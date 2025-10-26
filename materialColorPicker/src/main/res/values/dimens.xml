@@ -4,4 +4,11 @@
     <dimen name="material_color_picker_color_swatch_view_height">247.0dip</dimen>
     <dimen name="material_color_picker_gradient_wheel_cursor_radius">12.0dip</dimen>
     <dimen name="material_color_picker_spectrum_cursor_out_stroke_size">2.0dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_cursor_stroke_size">0.5dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_height">277.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_width">292.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_width_background">295.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_height_background">280.0dip</dimen>
+    <dimen name="sesl_color_picker_color_swatch_view_cursor_stroke_size">0.5dip</dimen>
+
 </resources>

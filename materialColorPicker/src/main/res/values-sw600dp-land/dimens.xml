@@ -2,4 +2,9 @@
 <resources>
     <dimen name="material_color_picker_color_swatch_view_width">292.0dip</dimen>
     <dimen name="material_color_picker_color_swatch_view_height">247.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_height">277.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_width">194.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_width_background">295.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_height_background">280.0dip</dimen>
+
 </resources>

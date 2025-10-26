@@ -3,4 +3,7 @@
     <!--  TODO: use material colors  -->
     <color name="material_color_picker_stroke_color_spectrum_view">#ffd6d6d6</color>
     <color name="material_color_picker_cursor_stroke_color">#ffffffff</color>
+    <color name="material_color_picker_swatch_cursor_color">#4dffffff</color>
+    <color name="material_color_picker_shadow">#66000000</color>
+    <color name="material_color_picker_stroke_color_swatchview">#ffd1d0d0</color>
 </resources>

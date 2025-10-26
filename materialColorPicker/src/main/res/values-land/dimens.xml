@@ -3,4 +3,8 @@
     <dimen name="material_color_picker_color_swatch_view_width">194.0dip</dimen>
     <dimen name="material_color_picker_color_swatch_view_height">190.0dip</dimen>
     <dimen name="material_color_picker_gradient_wheel_cursor_radius">9.5dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_width_background">197.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_height">190.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_height_background">193.0dip</dimen>
+
 </resources>
