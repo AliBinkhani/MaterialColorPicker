@@ -1,4 +1,4 @@
-package com.hooshkar.materialcolorpicker
+package com.hooshkar.materialcolorpicker.views
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,6 +16,8 @@ import android.view.SoundEffectConstants
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.toRectF
+import com.hooshkar.materialcolorpicker.R
+import com.hooshkar.materialcolorpicker.dpToPx
 import kotlin.math.max
 
 internal class ColorSpectrumView : View {

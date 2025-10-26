@@ -1,4 +1,4 @@
-package com.hooshkar.materialcolorpicker
+package com.hooshkar.materialcolorpicker.views
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -20,6 +20,8 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.customview.widget.ExploreByTouchHelper
+import com.hooshkar.materialcolorpicker.R
+import com.hooshkar.materialcolorpicker.dpToPx
 
 class ColorSwatchView : View {
 

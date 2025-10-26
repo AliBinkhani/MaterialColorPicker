@@ -6,4 +6,7 @@
     <color name="material_color_picker_swatch_cursor_color">#4dffffff</color>
     <color name="material_color_picker_shadow">#66000000</color>
     <color name="material_color_picker_stroke_color_swatchview">#ffd1d0d0</color>
+    <color name="material_color_picker_seekbar_cursor_stroke_color">#33000000</color>
+    <color name="material_color_picker_seekbar_cursor_background_color">#fffafafa</color>
+
 </resources>

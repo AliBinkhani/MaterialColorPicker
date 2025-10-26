@@ -9,6 +9,10 @@
     <dimen name="material_color_picker_oneui_3_color_swatch_view_width">292.0dip</dimen>
     <dimen name="material_color_picker_oneui_3_color_swatch_view_width_background">295.0dip</dimen>
     <dimen name="material_color_picker_oneui_3_color_swatch_view_height_background">280.0dip</dimen>
-    <dimen name="sesl_color_picker_color_swatch_view_cursor_stroke_size">0.5dip</dimen>
+    <dimen name="material_color_picker_seekbar_track_radius">10.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_track_height">20.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_cursor_outer_size">17.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_cursor_out_stroke_size">1.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_cursor_inner_size">16.0dip</dimen>
 
 </resources>
