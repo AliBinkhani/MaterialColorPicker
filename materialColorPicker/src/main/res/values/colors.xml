@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  TODO: use material colors  -->
+    <color name="material_color_picker_stroke_color_spectrum_view">#ffd6d6d6</color>
+    <color name="material_color_picker_cursor_stroke_color">#ffffffff</color>
+</resources>
