@@ -263,8 +263,6 @@ class MaterialColorPickerView: LinearLayout {
         colorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", gradientColorSeekBar.progress))
 
         colorSpectrumView.colorChangedListener = ColorSpectrumView.Listener { newHue, newSaturation ->
-            //TODO: TWICE CALLS!!!
-
             isInputFromUser = true
             try {
                 val imm = context.getSystemService<InputMethodManager>()

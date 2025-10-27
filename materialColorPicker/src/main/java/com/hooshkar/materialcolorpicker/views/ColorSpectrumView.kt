@@ -76,7 +76,9 @@ internal class ColorSpectrumView : View {
     override fun onTouchEvent(event: MotionEvent): Boolean {
         //Math.sqrt(Math.pow((double) event.getX(), 2.0d) + Math.pow((double) event.getY(), 2.0d));
         val action = event.action
-        if (action == MotionEvent.ACTION_DOWN) {
+        if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+            return true
+        } else if (action == MotionEvent.ACTION_DOWN) {
             playSoundEffect(SoundEffectConstants.CLICK)
         } else if (action == MotionEvent.ACTION_MOVE && parent != null) {
             parent.requestDisallowInterceptTouchEvent(true)
