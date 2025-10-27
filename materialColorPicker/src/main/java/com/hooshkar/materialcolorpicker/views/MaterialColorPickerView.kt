@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.text.Editable
@@ -18,13 +17,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import com.hooshkar.materialcolorpicker.R
@@ -32,9 +30,10 @@ import com.hooshkar.materialcolorpicker.isTablet
 import java.util.Locale
 import kotlin.math.ceil
 import androidx.core.graphics.toColorInt
+import com.google.android.material.button.MaterialButtonToggleGroup
 
 @SuppressLint("SetTextI18n")
-class MaterialColorPickerView: LinearLayout, View.OnClickListener {
+class MaterialColorPickerView: LinearLayout {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
@@ -53,28 +52,27 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     private var recentColorSlotCount: Int = 6
     private var beforeValue: String? = null
 
-//    private val binding: MaterialColorPickerOneui3LayoutBinding
     private val colorPickerRedEditText: EditText
     private var colorPickerGreenEditText: EditText //TODO: VAR???
     private val colorPickerBlueEditText: EditText
     private val colorPickerHexEditText: EditText
     private val colorPickerOpacityEditText: EditText
     private val colorPickerSaturationEditText: EditText
-    private val colorPickerTabSpectrumText: TextView
-    private val colorPickerTabSwatchesText: TextView
+    private val colorPickerTabSpectrumText: Button
+    private val colorPickerTabSwatchesText: Button
     private val colorSpectrumView: ColorSpectrumView
     private val colorSwatchView: ColorSwatchView
-    private val currentColorView: ImageView
+    private val currentColorView: View
+    private val pickedColorView: View
     private val gradientColorSeekBar: MaterialGradientColorSeekBar
     private val gradientSeekBarContainer: LinearLayout
     private val opacityLayout: LinearLayout
     private val opacitySeekBar: MaterialOpacitySeekBar
     private val opacitySeekBarContainer: FrameLayout
-    private val pickedColorView: ImageView
     private val recentColorListLayout: LinearLayout
     private val spectrumViewContainer: FrameLayout
     private val swatchViewContainer: FrameLayout
-    private val tabLayoutContainer: LinearLayout
+    private val tabLayoutContainer: MaterialButtonToggleGroup
     private val currentColorBackground: GradientDrawable
     private var flagVar = false
     private val pickedColor: PickedColor = PickedColor()
@@ -102,7 +100,7 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                 isInputFromUser = true
 
                 val intValue: Int = recentColorValues[i]
-                pickedColor.color = intValue
+                //pickedColor.color = intValue
                 mapColorOnColorWheel(intValue)
                 updateHexAndRGBValues(intValue)
 
@@ -196,10 +194,6 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     private fun initCurrentColorView() {
         colorPickerOpacityEditText.setPrivateImeOptions("disableDirectWriting=true;")
         colorPickerSaturationEditText.setPrivateImeOptions("disableDirectWriting=true;")
-        colorPickerTabSwatchesText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
-        colorPickerTabSwatchesText.setTextAppearance(R.style.TabTextSelected)
-        colorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
-        colorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
         colorPickerOpacityEditText.tag = 1
         flagVar = true
 
@@ -207,8 +201,30 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
             selectedColorBackground.setColor(pickedColor.color!!)
         }
 
-        colorPickerTabSwatchesText.setOnClickListener(this)
-        colorPickerTabSpectrumText.setOnClickListener(this)
+        tabLayoutContainer.check(R.id.material_color_picker_swatches_text_view)
+        tabLayoutContainer.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
+            if (!isChecked) return@addOnButtonCheckedListener
+
+            when (checkedId) {
+                R.id.material_color_picker_swatches_text_view -> {
+                    swatchViewContainer.visibility = VISIBLE
+                    spectrumViewContainer.visibility = GONE
+
+                    if (resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE || context.isTablet()) {
+                        gradientSeekBarContainer.visibility = GONE
+                    } else {
+                        gradientSeekBarContainer.visibility = INVISIBLE
+                    }
+                }
+
+                R.id.material_color_picker_spectrum_text_view -> {
+                    initColorSpectrumView()
+                    swatchViewContainer.visibility = GONE
+                    spectrumViewContainer.visibility = VISIBLE
+                    gradientSeekBarContainer.visibility = VISIBLE
+                }
+            }
+        }
 
         colorPickerOpacityEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -256,44 +272,6 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
         }
     }
 
-    override fun onClick(v: View) {
-        if (v.id == R.id.material_color_picker_swatches_text_view) {
-            colorPickerTabSwatchesText.setSelected(true)
-            colorPickerTabSwatchesText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
-            colorPickerTabSpectrumText.setSelected(false)
-            colorPickerTabSpectrumText.setBackgroundResource(0)
-            colorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
-            colorPickerTabSwatchesText.setTextAppearance(R.style.TabTextSelected)
-            colorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
-            colorPickerTabSpectrumText.setTypeface(Typeface.DEFAULT)
-
-            swatchViewContainer.visibility = VISIBLE
-            spectrumViewContainer.visibility = GONE
-
-            if (resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE || context.isTablet()) {
-                gradientSeekBarContainer.visibility = GONE
-            } else {
-                gradientSeekBarContainer.visibility = INVISIBLE
-            }
-
-        } else if (v.id == R.id.material_color_picker_spectrum_text_view) {
-            colorPickerTabSwatchesText.setSelected(false)
-            colorPickerTabSpectrumText.setSelected(true)
-            colorPickerTabSpectrumText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
-            colorPickerTabSwatchesText.setBackgroundResource(0)
-            initColorSpectrumView()
-            colorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
-            colorPickerTabSpectrumText.setTextAppearance(R.style.TabTextSelected)
-            colorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
-            colorPickerTabSwatchesText.setTypeface(Typeface.DEFAULT)
-
-            swatchViewContainer.visibility = GONE
-            spectrumViewContainer.visibility = VISIBLE
-
-            gradientSeekBarContainer.visibility = VISIBLE
-        }
-    }
-
     private fun initColorSpectrumView() {
         colorPickerSaturationEditText.setText(
             "" + java.lang.String.format(
@@ -329,7 +307,7 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                             flagVar = false
                             if (i <= 100) {
                                 colorPickerSaturationEditText.tag = 0
-                                gradientColorSeekBar.progress = i
+                                gradientColorSeekBar.progress = i //TODO: cause listener spam in the end.
                             }
                         }
                     } catch (e: Exception) {
@@ -350,7 +328,7 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                                 )
                             )
                         }
-                    } catch (e: java.lang.NumberFormatException) {
+                    } catch (e: NumberFormatException) {
                         e.printStackTrace()
                         colorPickerSaturationEditText.setText("0")
                     }
@@ -358,17 +336,10 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                 }
             }
         })
+
         colorPickerSaturationEditText.setOnFocusChangeListener { v, hasFocus ->
-            if (!colorPickerSaturationEditText.hasFocus() && colorPickerSaturationEditText.getText()
-                    .toString().isEmpty()
-            ) {
-                colorPickerSaturationEditText.setText(
-                    "" + String.format(
-                        Locale.getDefault(),
-                        "%d",
-                        0
-                    )
-                )
+            if (!colorPickerSaturationEditText.hasFocus() && colorPickerSaturationEditText.text.toString().isEmpty()) {
+                colorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", 0))
             }
         }
     }
@@ -563,10 +534,10 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
         gradientColorSeekBar.changeColorBase(color)
         fromSpectrumTouch = true
         colorPickerSaturationEditText.setText(
-            "" + String.format(
+            String.format(
                 Locale.getDefault(),
                 "%d",
-                Integer.valueOf(gradientColorSeekBar.progress)
+                gradientColorSeekBar.progress
             )
         )
         colorPickerSaturationEditText.setSelection(gradientColorSeekBar.progress.toString().length)
@@ -638,6 +609,7 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                     if (!s.toString().equals(beforeValue, ignoreCase = true) && s.toString().trim { it <= ' ' }.isNotEmpty()) {
+                        //TODO: Spam results.
                         updateHexData()
                     }
                 }
@@ -679,23 +651,20 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     }
 
     private fun updateHexData() {
-        val red = (if (colorPickerRedEditText.getText().toString()
-                .trim { it <= ' ' }.isNotEmpty()
-        ) colorPickerRedEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
-        val green = (if (colorPickerGreenEditText.getText().toString()
-                .trim { it <= ' ' }.isNotEmpty()
-        ) colorPickerGreenEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
-        val blue = (if (colorPickerBlueEditText.getText().toString()
-                .trim { it <= ' ' }.isNotEmpty()
-        ) colorPickerBlueEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
+        val redTxt = colorPickerRedEditText.text.toString().trim { it <= ' ' }
+        val red = if (redTxt.isNotEmpty()) redTxt.toInt() else 0
+
+        val greenTxt = colorPickerGreenEditText.text.toString().trim { it <= ' ' }
+        val green = if (greenTxt.isNotEmpty()) greenTxt.toInt() else 0
+
+        val blueTxt = colorPickerBlueEditText.text.toString().trim { it <= ' ' }
+        val blue = if (blueTxt.isNotEmpty()) blueTxt.toInt() else 0
 
         val color =
             ((red and 255) shl 16) or ((opacitySeekBar.progress and 255) shl 24) or ((green and 255) shl 8) or (blue and 255)
         val colorStr = String.format("%08x", color)
 
-        colorPickerHexEditText.setText(
-            "" + colorStr.substring(2, colorStr.length).uppercase(Locale.getDefault())
-        )
+        colorPickerHexEditText.setText(colorStr.substring(2, colorStr.length).uppercase(Locale.getDefault()))
         colorPickerHexEditText.setSelection(colorPickerHexEditText.getText().length)
         if (!fromSaturationSeekbar && !fromSpectrumTouch) {
             mapColorOnColorWheel(color)
@@ -882,7 +851,7 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     }
 
     class PickedColor {
-        private var mColor: Int? = null
+        private var mColor: Int? = 0xffffffff.toInt()
         private var mAlpha = 255
         private val mHsv = FloatArray(3)
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/material_color_picker_selected_color_layout_height"
     android:layout_gravity="center"
@@ -13,16 +14,18 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
+        <View
             android:id="@+id/material_color_picker_current_color_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/material_color_picker_oneui_3_selected_color_item_current_left_view" />
 
-        <ImageView
+        <View
             android:id="@+id/material_color_picker_picked_color_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/material_color_picker_oneui_3_selected_color_item_current_right_view" />
     </LinearLayout>
 
@@ -50,12 +53,15 @@
             android:background="@null"
             android:digits="ABCDEFabcdef0123456789"
             android:gravity="center"
+            android:hint="@null"
             android:inputType="textCapCharacters|textFilter"
+            android:labelFor="@id/material_color_hex_text"
             android:maxLength="6"
             android:minWidth="50.0dip"
             android:privateImeOptions="disableSticker=true;disableGifKeyboard=true;disableEmoticonInput=true;disableDirectWriting=true;"
             android:selectAllOnFocus="true"
-            android:singleLine="true" />
+            android:singleLine="true"
+            tools:text="#0381FE" />
     </LinearLayout>
 
     <LinearLayout
@@ -81,10 +87,13 @@
             android:layout_height="@dimen/material_color_picker_selected_color_value_text_height"
             android:background="@null"
             android:gravity="center"
+            android:hint="@null"
             android:inputType="number"
+            android:labelFor="@id/material_color_red_text"
             android:maxLength="3"
             android:minWidth="30.0dip"
-            android:selectAllOnFocus="true" />
+            android:selectAllOnFocus="true"
+            tools:text="3" />
     </LinearLayout>
 
     <LinearLayout
@@ -110,10 +119,13 @@
             android:layout_height="@dimen/material_color_picker_selected_color_value_text_height"
             android:background="@null"
             android:gravity="center"
+            android:hint="@null"
             android:inputType="number"
+            android:labelFor="@id/material_color_green_text"
             android:maxLength="3"
             android:minWidth="30.0dip"
-            android:selectAllOnFocus="true" />
+            android:selectAllOnFocus="true"
+            tools:text="129" />
     </LinearLayout>
 
     <LinearLayout
@@ -139,9 +151,12 @@
             android:layout_height="@dimen/material_color_picker_selected_color_value_text_height"
             android:background="@null"
             android:gravity="center"
+            android:hint="@null"
             android:inputType="number"
+            android:labelFor="@id/material_color_blue_text"
             android:maxLength="3"
             android:minWidth="30.0dip"
-            android:selectAllOnFocus="true" />
+            android:selectAllOnFocus="true"
+            tools:text="254" />
     </LinearLayout>
 </LinearLayout>
