@@ -13,7 +13,6 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.DisplayMetrics
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -26,8 +25,8 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
-import android.widget.TextView.OnEditorActionListener
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import com.hooshkar.materialcolorpicker.R
 import com.hooshkar.materialcolorpicker.isTablet
 import java.util.Locale
@@ -51,81 +50,69 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
         defStyleRes: Int
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    companion object {
-        private const val RIPPLE_EFFECT_OPACITY: Int = 61
-
-    }
-
-    private var RECENT_COLOR_SLOT_COUNT: Int = 6
+    private var recentColorSlotCount: Int = 6
     private var beforeValue: String? = null
 
 //    private val binding: MaterialColorPickerOneui3LayoutBinding
-    private val mColorPickerRedEditText: EditText
-    private var mColorPickerGreenEditText: EditText //TODO: VAR???
-    private val mColorPickerBlueEditText: EditText
-    private val mColorPickerHexEditText: EditText
-    private val mColorPickerOpacityEditText: EditText
-    private val mColorPickerSaturationEditText: EditText
-    private val mColorPickerTabSpectrumText: TextView
-    private val mColorPickerTabSwatchesText: TextView
-    private val mColorSpectrumView: ColorSpectrumView
-    private val mColorSwatchView: ColorSwatchView
-    private val mCurrentColorView: ImageView
-    private val mGradientColorSeekBar: MaterialGradientColorSeekBar
-    private val mGradientSeekBarContainer: LinearLayout
-    private val mOpacityLayout: LinearLayout
-    private val mOpacitySeekBar: MaterialOpacitySeekBar
-    private val mOpacitySeekBarContainer: FrameLayout
-    private val mPickedColorView: ImageView
-    private val mRecentColorListLayout: LinearLayout
-    private val mSpectrumViewContainer: FrameLayout
-    private val mSwatchViewContainer: FrameLayout
-    private val mTabLayoutContainer: LinearLayout
-    private var mCurrentColorBackground: GradientDrawable? = null
-    private var mFlagVar = false
-    var mOnColorChangedListener: OnColorChangedListener? = null
-    private val mPickedColor: PickedColor = PickedColor()
-    private val mRecentColorInfo: RecentColorInfo = RecentColorInfo()
-    private val mRecentColorValues: ArrayList<Int?> = mRecentColorInfo.getRecentColorInfo()
-    private var mSelectedColorBackground: GradientDrawable? = null
-    private val mSmallestWidthDp = intArrayOf(320, 360, 411)
-    private var mIsInputFromUser = false
-    private var mIsOpacityBarEnabled = false
-    var mIsSpectrumSelected: Boolean = false
-    var editTexts: ArrayList<EditText> = ArrayList()
-    private var mColorDescription: Array<String?>? = null
-    private var mfromEditText = false
-    private var mfromSaturationSeekbar = false
-    private var mfromSpectrumTouch = false
-    private var mfromRGB = false
-    private var mTextFromRGB = false
+    private val colorPickerRedEditText: EditText
+    private var colorPickerGreenEditText: EditText //TODO: VAR???
+    private val colorPickerBlueEditText: EditText
+    private val colorPickerHexEditText: EditText
+    private val colorPickerOpacityEditText: EditText
+    private val colorPickerSaturationEditText: EditText
+    private val colorPickerTabSpectrumText: TextView
+    private val colorPickerTabSwatchesText: TextView
+    private val colorSpectrumView: ColorSpectrumView
+    private val colorSwatchView: ColorSwatchView
+    private val currentColorView: ImageView
+    private val gradientColorSeekBar: MaterialGradientColorSeekBar
+    private val gradientSeekBarContainer: LinearLayout
+    private val opacityLayout: LinearLayout
+    private val opacitySeekBar: MaterialOpacitySeekBar
+    private val opacitySeekBarContainer: FrameLayout
+    private val pickedColorView: ImageView
+    private val recentColorListLayout: LinearLayout
+    private val spectrumViewContainer: FrameLayout
+    private val swatchViewContainer: FrameLayout
+    private val tabLayoutContainer: LinearLayout
+    private val currentColorBackground: GradientDrawable
+    private var flagVar = false
+    private val pickedColor: PickedColor = PickedColor()
+    private val recentColorInfo: RecentColorInfo = RecentColorInfo()
+    private val recentColorValues: ArrayList<Int> = recentColorInfo.recentColorInfo
+    private val selectedColorBackground: GradientDrawable
+    private val smallestWidthDp = intArrayOf(320, 360, 411)
+    private var isInputFromUser = false
+    private var isOpacityBarEnabled = false
+    private var isSpectrumSelected: Boolean = false
+    private val editTexts: List<EditText>
+    private var colorDescription: Array<String?>? = null
+    private var fromEditText = false
+    private var fromSaturationSeekbar = false
+    private var fromSpectrumTouch = false
+    private var fromRGB = false
+    private var textFromRGB = false
 
-    private val mImageButtonClickListener: OnClickListener = OnClickListener { v ->
+    var onColorChangedListener: OnColorChangedListener? = null
+
+    private val imageButtonClickListener: OnClickListener = OnClickListener { v ->
         var i = 0
-        while (i < mRecentColorValues.size && i < RECENT_COLOR_SLOT_COUNT) {
-            if (mRecentColorListLayout.getChildAt(i) == v) {
-                mIsInputFromUser = true
+        while (i < recentColorValues.size && i < recentColorSlotCount) {
+            if (recentColorListLayout.getChildAt(i) == v) {
+                isInputFromUser = true
 
-                val intValue: Int = mRecentColorValues[i]!!
-                mPickedColor.color = intValue
+                val intValue: Int = recentColorValues[i]
+                pickedColor.color = intValue
                 mapColorOnColorWheel(intValue)
                 updateHexAndRGBValues(intValue)
 
-                if (mGradientColorSeekBar != null) {
-                    val progress = mGradientColorSeekBar.progress
-                    mColorPickerSaturationEditText.setText(
-                        "" + String.format(
-                            Locale.getDefault(),
-                            "%d",
-                            progress
-                        )
-                    )
-                    mColorPickerSaturationEditText.setSelection(progress.toString().length)
-                }
+                val progress = gradientColorSeekBar.progress
+                colorPickerSaturationEditText.setText(
+                    "" + String.format(Locale.getDefault(), "%d", progress)
+                )
+                colorPickerSaturationEditText.setSelection(progress.toString().length)
 
-                if (mOnColorChangedListener != null) {
-                    mOnColorChangedListener!!.onColorChanged(intValue)
-                }
+                onColorChangedListener?.onColorChanged(intValue)
             }
             i++
         }
@@ -134,27 +121,32 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     init {
         LayoutInflater.from(context).inflate(R.layout.material_color_picker_oneui_3_layout, this)
 
-        mColorPickerRedEditText = findViewById(R.id.material_color_red_edit_text)
-        mColorPickerGreenEditText = findViewById(R.id.material_color_green_edit_text)
-        mColorPickerBlueEditText = findViewById(R.id.material_color_blue_edit_text)
-        mColorPickerHexEditText = findViewById(R.id.material_color_hex_edit_text)
-        mColorPickerOpacityEditText = findViewById(R.id.material_color_seek_bar_opacity_value_edit_view)
-        mColorPickerSaturationEditText = findViewById(R.id.material_color_seek_bar_saturation_value_edit_view)
-        mColorPickerTabSpectrumText = findViewById(R.id.material_color_picker_spectrum_text_view)
-        mColorPickerTabSwatchesText = findViewById(R.id.material_color_picker_swatches_text_view)
-        mColorSpectrumView = findViewById(R.id.material_color_picker_color_spectrum_view)
-        mColorSwatchView = findViewById(R.id.material_color_picker_color_swatch_view)
-        mCurrentColorView = findViewById(R.id.material_color_picker_current_color_view)
-        mGradientColorSeekBar = findViewById(R.id.material_color_picker_saturation_seekbar)
-        mGradientSeekBarContainer = findViewById(R.id.material_color_picker_saturation_layout)
-        mOpacityLayout = findViewById(R.id.material_color_picker_opacity_layout)
-        mOpacitySeekBar = findViewById(R.id.material_color_picker_opacity_seekbar)
-        mOpacitySeekBarContainer = findViewById(R.id.material_color_picker_opacity_seekbar_container)
-        mPickedColorView = findViewById(R.id.material_color_picker_picked_color_view)
-        mRecentColorListLayout = findViewById(R.id.material_color_picker_used_color_item_list_layout)
-        mSpectrumViewContainer = findViewById(R.id.material_color_picker_color_spectrum_view_container)
-        mSwatchViewContainer = findViewById(R.id.material_color_picker_color_swatch_view_container)
-        mTabLayoutContainer = findViewById(R.id.material_color_picker_tab_layout)
+        colorPickerRedEditText = findViewById(R.id.material_color_red_edit_text)
+        colorPickerGreenEditText = findViewById(R.id.material_color_green_edit_text)
+        colorPickerBlueEditText = findViewById(R.id.material_color_blue_edit_text)
+        colorPickerHexEditText = findViewById(R.id.material_color_hex_edit_text)
+        colorPickerOpacityEditText = findViewById(R.id.material_color_seek_bar_opacity_value_edit_view)
+        colorPickerSaturationEditText = findViewById(R.id.material_color_seek_bar_saturation_value_edit_view)
+        colorPickerTabSpectrumText = findViewById(R.id.material_color_picker_spectrum_text_view)
+        colorPickerTabSwatchesText = findViewById(R.id.material_color_picker_swatches_text_view)
+        colorSpectrumView = findViewById(R.id.material_color_picker_color_spectrum_view)
+        colorSwatchView = findViewById(R.id.material_color_picker_color_swatch_view)
+        currentColorView = findViewById(R.id.material_color_picker_current_color_view)
+        gradientColorSeekBar = findViewById(R.id.material_color_picker_saturation_seekbar)
+        gradientSeekBarContainer = findViewById(R.id.material_color_picker_saturation_layout)
+        opacityLayout = findViewById(R.id.material_color_picker_opacity_layout)
+        opacitySeekBar = findViewById(R.id.material_color_picker_opacity_seekbar)
+        opacitySeekBarContainer = findViewById(R.id.material_color_picker_opacity_seekbar_container)
+        pickedColorView = findViewById(R.id.material_color_picker_picked_color_view)
+        recentColorListLayout = findViewById(R.id.material_color_picker_used_color_item_list_layout)
+        spectrumViewContainer = findViewById(R.id.material_color_picker_color_spectrum_view_container)
+        swatchViewContainer = findViewById(R.id.material_color_picker_color_swatch_view_container)
+        tabLayoutContainer = findViewById(R.id.material_color_picker_tab_layout)
+
+        currentColorBackground = currentColorView.background as GradientDrawable
+        selectedColorBackground = this.pickedColorView.background as GradientDrawable
+
+        editTexts = listOf(colorPickerRedEditText, colorPickerGreenEditText, colorPickerBlueEditText)
 
         initDialogPadding()
         initCurrentColorView()
@@ -170,7 +162,7 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
 
     private fun initDialogPadding() {
         fun isContains(dp: Int): Boolean {
-            for (i in mSmallestWidthDp) {
+            for (i in smallestWidthDp) {
                 if (dp == i) {
                     return true
                 }
@@ -202,41 +194,39 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     }
 
     private fun initCurrentColorView() {
-        mColorPickerOpacityEditText.setPrivateImeOptions("disableDirectWriting=true;")
-        mColorPickerSaturationEditText.setPrivateImeOptions("disableDirectWriting=true;")
-        mColorPickerTabSwatchesText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
-        mColorPickerTabSwatchesText.setTextAppearance(R.style.TabTextSelected)
-        mColorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
-        mColorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
-        mColorPickerOpacityEditText.tag = 1
-        mFlagVar = true
-        mSelectedColorBackground = this.mPickedColorView.background as GradientDrawable?
+        colorPickerOpacityEditText.setPrivateImeOptions("disableDirectWriting=true;")
+        colorPickerSaturationEditText.setPrivateImeOptions("disableDirectWriting=true;")
+        colorPickerTabSwatchesText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
+        colorPickerTabSwatchesText.setTextAppearance(R.style.TabTextSelected)
+        colorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
+        colorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
+        colorPickerOpacityEditText.tag = 1
+        flagVar = true
 
-        if (mPickedColor.color != null) {
-            mSelectedColorBackground!!.setColor(mPickedColor.color!!)
+        if (pickedColor.color != null) {
+            selectedColorBackground.setColor(pickedColor.color!!)
         }
-        mCurrentColorBackground = mCurrentColorView.background as GradientDrawable
-        mColorPickerTabSwatchesText.setOnClickListener(this)
-        mColorPickerTabSpectrumText.setOnClickListener(this)
 
-        mColorPickerOpacityEditText.addTextChangedListener(object : TextWatcher {
+        colorPickerTabSwatchesText.setOnClickListener(this)
+        colorPickerTabSpectrumText.setOnClickListener(this)
+
+        colorPickerOpacityEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val i = if (s.toString().isEmpty()) 0 else s.toString().toInt()
-                if (mOpacitySeekBar != null && s.toString()
-                        .trim { it <= ' ' }.isNotEmpty() && i <= 100
+                if (s.toString().trim { it <= ' ' }.isNotEmpty() && i <= 100
                 ) {
-                    mColorPickerOpacityEditText.tag = 0
-                    mOpacitySeekBar.progress = (i * 255) / 100
+                    colorPickerOpacityEditText.tag = 0
+                    opacitySeekBar.progress = (i * 255) / 100
                 }
             }
 
             override fun afterTextChanged(s: Editable) {
                 try {
                     if (s.toString().toInt() > 100) {
-                        mColorPickerOpacityEditText.setText(
+                        colorPickerOpacityEditText.setText(
                             "" + String.format(
                                 Locale.getDefault(),
                                 "%d",
@@ -246,16 +236,16 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                     }
                 } catch (e: NumberFormatException) {
                     e.printStackTrace()
-                    mColorPickerOpacityEditText.setText("0")
+                    colorPickerOpacityEditText.setText("0")
                 }
-                mColorPickerOpacityEditText.setSelection(mColorPickerOpacityEditText.getText().length)
+                colorPickerOpacityEditText.setSelection(colorPickerOpacityEditText.getText().length)
             }
         })
-        mColorPickerOpacityEditText.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
-            if (!mColorPickerOpacityEditText.hasFocus() && mColorPickerOpacityEditText.getText()
+        colorPickerOpacityEditText.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
+            if (!colorPickerOpacityEditText.hasFocus() && colorPickerOpacityEditText.getText()
                     .toString().isEmpty()
             ) {
-                mColorPickerOpacityEditText.setText(
+                colorPickerOpacityEditText.setText(
                     "" + String.format(
                         Locale.getDefault(),
                         "%d",
@@ -268,82 +258,78 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
 
     override fun onClick(v: View) {
         if (v.id == R.id.material_color_picker_swatches_text_view) {
-            mColorPickerTabSwatchesText.setSelected(true)
-            mColorPickerTabSwatchesText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
-            mColorPickerTabSpectrumText.setSelected(false)
-            mColorPickerTabSpectrumText.setBackgroundResource(0)
-            mColorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
-            mColorPickerTabSwatchesText.setTextAppearance(R.style.TabTextSelected)
-            mColorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
-            mColorPickerTabSpectrumText.setTypeface(Typeface.DEFAULT)
+            colorPickerTabSwatchesText.setSelected(true)
+            colorPickerTabSwatchesText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
+            colorPickerTabSpectrumText.setSelected(false)
+            colorPickerTabSpectrumText.setBackgroundResource(0)
+            colorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
+            colorPickerTabSwatchesText.setTextAppearance(R.style.TabTextSelected)
+            colorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
+            colorPickerTabSpectrumText.setTypeface(Typeface.DEFAULT)
 
-            mSwatchViewContainer.visibility = VISIBLE
-            mSpectrumViewContainer.visibility = GONE
+            swatchViewContainer.visibility = VISIBLE
+            spectrumViewContainer.visibility = GONE
 
             if (resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE || context.isTablet()) {
-                mGradientSeekBarContainer.visibility = GONE
+                gradientSeekBarContainer.visibility = GONE
             } else {
-                mGradientSeekBarContainer.visibility = INVISIBLE
+                gradientSeekBarContainer.visibility = INVISIBLE
             }
 
         } else if (v.id == R.id.material_color_picker_spectrum_text_view) {
-            mColorPickerTabSwatchesText.setSelected(false)
-            mColorPickerTabSpectrumText.setSelected(true)
-            mColorPickerTabSpectrumText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
-            mColorPickerTabSwatchesText.setBackgroundResource(0)
+            colorPickerTabSwatchesText.setSelected(false)
+            colorPickerTabSpectrumText.setSelected(true)
+            colorPickerTabSpectrumText.setBackgroundResource(R.drawable.material_color_picker_tab_selector_bg)
+            colorPickerTabSwatchesText.setBackgroundResource(0)
             initColorSpectrumView()
-            mColorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
-            mColorPickerTabSpectrumText.setTextAppearance(R.style.TabTextSelected)
-            mColorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
-            mColorPickerTabSwatchesText.setTypeface(Typeface.DEFAULT)
+            colorPickerTabSpectrumText.setTextColor(resources.getColor(R.color.material_tablayout_subtab_background_stroke_color, null))
+            colorPickerTabSpectrumText.setTextAppearance(R.style.TabTextSelected)
+            colorPickerTabSwatchesText.setTextColor(resources.getColor(R.color.material_secondary_text_color, null))
+            colorPickerTabSwatchesText.setTypeface(Typeface.DEFAULT)
 
-            mSwatchViewContainer.visibility = GONE
-            mSpectrumViewContainer.visibility = VISIBLE
+            swatchViewContainer.visibility = GONE
+            spectrumViewContainer.visibility = VISIBLE
 
-            mGradientSeekBarContainer.visibility = VISIBLE
+            gradientSeekBarContainer.visibility = VISIBLE
         }
     }
 
     private fun initColorSpectrumView() {
-        mColorPickerSaturationEditText.setText(
+        colorPickerSaturationEditText.setText(
             "" + java.lang.String.format(
                 Locale.getDefault(),
                 "%d",
-                mGradientColorSeekBar.progress
+                gradientColorSeekBar.progress
             )
         )
 
-        mColorSpectrumView.colorChangedListener = ColorSpectrumView.Listener { newHue, newSaturation ->
-            mIsInputFromUser = true
+        colorSpectrumView.colorChangedListener = ColorSpectrumView.Listener { newHue, newSaturation ->
+            isInputFromUser = true
             try {
-                (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
-                    windowToken,
-                    InputMethodManager.RESULT_UNCHANGED_SHOWN
-                )
+                val imm = context.getSystemService<InputMethodManager>()
+                imm?.hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            mPickedColor.setHS(newHue, newSaturation, mOpacitySeekBar.progress)
+            pickedColor.setHS(newHue, newSaturation, opacitySeekBar.progress)
             updateCurrentColor()
-            updateHexAndRGBValues(mPickedColor.color!!)
+            updateHexAndRGBValues(pickedColor.color!!)
         }
 
-        mColorPickerSaturationEditText.addTextChangedListener(object : TextWatcher {
+        colorPickerSaturationEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (!mTextFromRGB) {
+                if (!textFromRGB) {
                     try {
-                        if (mGradientColorSeekBar != null && s.toString()
-                                .trim { it <= ' ' }.isNotEmpty()
-                        ) {
+                        if (s.toString().trim { it <= ' ' }.isNotEmpty()) {
                             val i = s.toString().toInt()
-                            mfromEditText = true
-                            mFlagVar = false
+                            fromEditText = true
+                            flagVar = false
                             if (i <= 100) {
-                                mColorPickerSaturationEditText.tag = 0
-                                mGradientColorSeekBar.progress = i
+                                colorPickerSaturationEditText.tag = 0
+                                gradientColorSeekBar.progress = i
                             }
                         }
                     } catch (e: Exception) {
@@ -353,10 +339,10 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
             }
 
             override fun afterTextChanged(s: Editable) {
-                if (!mTextFromRGB) {
+                if (!textFromRGB) {
                     try {
                         if (s.toString().toInt() > 100) {
-                            mColorPickerSaturationEditText.setText(
+                            colorPickerSaturationEditText.setText(
                                 "" + String.format(
                                     Locale.getDefault(),
                                     "%d",
@@ -366,42 +352,38 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                         }
                     } catch (e: java.lang.NumberFormatException) {
                         e.printStackTrace()
-                        mColorPickerSaturationEditText.setText("0")
+                        colorPickerSaturationEditText.setText("0")
                     }
-                    mColorPickerSaturationEditText.setSelection(mColorPickerSaturationEditText.getText().length)
+                    colorPickerSaturationEditText.setSelection(colorPickerSaturationEditText.getText().length)
                 }
             }
         })
-        mColorPickerSaturationEditText.setOnFocusChangeListener(object : OnFocusChangeListener {
-            override fun onFocusChange(v: View?, hasFocus: Boolean) {
-                if (!mColorPickerSaturationEditText.hasFocus() && mColorPickerSaturationEditText.getText()
-                        .toString().isEmpty()
-                ) {
-                    mColorPickerSaturationEditText.setText(
-                        "" + String.format(
-                            Locale.getDefault(),
-                            "%d",
-                            0
-                        )
+        colorPickerSaturationEditText.setOnFocusChangeListener { v, hasFocus ->
+            if (!colorPickerSaturationEditText.hasFocus() && colorPickerSaturationEditText.getText()
+                    .toString().isEmpty()
+            ) {
+                colorPickerSaturationEditText.setText(
+                    "" + String.format(
+                        Locale.getDefault(),
+                        "%d",
+                        0
                     )
-                }
+                )
             }
-        })
+        }
     }
 
     private fun initColorSwatchView() {
-        mColorSwatchView.onColorSwatchChangedListener =
+        colorSwatchView.onColorSwatchChangedListener =
             ColorSwatchView.OnColorSwatchChangedListener { newColor ->
-                mIsInputFromUser = true
+                isInputFromUser = true
                 try {
-                    (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
-                        windowToken,
-                        InputMethodManager.RESULT_UNCHANGED_SHOWN
-                    )
+                    val imm = context.getSystemService<InputMethodManager>()
+                    imm?.hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                 }
-                mPickedColor.setColorWithAlpha(newColor, mOpacitySeekBar.progress)
+                pickedColor.setColorWithAlpha(newColor, opacitySeekBar.progress)
                 updateCurrentColor()
                 updateHexAndRGBValues(newColor)
             }
@@ -409,68 +391,66 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initGradientColorSeekBar() {
-
-        mGradientColorSeekBar.init(mPickedColor.color)
-        mGradientColorSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+        gradientColorSeekBar.init(pickedColor.color)
+        gradientColorSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    mIsInputFromUser = true
-                    mfromSaturationSeekbar = true
+                    isInputFromUser = true
+                    fromSaturationSeekbar = true
                 }
                 val f = (seekBar.progress.toFloat()) / (seekBar.max.toFloat())
-                if (progress >= 0 && mFlagVar) {
-                    mColorPickerSaturationEditText.setText(
+                if (progress >= 0 && flagVar) {
+                    colorPickerSaturationEditText.setText(
                         "" + String.format(
                             Locale.getDefault(),
                             "%d",
                             progress
                         )
                     )
-                    mColorPickerSaturationEditText.setSelection(progress.toString().length)
+                    colorPickerSaturationEditText.setSelection(progress.toString().length)
                 }
-                if (mfromRGB) {
-                    mTextFromRGB = true
-                    mColorPickerSaturationEditText.setText(
+                if (fromRGB) {
+                    textFromRGB = true
+                    colorPickerSaturationEditText.setText(
                         "" + String.format(
                             Locale.getDefault(),
                             "%d",
                             progress
                         )
                     )
-                    mColorPickerSaturationEditText.setSelection(progress.toString().length)
-                    mTextFromRGB = false
+                    colorPickerSaturationEditText.setSelection(progress.toString().length)
+                    textFromRGB = false
                 }
-                mPickedColor.v = f
-                val i: Int = mPickedColor.color!!
-                if (mfromEditText) {
+                pickedColor.v = f
+                val i: Int = pickedColor.color!!
+                if (fromEditText) {
                     updateHexAndRGBValues(i)
-                    mfromEditText = false
+                    fromEditText = false
                 }
-                mSelectedColorBackground?.setColor(i)
-                mOpacitySeekBar?.changeColorBase(i, mPickedColor.alpha)
-                mOnColorChangedListener?.onColorChanged(i)
+                selectedColorBackground.setColor(i)
+                opacitySeekBar.changeColorBase(i, pickedColor.alpha)
+                onColorChangedListener?.onColorChanged(i)
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                mfromSaturationSeekbar = false
+                fromSaturationSeekbar = false
             }
         })
-        mGradientColorSeekBar!!.setOnTouchListener(object : OnTouchListener {
+        gradientColorSeekBar.setOnTouchListener(object : OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent): Boolean {
-                mFlagVar = true
+                flagVar = true
 
-                val action = event.getAction()
-                when (action) {
+                when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
-                        mGradientColorSeekBar!!.setSelected(true)
+                        gradientColorSeekBar.isSelected = true
                         return true
                     }
 
                     MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                        mGradientColorSeekBar!!.setSelected(false)
+                        gradientColorSeekBar.isSelected = false
                         return false
                     }
 
@@ -483,14 +463,15 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
         )
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     fun initOpacitySeekBar(enable: Boolean) {
-        mOpacityLayout.visibility = if (enable) VISIBLE else GONE
-        if (!mIsOpacityBarEnabled) {
-            mOpacitySeekBar.visibility = GONE
-            mOpacitySeekBarContainer.visibility = GONE
+        opacityLayout.visibility = if (enable) VISIBLE else GONE
+        if (!isOpacityBarEnabled) {
+            opacitySeekBar.visibility = GONE
+            opacitySeekBarContainer.visibility = GONE
         }
-        mOpacitySeekBar.init(mPickedColor.color)
-        mOpacitySeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+        opacitySeekBar.init(pickedColor.color)
+        opacitySeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
@@ -499,11 +480,11 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
-                    mIsInputFromUser = true
+                    isInputFromUser = true
                 }
-                mPickedColor.alpha = progress
-                if (progress >= 0 && mColorPickerOpacityEditText.tag.toString().toInt() == 1) {
-                    mColorPickerOpacityEditText.setText(
+                pickedColor.alpha = progress
+                if (progress >= 0 && colorPickerOpacityEditText.tag.toString().toInt() == 1) {
+                    colorPickerOpacityEditText.setText(
                         "" + String.format(
                             Locale.getDefault(),
                             "%d",
@@ -511,25 +492,23 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                         )
                     )
                 }
-                if (mPickedColor.color != null) {
-                    mSelectedColorBackground?.setColor(mPickedColor.color!!)
-                    mOnColorChangedListener?.onColorChanged(mPickedColor.color!!)
+                if (pickedColor.color != null) {
+                    selectedColorBackground.setColor(pickedColor.color!!)
+                    onColorChangedListener?.onColorChanged(pickedColor.color!!)
                 }
             }
         })
-        mOpacitySeekBar!!.setOnTouchListener(object : OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent): Boolean {
-                mColorPickerOpacityEditText.setTag(1)
-                return event.getAction() == MotionEvent.ACTION_DOWN
-            }
-        })
-        mOpacitySeekBarContainer.setContentDescription(
+        opacitySeekBar.setOnTouchListener { v, event ->
+            colorPickerOpacityEditText.tag = 1
+            event.action == MotionEvent.ACTION_DOWN
+        }
+        opacitySeekBarContainer.setContentDescription(
             resources.getString(R.string.material_color_picker_opacity) + ", " + resources.getString(R.string.material_color_picker_slider) + ", " + resources.getString(R.string.material_color_picker_double_tap_to_select)
         )
     }
 
     private fun initRecentColorLayout() {
-        mColorDescription = arrayOf(
+        colorDescription = arrayOf(
             resources.getString(R.string.material_color_picker_color_one),
             resources.getString(R.string.material_color_picker_color_two),
             resources.getString(R.string.material_color_picker_color_three),
@@ -538,13 +517,12 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
             resources.getString(R.string.material_color_picker_color_six),
             resources.getString(R.string.material_color_picker_color_seven)
         )
-        if (resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE || context.isTablet()) {
-            RECENT_COLOR_SLOT_COUNT = 6
-        } else {
-            RECENT_COLOR_SLOT_COUNT = 7
-        }
-        for (i in 0..<RECENT_COLOR_SLOT_COUNT) {
-            val child = mRecentColorListLayout.getChildAt(i)
+        recentColorSlotCount =
+            if (resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE || context.isTablet()) 6 else 7
+
+
+        for (i in 0..<recentColorSlotCount) {
+            val child = recentColorListLayout.getChildAt(i)
             setImageColor(
                 child,
                 ContextCompat.getColor(
@@ -558,77 +536,66 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     }
 
     private fun updateCurrentColor() {
-        val color: Int? = mPickedColor.color
-        if (color != null) {
-            if (mOpacitySeekBar != null) {
-                mOpacitySeekBar.changeColorBase(color, mPickedColor.alpha)
-                mColorPickerOpacityEditText.setText(
-                    "" + String.format(
-                        Locale.getDefault(),
-                        "%d",
-                        Integer.valueOf(mOpacitySeekBar.progress)
-                    )
-                )
-                mColorPickerOpacityEditText.setSelection(mColorPickerOpacityEditText.getText().length)
-            }
+        val color: Int = pickedColor.color ?: return
+        opacitySeekBar.changeColorBase(color, pickedColor.alpha)
+        colorPickerOpacityEditText.setText(
+            "" + String.format(
+                Locale.getDefault(),
+                "%d",
+                Integer.valueOf(opacitySeekBar.progress)
+            )
+        )
+        colorPickerOpacityEditText.setSelection(colorPickerOpacityEditText.getText().length)
 
-            if (mSelectedColorBackground != null) {
-                mSelectedColorBackground!!.setColor(color)
-                setCurrentColorViewDescription(color, 1)
-            }
 
-            if (mOnColorChangedListener != null) {
-                mOnColorChangedListener!!.onColorChanged(color)
-            }
+        selectedColorBackground.setColor(color)
+        setCurrentColorViewDescription(color, 1)
 
-            if (mColorSpectrumView != null) {
-                mColorSpectrumView.updateCursorColor(color)
-                mColorSpectrumView.setColor(color)
-            }
 
-            if (mGradientColorSeekBar != null) {
-                mGradientColorSeekBar.changeColorBase(color)
-                mfromSpectrumTouch = true
-                mColorPickerSaturationEditText.setText(
-                    "" + String.format(
-                        Locale.getDefault(),
-                        "%d",
-                        Integer.valueOf(mGradientColorSeekBar.progress)
-                    )
-                )
-                mColorPickerSaturationEditText.setSelection(mGradientColorSeekBar.progress.toString().length)
-                mfromSpectrumTouch = false
-            }
-        }
+        onColorChangedListener?.onColorChanged(color)
+
+
+        colorSpectrumView.updateCursorColor(color)
+        colorSpectrumView.setColor(color)
+
+
+
+        gradientColorSeekBar.changeColorBase(color)
+        fromSpectrumTouch = true
+        colorPickerSaturationEditText.setText(
+            "" + String.format(
+                Locale.getDefault(),
+                "%d",
+                Integer.valueOf(gradientColorSeekBar.progress)
+            )
+        )
+        colorPickerSaturationEditText.setSelection(gradientColorSeekBar.progress.toString().length)
+        fromSpectrumTouch = false
     }
 
     private fun setInitialColors() {
-        if (mPickedColor.color != null) {
-            mapColorOnColorWheel(mPickedColor.color!!)
+        if (pickedColor.color != null) {
+            mapColorOnColorWheel(pickedColor.color!!)
         }
     }
 
     private fun initCurrentColorValuesLayout() {
-        mColorPickerGreenEditText = findViewById(R.id.material_color_green_edit_text)
-        mColorPickerRedEditText.setPrivateImeOptions("disableDirectWriting=true;")
-        mColorPickerBlueEditText.setPrivateImeOptions("disableDirectWriting=true;")
-        mColorPickerGreenEditText.setPrivateImeOptions("disableDirectWriting=true;")
-        editTexts.add(mColorPickerRedEditText)
-        editTexts.add(mColorPickerGreenEditText)
-        editTexts.add(mColorPickerBlueEditText)
+        colorPickerGreenEditText = findViewById(R.id.material_color_green_edit_text)
+        colorPickerRedEditText.setPrivateImeOptions("disableDirectWriting=true;")
+        colorPickerBlueEditText.setPrivateImeOptions("disableDirectWriting=true;")
+        colorPickerGreenEditText.setPrivateImeOptions("disableDirectWriting=true;")
+
         setTextWatcher()
-        mColorPickerBlueEditText.setOnEditorActionListener(object : OnEditorActionListener {
-            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    mColorPickerBlueEditText.clearFocus()
-                }
-                return false
+        colorPickerBlueEditText.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                colorPickerBlueEditText.clearFocus()
             }
-        })
+            false
+        }
     }
 
     private fun setTextWatcher() {
-        mColorPickerHexEditText.addTextChangedListener(object : TextWatcher {
+        colorPickerHexEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -636,23 +603,23 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                 val length = s.toString().trim { it <= ' ' }.length
                 if (length == 6) {
                     val color = "#$s".toColorInt()
-                    if (!mColorPickerRedEditText.getText().toString().trim { it <= ' ' }
+                    if (!colorPickerRedEditText.getText().toString().trim { it <= ' ' }
                             .equals("" + Color.red(color), ignoreCase = true)) {
-                        mColorPickerRedEditText.setText("" + Color.red(color))
+                        colorPickerRedEditText.setText("" + Color.red(color))
                     }
-                    if (!mColorPickerGreenEditText.getText().toString().trim { it <= ' ' }
+                    if (!colorPickerGreenEditText.getText().toString().trim { it <= ' ' }
                             .equals("" + Color.green(color), ignoreCase = true)) {
-                        mColorPickerGreenEditText.setText("" + Color.green(color))
+                        colorPickerGreenEditText.setText("" + Color.green(color))
                     }
-                    if (!mColorPickerBlueEditText.getText().toString().trim { it <= ' ' }
+                    if (!colorPickerBlueEditText.getText().toString().trim { it <= ' ' }
                             .equals("" + Color.blue(color), ignoreCase = true)) {
-                        mColorPickerBlueEditText.setText("" + Color.blue(color))
+                        colorPickerBlueEditText.setText("" + Color.blue(color))
                     }
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {
-                mIsInputFromUser = true
+                isInputFromUser = true
             }
         })
 
@@ -670,9 +637,7 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                 }
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    if (!s.toString().equals(beforeValue, ignoreCase = true) && s.toString()
-                            .trim { it <= ' ' }.length > 0
-                    ) {
+                    if (!s.toString().equals(beforeValue, ignoreCase = true) && s.toString().trim { it <= ' ' }.isNotEmpty()) {
                         updateHexData()
                     }
                 }
@@ -681,123 +646,122 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                 override fun afterTextChanged(s: Editable) {
                     try {
                         if (s.toString().toInt() > 255) {
-                            if (editText === editTexts.get(0)) {
-                                mColorPickerRedEditText.setText("255")
+                            if (editText === editTexts[0]) {
+                                colorPickerRedEditText.setText("255")
                             }
-                            if (editText === editTexts.get(1)) {
-                                mColorPickerGreenEditText.setText("255")
+                            if (editText === editTexts[1]) {
+                                colorPickerGreenEditText.setText("255")
                             }
-                            if (editText === editTexts.get(2)) {
-                                mColorPickerBlueEditText.setText("255")
+                            if (editText === editTexts[2]) {
+                                colorPickerBlueEditText.setText("255")
                             }
                         }
                     } catch (e: java.lang.NumberFormatException) {
                         e.printStackTrace()
-                        if (editText === editTexts.get(0)) {
-                            mColorPickerRedEditText.setText("0")
+                        if (editText === editTexts[0]) {
+                            colorPickerRedEditText.setText("0")
                         }
-                        if (editText === editTexts.get(1)) {
-                            mColorPickerGreenEditText.setText("0")
+                        if (editText === editTexts[1]) {
+                            colorPickerGreenEditText.setText("0")
                         }
-                        if (editText === editTexts.get(2)) {
-                            mColorPickerBlueEditText.setText("0")
+                        if (editText === editTexts[2]) {
+                            colorPickerBlueEditText.setText("0")
                         }
                     }
-                    mIsInputFromUser = true
-                    mfromRGB = true
-                    mColorPickerRedEditText.setSelection(mColorPickerRedEditText.getText().length)
-                    mColorPickerGreenEditText.setSelection(mColorPickerGreenEditText.getText().length)
-                    mColorPickerBlueEditText.setSelection(mColorPickerBlueEditText.getText().length)
+                    isInputFromUser = true
+                    fromRGB = true
+                    colorPickerRedEditText.setSelection(colorPickerRedEditText.getText().length)
+                    colorPickerGreenEditText.setSelection(colorPickerGreenEditText.getText().length)
+                    colorPickerBlueEditText.setSelection(colorPickerBlueEditText.getText().length)
                 }
             })
         }
     }
 
     private fun updateHexData() {
-        val red = (if (mColorPickerRedEditText.getText().toString()
+        val red = (if (colorPickerRedEditText.getText().toString()
                 .trim { it <= ' ' }.isNotEmpty()
-        ) mColorPickerRedEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
-        val green = (if (mColorPickerGreenEditText.getText().toString()
+        ) colorPickerRedEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
+        val green = (if (colorPickerGreenEditText.getText().toString()
                 .trim { it <= ' ' }.isNotEmpty()
-        ) mColorPickerGreenEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
-        val blue = (if (mColorPickerBlueEditText.getText().toString()
+        ) colorPickerGreenEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
+        val blue = (if (colorPickerBlueEditText.getText().toString()
                 .trim { it <= ' ' }.isNotEmpty()
-        ) mColorPickerBlueEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
+        ) colorPickerBlueEditText.getText().toString().trim { it <= ' ' } else "0").toInt()
 
         val color =
-            ((red and 255) shl 16) or ((mOpacitySeekBar.progress and 255) shl 24) or ((green and 255) shl 8) or (blue and 255)
+            ((red and 255) shl 16) or ((opacitySeekBar.progress and 255) shl 24) or ((green and 255) shl 8) or (blue and 255)
         val colorStr = String.format("%08x", color)
 
-        mColorPickerHexEditText.setText(
+        colorPickerHexEditText.setText(
             "" + colorStr.substring(2, colorStr.length).uppercase(Locale.getDefault())
         )
-        mColorPickerHexEditText.setSelection(mColorPickerHexEditText.getText().length)
-        if (!mfromSaturationSeekbar && !mfromSpectrumTouch) {
+        colorPickerHexEditText.setSelection(colorPickerHexEditText.getText().length)
+        if (!fromSaturationSeekbar && !fromSpectrumTouch) {
             mapColorOnColorWheel(color)
         }
 
-        if (mOnColorChangedListener != null) {
-            mOnColorChangedListener!!.onColorChanged(color)
-        }
+        onColorChangedListener?.onColorChanged(color)
     }
 
     fun setOnlySpectrumMode() {
-        mTabLayoutContainer.visibility = GONE
+        tabLayoutContainer.visibility = GONE
 
         initColorSpectrumView()
-        if (!mIsSpectrumSelected) {
-            mIsSpectrumSelected = true
+        if (!isSpectrumSelected) {
+            isSpectrumSelected = true
         }
-        mSwatchViewContainer.visibility = GONE
-        mSpectrumViewContainer.visibility = VISIBLE
-        mColorPickerHexEditText.setInputType(InputType.TYPE_NULL)
-        mColorPickerRedEditText.setInputType(InputType.TYPE_NULL)
-        mColorPickerBlueEditText.setInputType(InputType.TYPE_NULL)
-        mColorPickerGreenEditText.setInputType(InputType.TYPE_NULL)
+        swatchViewContainer.visibility = GONE
+        spectrumViewContainer.visibility = VISIBLE
+        colorPickerHexEditText.setInputType(InputType.TYPE_NULL)
+        colorPickerRedEditText.setInputType(InputType.TYPE_NULL)
+        colorPickerBlueEditText.setInputType(InputType.TYPE_NULL)
+        colorPickerGreenEditText.setInputType(InputType.TYPE_NULL)
     }
 
     fun updateRecentColorLayout() {
-        val recentColorValues = if (mRecentColorValues != null) mRecentColorValues.size else 0
+        val recentColorValuesSize = recentColorValues.size
         val description = ", " + resources.getString(R.string.material_color_picker_option)
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            RECENT_COLOR_SLOT_COUNT = 7
-        } else {
-            RECENT_COLOR_SLOT_COUNT = 6
-        }
-        for (i in 0..<RECENT_COLOR_SLOT_COUNT) {
-            val child = mRecentColorListLayout.getChildAt(i)
-            if (i < recentColorValues) {
-                setImageColor(child, mRecentColorValues.get(i))
+        recentColorSlotCount =
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 7 else 6
+
+        for (i in 0..<recentColorSlotCount) {
+            val child = recentColorListLayout.getChildAt(i)
+            if (i < recentColorValuesSize) {
+                setImageColor(child, this.recentColorValues[i])
 
                 val sb = java.lang.StringBuilder()
-                sb.append(mColorSwatchView.getColorSwatchDescriptionAt(mRecentColorValues.get(i)!!) as CharSequence?)
-                sb.insert(0, mColorDescription!![i] + description + ", ")
+                sb.append(colorSwatchView.getColorSwatchDescriptionAt(this.recentColorValues[i]) as CharSequence?)
+                sb.insert(0, colorDescription!![i] + description + ", ")
                 child.setContentDescription(sb)
 
                 child.isFocusable = true
                 child.isClickable = true
             }
         }
-        if (mRecentColorInfo.getCurrentColor() != null) {
-            mCurrentColorBackground!!.setColor(mRecentColorInfo.getCurrentColor()!!)
-            setCurrentColorViewDescription(mRecentColorInfo.getCurrentColor()!!, 0)
-            mSelectedColorBackground!!.setColor(mRecentColorInfo.getCurrentColor()!!)
-            mapColorOnColorWheel(mRecentColorInfo.getCurrentColor()!!)
-            updateHexAndRGBValues(mCurrentColorBackground!!.color!!.defaultColor)
-        } else if (recentColorValues != 0) {
-            mCurrentColorBackground!!.setColor(mRecentColorValues[0]!!)
-            setCurrentColorViewDescription(mRecentColorValues[0]!!, 0)
-            mSelectedColorBackground!!.setColor(mRecentColorValues[0]!!)
-            mapColorOnColorWheel(mRecentColorValues[0]!!)
-            updateHexAndRGBValues(mCurrentColorBackground!!.color!!.defaultColor)
+
+        val currentColor = recentColorInfo.currentColor
+        if (currentColor != null) {
+            currentColorBackground.setColor(currentColor)
+            setCurrentColorViewDescription(currentColor, 0)
+            selectedColorBackground.setColor(currentColor)
+            mapColorOnColorWheel(currentColor)
+            updateHexAndRGBValues(currentColorBackground.color!!.defaultColor)
+        } else if (recentColorValuesSize != 0) {
+            val recentColorValue = recentColorValues[0]
+            currentColorBackground.setColor(recentColorValue)
+            setCurrentColorViewDescription(recentColorValue, 0)
+            selectedColorBackground.setColor(recentColorValue)
+            mapColorOnColorWheel(recentColorValue)
+            updateHexAndRGBValues(currentColorBackground.color!!.defaultColor)
         }
-        if (mRecentColorInfo.getNewColor() != null) {
-            mSelectedColorBackground!!.setColor(mRecentColorInfo.getNewColor()!!)
-            mapColorOnColorWheel(mRecentColorInfo.getNewColor()!!)
-            updateHexAndRGBValues(mSelectedColorBackground!!.color!!.defaultColor)
+
+        if (recentColorInfo.newColor != null) {
+            selectedColorBackground.setColor(recentColorInfo.newColor!!)
+            mapColorOnColorWheel(recentColorInfo.newColor!!)
+            updateHexAndRGBValues(selectedColorBackground.color!!.defaultColor)
         }
     }
-
 
     private fun setImageColor(view: View, num: Int?) {
         val gradientDrawable =
@@ -811,47 +775,41 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
                 intArrayOf(Color.argb(61, 0, 0, 0))
             ), gradientDrawable, null
         )
-        view.setOnClickListener(mImageButtonClickListener)
+        view.setOnClickListener(imageButtonClickListener)
     }
 
     private fun mapColorOnColorWheel(i: Int) {
-        mPickedColor?.color = i
+        pickedColor.color = i
 
-        mColorSwatchView?.updateCursorPosition(i)
+        colorSwatchView.updateCursorPosition(i)
 
-        mColorSpectrumView?.setColor(i)
+        colorSpectrumView.setColor(i)
 
-        mGradientColorSeekBar?.restoreColor(i)
+        gradientColorSeekBar.restoreColor(i)
 
-        mOpacitySeekBar?.restoreColor(i)
+        opacitySeekBar.restoreColor(i)
 
-        if (mSelectedColorBackground != null) {
-            mSelectedColorBackground!!.setColor(i)
-            setCurrentColorViewDescription(i, 1)
-        }
+        selectedColorBackground.setColor(i)
+        setCurrentColorViewDescription(i, 1)
 
-        if (mColorSpectrumView != null) {
-            val v: Float = mPickedColor.v
-            val alpha: Int = mPickedColor.alpha
-            mPickedColor.v = 1.0f
-            mPickedColor.alpha = 255
-            mColorSpectrumView.updateCursorColor(mPickedColor.color!!)
-            mPickedColor.v = v
-            mPickedColor.alpha = alpha
-        }
+        val v: Float = pickedColor.v
+        val alpha: Int = pickedColor.alpha
+        pickedColor.v = 1.0f
+        pickedColor.alpha = 255
+        colorSpectrumView.updateCursorColor(pickedColor.color!!)
+        pickedColor.v = v
+        pickedColor.alpha = alpha
 
-        if (mOpacitySeekBar != null) {
-            val ceil = ceil((((mOpacitySeekBar.progress * 100).toFloat()) / 255.0f).toDouble()).toInt()
-            mColorPickerOpacityEditText.setText("" + String.format(Locale.getDefault(), "%d", ceil)
-            )
-            mColorPickerOpacityEditText.setSelection(ceil.toString().length)
-        }
+
+        val ceil = ceil((((opacitySeekBar.progress * 100).toFloat()) / 255.0f).toDouble()).toInt()
+        colorPickerOpacityEditText.setText("" + String.format(Locale.getDefault(), "%d", ceil))
+        colorPickerOpacityEditText.setSelection(ceil.toString().length)
     }
 
     private fun setCurrentColorViewDescription(i: Int, i2: Int) {
         val sb = StringBuilder()
         val colorSwatchDescriptionAt: StringBuilder? =
-            mColorSwatchView.getColorSwatchDescriptionAt(i)
+            colorSwatchView.getColorSwatchDescriptionAt(i)
         if (colorSwatchDescriptionAt != null) {
             sb.append(", ").append(colorSwatchDescriptionAt as CharSequence)
         }
@@ -863,24 +821,24 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     }
 
     fun saveSelectedColor() {
-        if (mPickedColor?.color != null) {
-            mRecentColorInfo.saveSelectedColor(mPickedColor.color!!)
+        if (pickedColor.color != null) {
+            recentColorInfo.selectedColor = pickedColor.color
         }
     }
 
     fun getRecentColorInfo(): RecentColorInfo {
-        return mRecentColorInfo
+        return recentColorInfo
     }
 
     fun isUserInputValid(): Boolean {
-        return mIsInputFromUser
+        return isInputFromUser
     }
 
     fun setOpacityBarEnabled(z: Boolean) {
-        mIsOpacityBarEnabled = z
+        isOpacityBarEnabled = z
         if (z) {
-            mOpacitySeekBar.visibility = VISIBLE
-            mOpacitySeekBarContainer.visibility = VISIBLE
+            opacitySeekBar.visibility = VISIBLE
+            opacitySeekBarContainer.visibility = VISIBLE
         }
     }
 
@@ -888,63 +846,35 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
         if (i != 0) {
             val format = String.format("%08x", i)
             val substring = format.substring(2, format.length)
-            mColorPickerHexEditText.setText("" + substring.uppercase(Locale.getDefault()))
-            mColorPickerHexEditText.setSelection(mColorPickerHexEditText.getText().length)
+            colorPickerHexEditText.setText("" + substring.uppercase(Locale.getDefault()))
+            colorPickerHexEditText.setSelection(colorPickerHexEditText.getText().length)
 
             val color = "#$substring".toColorInt()
-            mColorPickerRedEditText.setText("" + Color.red(color))
-            mColorPickerBlueEditText.setText("" + Color.blue(color))
-            mColorPickerGreenEditText.setText("" + Color.green(color))
+            colorPickerRedEditText.setText("" + Color.red(color))
+            colorPickerBlueEditText.setText("" + Color.blue(color))
+            colorPickerGreenEditText.setText("" + Color.green(color))
         }
     }
 
     inner class RecentColorInfo {
-        private var mSelectedColor: Int? = null
-        private var mCurrentColor: Int? = null
-        private var mNewColor: Int? = null
-        private val mRecentColorInfo = java.util.ArrayList<Int?>()
-
-        fun getRecentColorInfo(): java.util.ArrayList<Int?> {
-            return mRecentColorInfo
-        }
-
-        fun getCurrentColor(): Int? {
-            return mCurrentColor
-        }
-
-        fun getNewColor(): Int? {
-            return mNewColor
-        }
-
-        fun getSelectedColor(): Int? {
-            return mSelectedColor
-        }
-
-        fun setCurrentColor(num: Int?) {
-            mCurrentColor = num
-        }
-
-        fun setNewColor(num: Int?) {
-            mNewColor = num
-        }
-
-        fun saveSelectedColor(i: Int) {
-            mSelectedColor = i
-        }
+        var selectedColor: Int? = null
+        var currentColor: Int? = null
+        var newColor: Int? = null
+        val recentColorInfo = ArrayList<Int>()
 
         fun initRecentColorInfo(iArr: IntArray?) {
             if (iArr != null) {
                 var i = 0
-                if (iArr.size <= RECENT_COLOR_SLOT_COUNT) {
+                if (iArr.size <= recentColorSlotCount) {
                     val length = iArr.size
                     while (i < length) {
-                        this.mRecentColorInfo.add(iArr[i])
+                        this.recentColorInfo.add(iArr[i])
                         i++
                     }
                     return
                 }
-                while (i < RECENT_COLOR_SLOT_COUNT) {
-                    mRecentColorInfo.add(iArr[i])
+                while (i < recentColorSlotCount) {
+                    recentColorInfo.add(iArr[i])
                     i++
                 }
             }
@@ -998,5 +928,4 @@ class MaterialColorPickerView: LinearLayout, View.OnClickListener {
     fun interface OnColorChangedListener {
         fun onColorChanged(newColor: Int)
     }
-
 }

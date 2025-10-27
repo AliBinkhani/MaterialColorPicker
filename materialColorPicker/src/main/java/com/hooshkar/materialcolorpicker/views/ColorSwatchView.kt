@@ -223,8 +223,8 @@ internal class ColorSwatchView : View {
             intArrayOf(83, 71, 61, 53, 50, 49, 43, 33, 18, 10),
             intArrayOf(83, 70, 61, 53, 50, 49, 43, 33, 19, 10)
         )
-        colorSwatchDescription = Array<Array<StringBuilder>>(10) {
-            Array<StringBuilder>(11) {
+        colorSwatchDescription = Array<Array<StringBuilder>>(11) {
+            Array<StringBuilder>(10) {
                 StringBuilder()
             }
         }
