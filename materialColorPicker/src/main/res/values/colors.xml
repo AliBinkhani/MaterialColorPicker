@@ -1,12 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  TODO: use material colors  -->
-    <color name="material_color_picker_stroke_color_spectrum_view">#ffd6d6d6</color>
+
+    <!--Main-->
+    <color name="primary_color">#ff0381fe</color> <!--color_primary-->
+    <color name="secondary_color">#ff3e91ff</color> <!--color_control_activated-->
+    <color name="primary_dark_color">#ff0072de</color> <!--color_primary_dark-->
+
+    <color name="material_primary_text_color">@color/material_black</color>
+    <color name="sesl4_primary_text_color">#ff010101</color>
+    <color name="material_secondary_text_color">#ff8c8c8c</color>
+    <color name="material_highlighted_text_color">#ffc4e9fc</color>
+
+
+    <color name="material_background_floating">@color/material_white</color>
+    <color name="material_ripple_color">#1a000000</color>
+    <color name="sesl4_ripple_color">#0d000000</color>
+    <color name="material_error_color">#fff4511e</color>
+    <!--    <color name="material_control_color_normal">@color/control_color_normal</color>-->
+
+    <color name="material_round_and_bgcolor">#F2F2F2</color>
+    <color name="sesl4_round_and_bgcolor">#F6F6F6</color>
+
+    <color name="material_control_normal_color">#cc8f8f8f</color>
+
+    <color name="background_color">#fff6f6f6</color>
+    <color name="item_background_color">#fffcfcfc</color>
+    <color name="item_color">@color/material_black</color>
+
+    <color name="material_btn_background_color">#14000000</color>
+    <color name="material_btn_default_text_color">@color/material_black</color>
+
+    <!-- <color name="material_list_ripple_color">@color/material_ripple_color</color> -->
+
+    <color name="material_edit_text_color_disabled">#ffbebebe</color>
+    <color name="material_edit_text_color">@color/material_black</color>
+    <color name="sesl4_edit_text_color">#ff010101</color>
+    <color name="material_edit_text_hint_color">#ff8c8c8c</color>
+    <color name="material_edit_text_tint_color">@color/material_black</color>
+    <color name="material_edit_text_tint_color_disabled">#ffbebebe</color>
+    <color name="material_edit_text_tint_color_unfocused">#ff8c8c8c</color>
+
+    <color name="material_action_bar_text_color_menu">@color/material_black</color>
+    <color name="sesl4_action_bar_text_color_menu">#ff010101</color>
+
+    <color name="material_menu_badge_background_color">#fff56a0d</color>
+    <color name="material_menu_badge_text_color">@color/material_white</color>
+
+    <color name="material_swipe_refresh_background">#fffafafa</color>
+
+    <color name="material_functional_green">#ff14a866</color>
+    <color name="material_functional_orange">#ffef5e16</color>
+    <color name="material_functional_red">#ffdb332a</color>
+
+
+    <!--Colors-->
+    <color name="red">#ffD50000</color>
+    <color name="yellow">#ffFFD600</color>
+    <color name="green">#ff009808</color>
+    <color name="blue">#ff304FFE</color>
+    <color name="purple">#ffAA00FF</color>
+    <color name="orange">#ffFF6D00</color>
+    <color name="cyan">#ff00BFA5</color>
+    <color name="magenta">#ffC51162</color>
+    <color name="light_green">#ff64DD17</color>
+    <color name="black">#ff000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="transparent">#00000000</color>
+
+
+    <!--Sesl-->
+    <color name="material_white">#fffafafa</color>
+    <color name="material_black">#ff252525</color>
+    <color name="divider_color">#ff979797</color>
+
+
+    <!--ProgressBar-->
+    <color name="material_loading_progress_color1">#ff06b485</color>
+    <color name="material_loading_progress_color2">?colorPrimary</color>
+    <!--    <color name="material_progress_control_color_normal">@color/material_control_color_normal</color>-->
+    <color name="sesl4_progress_control_color_normal">#66cacaca</color>
+    <color name="material_progress_control_color_background">#66cacaca</color>
+    <color name="material_swipe_refresh_color1">#ff00d694</color>
+    <color name="material_swipe_refresh_color2">?colorPrimary</color>
+
+    <!--    <color name="material_seekbar_control_color_normal">@color/material_control_color_normal</color>-->
+    <!--    <color name="material_seekbar_control_color_default">@color/material_control_color_normal</color>-->
+    <color name="sesl4_seekbar_control_color_default">#66cacaca</color>
+    <color name="material_seekbar_disable_color_activated">#ffd2d2d2</color>
+    <color name="material_seekbar_overlap_color_activated">#ffff6021</color>
+    <color name="sesl4_seekbar_overlap_color_activated">#ffef5e16</color>
+    <color name="material_seekbar_overlap_color_default">#fffcb69b</color> <!--oui4 #66cacaca-->
+    <color name="material_seekbar_control_color_secondary">#ff7ab9cb</color>
+    <color name="oui_seekbar_circle_marker_color">#9c9c9c</color>
+
+
+    <!--Switch-->
+    <color name="material_switch_thumb_off_color">#fffafafa</color>
+    <color name="material_switch_thumb_off_disabled_color">#fffafafa</color>
+    <color name="material_switch_thumb_off_disabled_stroke_color">#ffd0d0d0</color>
+    <color name="material_switch_thumb_off_stroke_color">#ff8c8c8c</color>
+    <color name="material_switch_thumb_on_color">#fffafafa</color>
+    <color name="material_switch_thumb_on_disabled_color">#fffafafa</color>
+    <color name="material_switch_thumb_on_disabled_stroke_color">#ffd0d0d0</color>
+    <color name="material_switch_track_off_color">#00ffffff</color>
+    <color name="material_switch_track_off_disabled_color">#00ffffff</color>
+    <color name="material_switch_track_off_disabled_stroke_color">#668c8c8c</color>
+    <color name="material_switch_track_off_stroke_color">#ff8c8c8c</color>
+    <color name="material_switch_track_on_disabled_color">#668f8f8f</color>
+
+    <color name="sesl4_switch_thumb_off_disabled_stroke_color">#668c8c8c</color>
+    <color name="sesl4_switch_track_off_color">#ff999999</color>
+    <color name="sesl4_switch_track_off_disabled_color">#66999999</color>
+
+
+    <!--SwitchBar-->
+    <color name="material_switchbar_off_background_color">#fffafafa</color>
+    <color name="material_switchbar_off_background_color_dark">#2bfafafa</color>
+    <color name="material_switchbar_off_background_color_light">#fffafafa</color>
+    <color name="material_switchbar_off_text_color_dark">#fffafafa</color>
+    <color name="material_switchbar_off_text_color_light">#ff252525</color>
+    <color name="material_switchbar_off_text_color">#ff252525</color>
+    <!--    <color name="material_switchbar_on_background_color">@color/material_control_color_normal</color>-->
+
+    <color name="sesl4_switchbar_off_background_color">#fffcfcfc</color>
+    <color name="sesl4_switchbar_off_text_color">#ff252525</color>
+    <color name="sesl4_switchbar_on_background_color">#0d000000</color>
+
+
+    <!--Spinner-->
+    <color name="material_menu_popup_background_color">#fffcfcfc</color>
+    <color name="material_menu_popup_background_stroke_color">#fffcfcfc</color>
+    <color name="sesl4_menu_popup_background_color">#fffcfcfc</color>
+    <color name="sesl4_menu_popup_background_stroke_color">#fffcfcfc</color>
+    <color name="material_popup_menu_blur_background">#e6fcfcfc</color>
+    <color name="material_popup_menu_item_text_color_checked">?colorPrimaryDark</color>
+    <color name="material_spinner_dropdown_item_checkmark">?colorPrimaryDark</color>
+    <color name="material_spinner_dropdown_item_text_color_disabled">#66000000</color>
+    <color name="material_spinner_dropdown_item_text_color_normal">#ff000000</color>
+    <color name="material_spinner_icon_color_default">#ff3b3b3b</color>
+    <color name="material_spinner_icon_color_disabled">#663b3b3b</color>
+    <color name="material_spinner_item_text_color_disabled">#66252525</color>
+    <color name="material_spinner_item_text_color_normal">@color/material_black</color>
+    <color name="material_popup_menu_divider_color">#80979797</color>
+
+
+    <!--Others-->
+    <color name="button_ripple_color">#e1e1e1</color>
+    <color name="button_background_color">#4dcccccc</color>
+    <color name="drawer_dim_color">#33000000</color>
+    <color name="item_divider_color">#ff979797</color>
+    <color name="drawer_icon_color">#ff676768</color>
+    <color name="badge_background_color">#fff56a0d</color>
+    <color name="splash_background">#fffcfcfc</color>
+    <color name="material_scrollbar_handle_tint">#ffdedede</color>
+    <color name="material_list_subheader_text_color">#ff8c8c8c</color>
+    <color name="about_info_button_tint">#ff454545</color>
+    <color name="material_edge_effect_device_default">#0d000000</color>
+
+
+    <!--ColorPicker-->
+    <color name="material_color_picker_divider">#ff979797</color>
     <color name="material_color_picker_cursor_stroke_color">#ffffffff</color>
-    <color name="material_color_picker_swatch_cursor_color">#4dffffff</color>
-    <color name="material_color_picker_shadow">#66000000</color>
-    <color name="material_color_picker_stroke_color_swatchview">#ffd1d0d0</color>
-    <color name="material_color_picker_seekbar_cursor_stroke_color">#33000000</color>
+    <color name="material_color_picker_percent_text_color">
+        @color/material_color_picker_tab_selected
+    </color>
     <color name="material_color_picker_seekbar_cursor_background_color">#fffafafa</color>
+    <color name="material_color_picker_seekbar_cursor_stroke_color">#33000000</color>
+    <color name="material_color_picker_selected_color_item_text_color">#ff5d5d5d</color>
+    <color name="material_color_picker_shadow">#66000000</color>
+    <color name="material_color_picker_stroke_color">#ffd4d4d4</color>
+    <color name="material_color_picker_stroke_color_spectrumview">#ffd6d6d6</color>
+    <color name="material_color_picker_stroke_color_swatchview">#ffd1d0d0</color>
+    <color name="material_color_picker_swatch_cursor_color">#4dffffff</color>
+    <color name="material_color_picker_swatch_cursor_color_for_white">#48000000</color>
+    <color name="material_color_picker_tab_selected_background">#0d000000</color>
+    <color name="material_color_picker_tab_selected">#ff252525</color>
+    <color name="material_color_picker_tab_unselected">#ff909090</color>
+    <color name="material_color_picker_transparent">#00000000</color>
+    <color name="material_color_picker_used_color_item_empty_slot_color">#ffe6e6e6</color>
+    <color name="material_color_picker_used_color_text_color">#ff979797</color>
+
+
+    <!--Tooltip-->
+    <color name="material_tooltip_foreground">@color/material_black</color>
+    <color name="material_tooltip_background">#fff7f7f7</color>
+
+    <!--AppBarLayout-->
+    <color name="material_action_bar_background_color">#fff2f2f2</color>
+    <color name="sesl4_action_bar_background_color">#fff6f6f6</color>
+    <color name="material_action_bar_text_color_title">#ff252525</color>
+    <color name="sesl4_action_bar_text_color_title">#ff010101</color>
+    <color name="material_action_bar_text_color_subtitle">#ff636363</color>
+    <color name="sesl4_action_bar_text_color_subtitle">#ff636363</color>
+    <color name="material_extended_appbar_subtitle">#ff636363</color>
+
+    <color name="bottom_bar_item_image_color">#ff454545</color>
+    <color name="bottom_bar_item_text_color">#ff636363</color>
+
+
+    <!--TabLayout-->
+    <color name="material_badge_background_color">#ffef5e16</color>
+    <color name="material_badge_text_color">@color/material_white</color>
+    <color name="material_tablayout_main_tab_indicator_color">#ff252525</color>
+    <color name="material_tablayout_subtab_background_stroke_color">#ff717171</color>
+    <!--    <color name="material_tablayout_subtab_background_stroke_color">#ff000000</color>-->
+    <color name="material_tablayout_subtab_indicator_background">#0d000000</color>
+    <color name="material_tablayout_subtab_sub_text_color_default">#ff909090</color>
+    <color name="material_tablayout_subtab_sub_text_color_disabled">#66858585</color>
+    <color name="material_tablayout_subtab_sub_text_color_selected">#ff0072de</color>
+    <color name="material_tablayout_subtab_text_color_default">#ff8c8c8c</color>
+    <color name="material_tablayout_subtab_text_color_disabled">#668c8c8c</color>
+    <color name="material_tablayout_subtab_text_color_selected">#ff252525</color>
+    <color name="material_tablayout_text_color_default">#ff8c8c8c</color>
+    <color name="material_tablayout_text_color_disabled">#668c8c8c</color>
+    <color name="material_tablayout_text_color_selected">#ff010101</color>
+
+    <!--Dialog-->
+    <color name="material_dialog_body_text_color">#ff505050</color>
+    <color name="material_dialog_button_text_color">#ff0074d4</color>
+    <color name="material_dialog_button_red_text">@color/material_functional_red</color>
+    <color name="sesl4_dialog_button_text_color">#ff010101</color>
+    <color name="material_dialog_divider_color_material">#ffe6e6e6</color>
+    <color name="material_dialog_list_text_color">#ff252525</color>
+    <color name="material_dialog_scrollbar_handle_tint_color_mtrl">#ffdedede</color>
+    <color name="material_dialog_show_button_background_color">#47ffffff</color>
+    <color name="material_dialog_sub_text_color_material">#ff3b3b3b</color>
+    <color name="material_dialog_text_body_color">#ff505050</color>
+    <color name="material_dialog_title_text_color">#ff252525</color>
+    <color name="material_dialog_window_background_color_material">#fffcfcfc</color>
+    <color name="material_progress_dialog_text_color">#ff252525</color>
+    <color name="material_progress_dialog_horizontal_text_color">#ff505050</color>
+
+    <!--RecyclerView-->
+    <color name="material_scrollbar_index_tip_color">#ff4d4d4d</color>
+    <color name="material_fast_scrollbar_bg_color">#e64d4d4d</color>
+    <color name="material_list_go_to_top_arrow_bottom">#404040</color>
+    <color name="material_list_go_to_top_arrow_top">#888888</color>
+    <color name="material_list_go_to_top_inner_round">#FCFCFC</color>
+    <color name="material_list_go_to_top_outer_round">#33252525</color>
+    <!-- <color name="material_list_go_to_top_ripple">@color/material_ripple_color</color> -->
+
+    <!--Indexbar-->
+    <color name="material_index_bar_background_tint_color_dark">#993a3a3a</color>
+    <color name="material_index_bar_background_tint_color_light">#80e6e6e6</color>
+    <color name="material_index_bar_text_color_dark">#ff9c9c9c</color>
+    <color name="material_index_bar_text_color_light">#ff686868</color>
+    <color name="material_index_scroll_preview_text_color_light">@color/material_white</color>
+
+    <!--Preference-->
+    <color name="preference_fallback_accent_color">#ff008577</color>
+    <color name="material_switch_divider_color">#ffc4c4c4</color>
+    <color name="material_list_divider_color">#ffe6e6e6</color>
+    <color name="tips_card_view_item_color">@color/material_white</color>
+    <color name="widget_multi_button_selected_color">@color/primary_color</color>
+    <color name="widget_multi_button_unselected_color">#ff858585</color>
+    <color name="widget_multi_button_unselected_icon_color">#ff686868</color>
+    <color name="widget_multi_button_divider_color">#ffe6e6e6</color>
+
+
+    <!--Snackbar-->
+    <color name="material_design_snackbar_text_color">#fffafafa</color>
+    <color name="material_snackbar_action_ripple_color">#40000000</color>
+
+    <!-- TipPopup -->
+    <color name="oui_tip_popup_background_color">#ff474747</color>
+    <color name="oui_tip_popup_text_color">#fffcfcfc</color>
+    <color name="oui_tip_popup_text_color_translucent">#fffcfcfc</color>
+
+    <!--Picker-->
+    <color name="material_date_picker_selected_day_number_text_color">#fffcfcfc</color>
+    <color name="material_date_picker_button_tint_color">#ff8e8e8e</color>
+    <color name="material_date_picker_header_text_color">
+        @color/material_date_picker_normal_day_number_text_color
+    </color>
+    <color name="material_date_picker_normal_day_number_text_color">#ff4d4d4d</color>
+    <color name="material_date_picker_normal_text_color">#ff909090</color>
+    <color name="material_date_picker_sunday_text_color">#ffdb332a</color>
+
+    <color name="material_date_picker_saturday_text_color">#ff0082be</color>
+    <color name="material_date_picker_saturday_week_text_color">#ff0082be</color>
+    <color name="material_date_picker_sunday_number_text_color">#ffdb332a</color>
+    <color name="material_date_picker_weekday_number_text_color">#ff454545</color>
+    <color name="material_number_picker_text_highlight_color">#0d000000</color>
+    <color name="material_number_picker_text_color">#ff252525</color>
 
 </resources>

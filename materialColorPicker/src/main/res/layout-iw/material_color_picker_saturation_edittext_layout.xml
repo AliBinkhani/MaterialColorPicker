@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginStart="@dimen/material_color_picker_seekbar_edittext_margin_left">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layoutDirection="ltr">
+
+        <EditText
+            android:id="@+id/material_color_seek_bar_saturation_value_edit_view"
+            style="@style/SeekbarProgressText"
+            android:layout_width="@dimen/material_color_picker_perecent_edit_text_width"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="end"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="3"
+            android:selectAllOnFocus="true" />
+
+        <TextView
+            style="@style/SeekbarProgressText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="%" />
+    </LinearLayout>
+</LinearLayout>

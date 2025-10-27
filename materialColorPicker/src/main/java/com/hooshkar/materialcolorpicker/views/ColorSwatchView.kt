@@ -23,7 +23,7 @@ import androidx.customview.widget.ExploreByTouchHelper
 import com.hooshkar.materialcolorpicker.R
 import com.hooshkar.materialcolorpicker.dpToPx
 
-class ColorSwatchView : View {
+internal class ColorSwatchView : View {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -32,6 +32,13 @@ class ColorSwatchView : View {
         attrs,
         defStyleAttr
     )
+
+    constructor(
+        context: Context,
+        attrs: AttributeSet?,
+        defStyleAttr: Int,
+        defStyleRes: Int
+    ) : super(context, attrs, defStyleAttr, defStyleRes)
 
     companion object {
         private const val MAX_SWATCH_VIEW_ID: Int = 110
@@ -53,7 +60,7 @@ class ColorSwatchView : View {
     private val cursorRect: Rect = Rect()
     private var fromUser = false
     private var isColorInSwatch = false
-    private var listener: OnColorSwatchChangedListener? = null
+    var onColorSwatchChangedListener: OnColorSwatchChangedListener? = null
     private var selectedVirtualViewId = 0
     private val shadowRect: Rect = Rect()
     val strokePaint: Paint
@@ -419,7 +426,7 @@ class ColorSwatchView : View {
             setSelectedVirtualViewId()
             invalidate()
 
-            listener?.onColorSwatchChanged(colorSwatch[cursorIndex.x][cursorIndex.y])
+            onColorSwatchChangedListener?.onColorSwatchChanged(colorSwatch[cursorIndex.x][cursorIndex.y])
         }
         return true
     }
@@ -494,6 +501,30 @@ class ColorSwatchView : View {
 
     private fun setSelectedVirtualViewId() {
         selectedVirtualViewId = (cursorIndex.y * 11) + cursorIndex.x
+    }
+
+    fun updateCursorPosition(i: Int) {
+        setCursorIndexAt(i)
+        if (this.fromUser) {
+            this.currentCursorColor = ColorUtils.setAlphaComponent(i, 255)
+            setShadowRect(this.shadowRect)
+            setCursorRect(this.cursorRect)
+            invalidate()
+            setSelectedVirtualViewId()
+            return
+        }
+        this.selectedVirtualViewId = -1
+    }
+
+    fun getColorSwatchDescriptionAt(i: Int): StringBuilder? {
+        val cursorIndexAt = getCursorIndexAt(i)
+        if (!this.fromUser) {
+            return null
+        }
+        if (this.colorSwatchDescription[cursorIndexAt.x][cursorIndexAt.y] == null) {
+            return this.touchHelper.getItemDescription(cursorIndexAt.x + (cursorIndexAt.y * 11))
+        }
+        return this.colorSwatchDescription[cursorIndexAt.x][cursorIndexAt.y]
     }
 
     inner class TouchHelper(view: View) : ExploreByTouchHelper(view) {
@@ -591,7 +622,7 @@ class ColorSwatchView : View {
             TODO("Not yet implemented")
         }
 
-        private fun getItemDescription(i: Int): java.lang.StringBuilder? {
+        fun getItemDescription(i: Int): java.lang.StringBuilder? {
             setVirtualCursorIndexAt(i)
             if (colorSwatchDescription[this.virtualCursorIndexX][this.virtualCursorIndexY] == null) {
                 val sb = java.lang.StringBuilder()
@@ -636,7 +667,7 @@ class ColorSwatchView : View {
         }
 
         private fun onVirtualViewClick(i: Int) {
-            listener?.onColorSwatchChanged(i)
+            onColorSwatchChangedListener?.onColorSwatchChanged(i)
             touchHelper?.sendEventForVirtualView(selectedVirtualViewId, 1)
         }
 

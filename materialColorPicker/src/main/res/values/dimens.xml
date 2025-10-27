@@ -1,18 +1,565 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="material_color_picker_color_swatch_view_width">292.0dip</dimen>
-    <dimen name="material_color_picker_color_swatch_view_height">247.0dip</dimen>
-    <dimen name="material_color_picker_gradient_wheel_cursor_radius">12.0dip</dimen>
-    <dimen name="material_color_picker_spectrum_cursor_out_stroke_size">2.0dip</dimen>
+    <dimen name="rounded_corner_size">26dp</dimen>
+    <item name="material_disabled_color_alpha" type="dimen">0.4</item>
+    <dimen name="material_switchbar_height">64.0dip</dimen>
+    <dimen name="material_switchbar_margin_end">24.0dip</dimen>
+    <dimen name="material_switchbar_margin_start">24.0dip</dimen>
+    <dimen name="material_switchbar_progress_margin_right">12.0dip</dimen>
+    <dimen name="material_text_size_body_1">14.0sp</dimen>
+    <dimen name="material_text_size_title">20.0sp</dimen>
+    <dimen name="material_toolbar_title_text_size">19.0sp</dimen>
+
+    <dimen name="spacing_vertical_small">16.0dip</dimen>
+    <dimen name="spacing_vertical_tiny">10.0dip</dimen>
+    <dimen name="progress_bar_height">24.0dip</dimen>
+    <dimen name="progress_bar_radius">12.0dip</dimen>
+
+    <dimen name="material_button_corner_radius">26.0dip</dimen>
+    <dimen name="material_button_text_size">15.0sp</dimen>
+    <dimen name="material_show_button_background_radius">2.0dip</dimen>
+
+    <dimen name="material_list_divider_inset">10.0dip</dimen>
+    <dimen name="material_list_divider_height">1.0px</dimen>
+
+    <dimen name="material_list_preferred_item_height">58.5dip</dimen>
+    <dimen name="material_list_preferred_item_height_small">56.0dip</dimen>
+
+    <dimen name="material_list_item_padding_horizontal">12.0dip</dimen>
+
+    <dimen name="material_list_dropdown_item_start_padding">10.0dip</dimen>
+
+    <dimen name="material_edit_text_size">16.0sp</dimen>
+    <dimen name="sesl4_edit_text_size">17.0sp</dimen>
+    <dimen name="material_edit_textfield_cursor_inset">0.0px</dimen>
+    <dimen name="material_edit_textfield_cursor_width">2.0px</dimen>
+
+    <dimen name="material_list_primary_text_size">18.0sp</dimen>
+    <dimen name="sesl4_list_primary_text_size">17.0sp</dimen>
+    <dimen name="material_list_secondary_text_size">13.0sp</dimen>
+    <item name="material_text_size_subhead" type="dimen">@dimen/material_list_primary_text_size
+    </item>
+    <item name="sesl4_text_size_subhead" type="dimen">@dimen/sesl4_list_primary_text_size</item>
+    <item name="material_text_size_small" type="dimen">@dimen/material_list_secondary_text_size
+    </item>
+
+
+    <!--Spinner-->
+    <dimen name="material_menu_popup_max_height">464.0dip</dimen>
+    <dimen name="material_menu_popup_bottom_margin">6.0dip</dimen>
+    <dimen name="material_menu_popup_bottom_padding">6.0dip</dimen>
+    <dimen name="material_menu_popup_corner_radius">24.0dip</dimen>
+    <dimen name="material_menu_popup_elevation">8.0dip</dimen>
+    <item name="material_menu_popup_scale_anim_pivot_x" type="dimen">100.0%</item>
+    <item name="material_menu_popup_scale_anim_pivot_y" type="dimen">100.0%</item>
+    <dimen name="material_menu_popup_stroke_width">1.0px</dimen>
+    <dimen name="material_menu_popup_top_margin">6.0dip</dimen>
+    <dimen name="material_menu_popup_top_padding">6.0dip</dimen>
+
+    <dimen name="material_popup_menu_item_bottom_padding">13.0dip</dimen>
+    <dimen name="material_popup_menu_item_end_padding">24.0dip</dimen>
+    <dimen name="material_popup_menu_item_min_height">43.0dip</dimen>
+    <dimen name="material_popup_menu_item_min_width">168.0dip</dimen>
+    <dimen name="material_popup_menu_item_start_padding">24.0dip</dimen>
+    <dimen name="material_popup_menu_item_top_padding">13.0dip</dimen>
+
+    <dimen name="material_context_menu_title_bottom_padding">6.0dip</dimen>
+    <dimen name="material_context_menu_title_end_padding">24.0dip</dimen>
+    <dimen name="material_context_menu_title_start_padding">24.0dip</dimen>
+    <dimen name="material_context_menu_title_text_size">17.0sp</dimen>
+    <dimen name="material_context_menu_title_top_padding">14.0dip</dimen>
+
+    <dimen name="material_popup_menu_divider_bottom_margin">7.5dip</dimen>
+    <dimen name="material_popup_menu_divider_end_margin">12.0dip</dimen>
+    <dimen name="material_popup_menu_divider_start_margin">12.0dip</dimen>
+    <dimen name="material_popup_menu_divider_top_margin">7.5dip</dimen>
+
+    <dimen name="material_spinner_item_bottom_padding">4.0dip</dimen>
+    <dimen name="material_spinner_item_end_padding">6.0dip</dimen>
+    <dimen name="material_spinner_item_start_padding">13.0dip</dimen>
+    <dimen name="material_spinner_item_text_size">17.0sp</dimen>
+    <dimen name="material_spinner_item_top_padding">4.0dip</dimen>
+
+    <dimen name="material_checked_text_padding">18.0dip</dimen>
+
+
+    <!-- ProgressBar -->
+    <dimen name="material_progress_bar_height">3.0dip</dimen>
+    <dimen name="sesl4_progress_bar_height">4.0dip</dimen>
+    <dimen name="material_progress_bar_size_large">60.0dip</dimen>
+    <dimen name="material_progress_bar_size_small">24.0dip</dimen>
+    <dimen name="material_progress_bar_size_small_title">16.0dip</dimen>
+    <dimen name="material_progress_bar_min_height">21.0dip</dimen>
+    <dimen name="material_progress_bar_indeterminate_large">1919.0dip</dimen>
+    <dimen name="material_progress_bar_indeterminate_medium">959.0dip</dimen>
+    <dimen name="material_progress_bar_indeterminate_small">719.0dip</dimen>
+    <dimen name="material_progress_bar_indeterminate_xsmall">479.0dip</dimen>
+    <dimen name="material_progress_bar_size_xlarge">75.0dip</dimen>
+    <dimen name="material_progress_circle_size">60.0dip</dimen>
+    <dimen name="material_progress_circle_size_large_padding">2.5dip</dimen>
+    <dimen name="material_progress_circle_size_large_width">8.799988dip</dimen>
+    <dimen name="material_progress_circle_size_small_padding">1.0dip</dimen>
+    <dimen name="material_progress_circle_size_small_title_padding">0.70000005dip</dimen>
+    <dimen name="material_progress_circle_size_small_title_width">2.2999878dip</dimen>
+    <dimen name="material_progress_circle_size_small_width">3.5dip</dimen>
+    <dimen name="material_progress_circle_size_xlarge_padding">3.0999756dip</dimen>
+    <dimen name="material_progress_circle_size_xlarge_width">10.899994dip</dimen>
+    <dimen name="material_progress_circle_thickness">2.5dip</dimen>
+
+    <dimen name="material_seekbar_padding_horizontal">16.0dip</dimen>
+    <dimen name="material_seekbar_ripple_radius">16.0dip</dimen>
+    <dimen name="material_seekbar_thumb_radius">8.5dip</dimen>
+    <dimen name="sesl4_seekbar_thumb_radius">10.0dip</dimen>
+    <dimen name="material_seekbar_track_height">3.0dip</dimen>
+    <dimen name="sesl4_seekbar_track_height">4.0dip</dimen>
+    <dimen name="material_seekbar_track_height_expand">17.0dip</dimen>
+
+
+    <!--Popup-->
+    <dimen name="material_popup_menu_item_text_size">17.0sp</dimen>
+    <dimen name="material_popup_menu_item_padding">17.0dip</dimen>
+
+    <!--Toolbar-->
+    <dimen name="material_action_button_icon_size">24.0dip</dimen>
+    <dimen name="material_action_button_min_width">34.0dip</dimen>
+    <dimen name="material_action_button_padding_horizontal">12.0dip</dimen>
+
+    <!--ColorPicker-->
+    <dimen name="material_color_picker_color_oneui_3_swatch_view_container_margin_bottom">33.0dip
+    </dimen>
+    <dimen name="material_color_picker_color_spectrum_view_container_margin_top">16.0dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_container_margin_bottom">27.0dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_container_margin_right">15.0dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_container_margin_top">20.0dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_cursor_stroke_radius">2.0dip</dimen>
     <dimen name="material_color_picker_color_swatch_view_cursor_stroke_size">0.5dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_cursor_stroke_size_old">2.0dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_height">296.0dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_width">272.0dip</dimen>
+    <dimen name="material_color_picker_dialog_padding_bottom">32.0dip</dimen>
+    <dimen name="material_color_picker_dialog_padding_left">19.0dip</dimen>
+    <dimen name="material_color_picker_dialog_padding_right">19.0dip</dimen>
+    <dimen name="material_color_picker_dialog_padding_top">24.0dip</dimen>
+    <dimen name="material_color_picker_edit_text_size">14.0dip</dimen>
+    <dimen name="material_color_picker_gradient_wheel_cursor_radius">12.0dip</dimen>
+    <dimen name="material_color_picker_hex_edit_width">85.0dip</dimen>
+    <dimen name="material_color_picker_main_content_width">320.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_spectrum_view_height">247.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_container_margin_top">16.0dip
+    </dimen>
     <dimen name="material_color_picker_oneui_3_color_swatch_view_height">277.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_height_background">280.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_margin_bottom_background">28.0dip
+    </dimen>
+    <dimen name="material_color_picker_oneui_3_color_swatch_view_margin_top_background">15.0dip
+    </dimen>
     <dimen name="material_color_picker_oneui_3_color_swatch_view_width">292.0dip</dimen>
     <dimen name="material_color_picker_oneui_3_color_swatch_view_width_background">295.0dip</dimen>
-    <dimen name="material_color_picker_oneui_3_color_swatch_view_height_background">280.0dip</dimen>
-    <dimen name="material_color_picker_seekbar_track_radius">10.0dip</dimen>
-    <dimen name="material_color_picker_seekbar_track_height">20.0dip</dimen>
-    <dimen name="material_color_picker_seekbar_cursor_outer_size">17.0dip</dimen>
-    <dimen name="material_color_picker_seekbar_cursor_out_stroke_size">1.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_current_view_height">36.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_current_view_radius">14.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_current_view_stroke">0.0px</dimen>
+    <dimen name="material_color_picker_oneui_3_current_view_width">28.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_dialog_bottom_margin">3.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_dialog_extra_bottom_margin">1.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_dialog_extra_horizontal_margin">3.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_dialog_padding_bottom">20.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_dialog_padding_left">20.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_dialog_padding_right">20.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_dialog_padding_top">12.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_main_content_width">340.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_seekbar_height">24.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_seekbar_margin_bottom">18.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_seekbar_padding">0.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_selected_color_extra_margin">2.5dip</dimen>
+    <dimen name="material_color_picker_oneui_3_selected_color_text_size">12.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_used_color_divider_container_height">0.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_used_color_item_gap_margin">11.0dip</dimen>
+    <dimen name="material_color_picker_oneui_3_used_color_item_size">40.0dip</dimen>
+    <dimen name="material_color_picker_opacity_seekbar_background_height">19.5dip</dimen>
+    <dimen name="material_color_picker_opacity_seekbar_background_width">271.5dip</dimen>
+    <dimen name="material_color_picker_opacity_seekbar_margin_bottom">27.0dip</dimen>
+    <dimen name="material_color_picker_opacity_seekbar_margin_top">10.0dip</dimen>
+    <dimen name="material_color_picker_perecent_edit_text_width">24.0dip</dimen>
+    <dimen name="material_color_picker_rgb_edit_width">40.0dip</dimen>
+    <dimen name="material_color_picker_rgb_layout_margin">20.0dip</dimen>
+    <dimen name="material_color_picker_saturation_seekbar_area_height">54.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_content_width">268.0dip</dimen>
     <dimen name="material_color_picker_seekbar_cursor_inner_size">16.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_cursor_out_stroke_size">1.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_cursor_outer_size">17.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_edittext_margin_left">16.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_height">20.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_height_old">30.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_padding">5.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_track_height">20.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_track_radius">10.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_width">282.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_focus_height">52.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_focus_width">136.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_group_background_padding_vertical">4.0dip
+    </dimen>
+    <dimen name="material_color_picker_selected_color_group_height">52.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_group_width">272.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_hex_width">85.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_item_height">30.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_item_margin">8.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_item_radius">15.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_item_width">50.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_layout_height">42.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_rgb_width">42.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_text_height">44.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_text_margin">4.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_text_size">15.0sp</dimen>
+    <dimen name="material_color_picker_selected_color_text_width">78.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_title_text_height">18.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_value_text_height">24.0dip</dimen>
+    <dimen name="material_color_picker_selected_current_width">56.0dip</dimen>
+    <dimen name="material_color_picker_spectrum_cursor_out_stroke_size">2.0dip</dimen>
+    <dimen name="material_color_picker_spectrum_cursor_paint_size">25.0dip</dimen>
+    <dimen name="material_color_picker_spectrum_size">264.0dip</dimen>
+    <dimen name="material_color_picker_swatch_empty_area_height">54.0dip</dimen>
+    <dimen name="material_color_picker_tab_layout_height">56.0dip</dimen>
+    <dimen name="material_color_picker_tab_text_size">15.0dip</dimen>
+    <dimen name="material_color_picker_used_color_divider_container_height">36.0dip</dimen>
+    <dimen name="material_color_picker_used_color_divider_container_margin_bottom">16.0dip</dimen>
+    <dimen name="material_color_picker_used_color_divider_container_margin_top">20.0dip</dimen>
+    <dimen name="material_color_picker_used_color_divider_container_width">300.0dip</dimen>
+    <dimen name="material_color_picker_used_color_group_width">274.0dip</dimen>
+    <dimen name="material_color_picker_used_color_item_gap_margin">10.0dip</dimen>
+    <dimen name="material_color_picker_used_color_item_size">37.0dip</dimen>
+    <dimen name="material_color_picker_used_color_item_stroke_size">1.0px</dimen>
+    <dimen name="material_color_seekbar_title_text_size">14.0dip</dimen>
+
+    <!--Tooltip-->
+    <dimen name="material_hover_popup_elevation">8.0dip</dimen>
+    <dimen name="material_hover_popup_text_size">16.0sp</dimen>
+    <dimen name="material_hover_tooltip_popup_left_margin">12.0dip</dimen>
+    <dimen name="material_hover_tooltip_popup_top_margin">6.0dip</dimen>
+    <dimen name="material_hover_tooltip_popup_right_margin">12.0dip</dimen>
+    <dimen name="material_hover_tooltip_popup_bottom_margin">6.0dip</dimen>
+    <dimen name="material_hover_tooltip_popup_area_margin">20.0dip</dimen>
+    <dimen name="material_hover_popup_padding_left">28.0dip</dimen>
+    <dimen name="material_hover_popup_padding_top">16.0dip</dimen>
+    <dimen name="material_hover_popup_padding_right">28.0dip</dimen>
+    <dimen name="material_hover_popup_padding_bottom">16.0dip</dimen>
+    <dimen name="material_hover_popup_corner_radius">22.0dip</dimen>
+    <dimen name="material_navigation_bar_height">48.0dip</dimen>
+
+    <!--Switch-->
+    <dimen name="material_switch_width">43.0dip</dimen>
+
+    <!--AppBarLayout-->
+    <item name="material_appbar_height_proportion" type="dimen">0.0</item>
+    <dimen name="material_extended_appbar_bottom_padding">0.0dip</dimen>
+    <dimen name="material_appbar_elevation">0.0dip</dimen>
+    <dimen name="material_appbar_extended_title_padding">24.0dip</dimen>
+    <dimen name="material_toolbar_subtitle_text_size">15.0dip</dimen>
+    <dimen name="material_action_bar_default_height">56.0dip</dimen>
+    <dimen name="material_action_bar_height_with_padding">64.0dip</dimen>
+    <dimen name="material_appbar_extended_title_text_view_height">105.0dip</dimen>
+    <dimen name="material_appbar_extended_title_text_size">38.0sp</dimen>
+    <dimen name="material_appbar_extended_title_text_size_with_subtitle">38.0dip</dimen>
+    <dimen name="material_appbar_extended_subtitle_text_size">15.0dip</dimen>
+    <dimen name="material_action_bar_content_inset_with_nav">56.0px</dimen>
+    <dimen name="material_action_bar_content_inset">24.0dip</dimen>
+    <dimen name="material_overflow_button_min_width">46.0dip</dimen>
+    <dimen name="material_action_bar_overflow_padding_start">3.0dip</dimen>
+    <dimen name="material_action_bar_overflow_padding_end">20.0dip</dimen>
+    <dimen name="material_badge_additional_width">4.0dip</dimen>
+    <dimen name="material_badge_default_width">13.0dip</dimen>
+    <dimen name="material_menu_item_badge_end_margin">16.0dip</dimen>
+    <dimen name="material_menu_item_badge_size">17.0dip</dimen>
+    <dimen name="material_menu_item_badge_text_size">11.0dip</dimen>
+    <dimen name="select_all_width">68.0dip</dimen>
+    <dimen name="select_all_checkbox_size">32.0dip</dimen>
+    <dimen name="select_all_text_margin_top">-2.0dip</dimen>
+    <dimen name="select_all_list_text_size">12.0dip</dimen>
+    <dimen name="overflow_button_size">48.0dip</dimen>
+    <dimen name="overflow_button_start_margin">-9.0dip</dimen>
+
+    <dimen name="message_list_bottom_bar_height">60.0dip</dimen>
+    <dimen name="bottom_bar_item_spacing">3.0dip</dimen>
+    <dimen name="bottom_bar_item_image_size">24.0dip</dimen>
+    <dimen name="bottom_bar_item_text_size">12.0sp</dimen>
+
+    <dimen name="material_search_view_text_min_width">160.0dip</dimen>
+    <dimen name="material_search_view_search_text_size">20.0sp</dimen>
+
+
+    <!--TabLayout-->
+    <dimen name="material_tab_badge_dot_size">6.0dip</dimen>
+    <dimen name="material_tab_badge_number_height">17.0dip</dimen>
+    <dimen name="material_tab_badge_number_min_width">17.0dip</dimen>
+    <dimen name="material_tab_badge_offset_y">6.0dip</dimen>
+    <dimen name="material_tab_icon_size">24.0dip</dimen>
+    <dimen name="material_tab_max_width">0.0dip</dimen>
+    <dimen name="material_tab_min_side_space">10.0dip</dimen>
+    <dimen name="material_tab_scrollable_min_width">72.0dip</dimen>
+    <dimen name="material_tab_sub_text_size">12.0sp</dimen>
+    <dimen name="material_tab_text_size">15.0sp</dimen>
+    <dimen name="material_tab_text_size_2line">12.0sp</dimen>
+    <item name="material_tablayout_over_screen_max_width_rate" type="dimen">0.75</item>
+    <dimen name="material_tablayout_subtab_dot_badge_offset_x">4.0dip</dimen>
+    <dimen name="material_tablayout_subtab_indicator_2nd_height">50.0dip</dimen>
+    <dimen name="material_tablayout_subtab_indicator_height">36.0dip</dimen>
+    <dimen name="material_tablayout_subtab_indicator_radius">23.0dip</dimen>
+    <dimen name="material_tablayout_subtab_indicator_stroke_width">1.0dip</dimen>
+    <dimen name="material_tablayout_subtab_n_badge_xoffset">3.0dip</dimen>
+    <dimen name="material_tablayout_subtab_side_space">12.0dip</dimen>
+    <dimen name="tab_layout_default_padding">24.0dip</dimen>
+
+
+    <!--Dialog-->
+    <dimen name="material_alert_dialog_button_bar_height">48.0dip</dimen>
+    <dimen name="material_dialog_background_inset_horizontal">0.0dip</dimen>
+    <dimen name="material_dialog_background_inset_vertical">16.0dip</dimen>
+    <dimen name="material_dialog_body_text_line_spacing_extra">4.0sp</dimen>
+    <dimen name="material_dialog_body_text_margin_end">4.0dip</dimen>
+    <dimen name="material_dialog_body_text_margin_start">4.0dip</dimen>
+    <dimen name="material_dialog_body_text_padding_bottom">24.0dip</dimen>
+    <dimen name="sesl4_dialog_body_text_padding_bottom">26.0dip</dimen>
+    <dimen name="material_dialog_body_text_padding_top">16.0dip</dimen>
+    <dimen name="material_dialog_body_text_scroll_margin_bottom">8.0dip</dimen>
+    <dimen name="material_dialog_body_text_scroll_margin_top">8.0dip</dimen>
+    <dimen name="material_dialog_body_text_scroll_padding_end">20.0dip</dimen>
+    <dimen name="material_dialog_body_text_scroll_padding_start">20.0dip</dimen>
+    <dimen name="material_dialog_body_text_size">16.0sp</dimen>
+    <dimen name="sesl4_dialog_body_text_size">14.0sp</dimen>
+    <dimen name="material_dialog_button_bar_padding_bottom">20.0dip</dimen>
+    <dimen name="sesl4_dialog_button_bar_padding_bottom">24.0dip</dimen>
+    <dimen name="material_dialog_button_bar_padding_horizontal">24.0dip</dimen>
+    <dimen name="material_dialog_button_min_height">36.0dip</dimen>
+    <dimen name="material_dialog_button_min_width">42.0dip</dimen>
+    <dimen name="material_dialog_button_padding_horizontal">18.0dip</dimen>
+    <dimen name="material_dialog_button_padding_horizontal_with_three_button">15.0dip</dimen>
+    <dimen name="material_dialog_button_padding_vertical">4.0dip</dimen>
+    <dimen name="material_dialog_button_shape_corner">4.0dip</dimen>
+    <dimen name="material_dialog_button_shape_inset_horizontal">4.0dip</dimen>
+    <dimen name="material_dialog_button_shape_inset_vertical">0.0dip</dimen>
+    <dimen name="material_dialog_button_shape_padding_horizontal">4.0dip</dimen>
+    <dimen name="material_dialog_button_show_background_inset_horizontal">4.0dip</dimen>
+    <dimen name="material_dialog_button_show_background_inset_vertical">2.0dip</dimen>
+    <dimen name="material_dialog_button_text_size">16.0sp</dimen>
+    <dimen name="sesl4_dialog_button_text_size">18.0sp</dimen>
+    <dimen name="material_dialog_button_text_size_with_three_button">16.0sp</dimen>
+    <item name="material_dialog_fixed_height_major" type="dimen">79.99999%</item>
+    <item name="material_dialog_fixed_height_minor" type="dimen">100.0%</item>
+    <dimen name="material_dialog_fixed_width_major">320.0dip</dimen>
+    <dimen name="material_dialog_fixed_width_minor">320.0dip</dimen>
+    <dimen name="material_dialog_list_padding_bottom_no_buttons">24.0dip</dimen>
+    <dimen name="material_dialog_list_padding_top_no_title">24.0dip</dimen>
+    <item name="material_dialog_min_width_major" type="dimen">100.0%</item>
+    <item name="material_dialog_min_width_minor" type="dimen">100.0%</item>
+    <item name="sesl4_dialog_min_width_major" type="dimen">94.50001%</item>
+    <item name="sesl4_dialog_min_width_minor" type="dimen">94.50001%</item>
+    <dimen name="material_dialog_padding">24.0dip</dimen>
+    <item name="material_dialog_padding_horizontal" type="dimen">@dimen/material_dialog_padding
+    </item>
+    <item name="material_dialog_padding_top" type="dimen">@dimen/material_dialog_padding</item>
+    <item name="material_dialog_padding_vertical" type="dimen">@dimen/material_dialog_padding</item>
+    <dimen name="material_dialog_title_padding_bottom">18.0dip</dimen>
+    <dimen name="sesl4_dialog_title_padding_bottom">4.0dip</dimen>
+    <dimen name="material_dialog_title_padding_top">24.0dip</dimen>
+    <dimen name="material_dialog_title_text_size">20.0sp</dimen>
+    <dimen name="sesl4_dialog_title_text_size">16.0sp</dimen>
+    <dimen name="material_dialog_window_elevation">1.0dip</dimen>
+    <dimen name="material_progress_dialog_circle_message_text_size">14.0dip</dimen>
+    <dimen name="material_progress_dialog_circle_message_width">40.0dip</dimen>
+    <dimen name="material_progress_dialog_circle_size">70.0dip</dimen>
+    <dimen name="material_progress_dialog_padding_horizontal">16.0dip</dimen>
+    <dimen name="material_progress_dialog_padding_vertical">16.0dip</dimen>
+    <dimen name="material_progress_dialog_text_size">14.0dip</dimen>
+    <dimen name="material_select_dialog_item_padding_horizontal">6.0dip</dimen>
+    <dimen name="material_select_dialog_item_padding_vertical">14.0dip</dimen>
+    <item name="material_select_dialog_list_item_text_disabled_alpha" type="dimen">0.4</item>
+    <dimen name="material_select_dialog_list_item_text_size">18.0sp</dimen>
+    <dimen name="sesl4_select_dialog_list_item_text_size">17.0sp</dimen>
+    <dimen name="material_select_dialog_list_item_text_size_secondary">13.0sp</dimen>
+    <dimen name="material_select_dialog_padding_bottom">24.0dip</dimen>
+    <dimen name="sesl4_select_dialog_padding_bottom">26.0dip</dimen>
+    <dimen name="material_select_dialog_padding_end">24.0dip</dimen>
+    <dimen name="material_select_dialog_padding_start">18.0dip</dimen>
+    <dimen name="material_select_dialog_padding_top">18.0dip</dimen>
+
+    <!--RecyclerView-->
+    <dimen name="material_go_to_top_elevation">8.0dip</dimen>
+    <dimen name="material_go_to_top_scrollable_view_gap">20.0dip</dimen>
+    <dimen name="material_go_to_top_scrollable_view_size">40.0dip</dimen>
+    <dimen name="material_fast_scroll_additional_touch_area">11.0dip</dimen>
+    <dimen name="material_fast_scroll_preview_margin_end">24.0dip</dimen>
+    <dimen name="material_fast_scroll_thumb_margin_end">8.0dip</dimen>
+    <dimen name="material_fast_scroller_additional_bottom_padding">14.0dip</dimen>
+    <dimen name="material_fast_scroller_touch_target_min_size">48.0dip</dimen>
+    <dimen name="material_fast_scroller_track_padding">6.0dip</dimen>
+    <dimen name="material_index_tip_height">29.0dip</dimen>
+    <dimen name="material_index_tip_margin_top">6.0dip</dimen>
+    <dimen name="material_index_tip_max_width">150.0dip</dimen>
+    <dimen name="material_index_tip_min_width">25.0dip</dimen>
+    <dimen name="material_index_tip_padding">14.0dip</dimen>
+    <dimen name="material_index_tip_radius">15.0dip</dimen>
+    <dimen name="material_index_tip_text_size">13.0sp</dimen>
+
+    <!--Indexbar-->
+    <dimen name="material_index_scroll_preview_margin_center">86.0dip</dimen>
+    <dimen name="material_index_scroll_preview_radius">35.0dip</dimen>
+    <dimen name="material_index_scroll_preview_text_size">41.0dip</dimen>
+    <dimen name="material_index_scroll_preview_text_width_limit">60.0dip</dimen>
+    <dimen name="material_index_scroll_preview_ypos_limit">18.0dip</dimen>
+    <dimen name="material_indexbar_additional_touch_boundary">8.0dip</dimen>
+    <dimen name="material_indexbar_content_min_height">17.0dip</dimen>
+    <dimen name="material_indexbar_content_padding">4.0dip</dimen>
+    <dimen name="material_indexbar_dot_radius">0.75dip</dimen>
+    <dimen name="material_indexbar_margin_bottom">18.0dip</dimen>
+    <dimen name="material_indexbar_margin_horizontal">8.0dip</dimen>
+    <dimen name="material_indexbar_margin_top">36.0dip</dimen>
+    <dimen name="material_indexbar_simple_index_width">30.0dip</dimen>
+    <dimen name="material_indexbar_text_size">11.0dip</dimen>
+    <dimen name="material_indexbar_textmode_width">22.0dip</dimen>
+    <dimen name="material_indexbar_thumb_additional_height">2.0dip</dimen>
+    <dimen name="material_indexbar_thumb_horizontal_padding">2.0dip</dimen>
+    <dimen name="material_indexbar_thumb_vertical_padding">3.0dip</dimen>
+    <dimen name="material_indexbar_width">15.0dip</dimen>
+
+    <!--Preference-->
+    <dimen name="material_list_subheader_min_height">20.0dip</dimen>
+    <dimen name="material_list_image_end_padding">10.0dip</dimen>
+    <dimen name="material_preference_item_icon_size">36.0dip</dimen>
+    <dimen name="material_list_widget_start_padding">16.0dip</dimen>
+    <dimen name="material_preference_item_padding_vertical">14.0dip</dimen>
+    <dimen name="material_switch_divider_height">1.0px</dimen>
+    <dimen name="material_list_subheader_padding_top">11.75dip</dimen>
+    <dimen name="material_list_subheader_padding_bottom">5.0dip</dimen>
+    <dimen name="material_list_subheader_text_size">14.0sp</dimen>
+    <dimen name="material_preference_switch_padding_vertical">12.0dip</dimen>
+    <dimen name="layout_preference_padding_bottom">0.0dip</dimen>
+    <dimen name="widget_multi_btn_preference_divider_margin_top">27.0dip</dimen>
+    <dimen name="widget_multi_btn_preference_divider_margin_bottom">39.0dip</dimen>
+    <dimen name="widget_multi_btn_preference_padding_top">18.0dip</dimen>
+    <dimen name="widget_multi_btn_preference_padding_bottom">14.0dip</dimen>
+    <dimen name="widget_multi_btn_preference_padding_start_end">8.0dip</dimen>
+    <dimen name="widget_multi_btn_preference_icon_text_size">20.0dip</dimen>
+    <dimen name="widget_multi_btn_preference_icon_margin_bottom">7.0dip</dimen>
+    <dimen name="widget_horizontal_radio_preference_icon_min_height">24.0dip</dimen>
+    <dimen name="widget_horizontal_radio_preference_icon_min_width">24.0dip</dimen>
+    <dimen name="widget_two_btn_preference_text_size">15.0sp</dimen>
+    <dimen name="widget_multi_btn_preference_text_size">15.0dip</dimen>
+    <dimen name="widget_related_card_gap_height">20.0dip</dimen>
+    <dimen name="widget_related_card_padding">12.0dip</dimen>
+    <dimen name="widget_related_card_chunking_category_height">0.0dip</dimen>
+    <dimen name="widget_related_card_title_text_size">18.0sp</dimen>
+    <dimen name="widget_related_card_title_text_margin_bottom">10.0dip</dimen>
+    <dimen name="widget_related_card_text_size">16.0sp</dimen>
+    <dimen name="widget_related_card_text_padding_top">6.0dip</dimen>
+    <dimen name="widget_related_card_text_margin_start">8.0dip</dimen>
+    <dimen name="widget_related_card_text_padding_side">16.0dip</dimen>
+    <dimen name="widget_related_card_view_margin_top_bottom">20.0dip</dimen>
+    <dimen name="widget_related_card_view_margin_start_end">24.0dip</dimen>
+    <dimen name="widget_related_card_view_margin_start_tip">18.0dip</dimen>
+
+    <!--Snackbar-->
+    <dimen name="material_toast_padding_start">20.0dip</dimen>
+    <dimen name="material_toast_padding_top">9.0dip</dimen>
+    <dimen name="material_toast_padding_end">20.0dip</dimen>
+    <dimen name="material_toast_padding_bottom">9.0dip</dimen>
+    <dimen name="material_toast_text_size">16.0sp</dimen>
+    <dimen name="material_design_snackbar_action_padding_left">20.0dip</dimen>
+    <dimen name="material_design_snackbar_action_padding_right">20.0dip</dimen>
+    <dimen name="material_design_snackbar_action_padding_top">2.0dip</dimen>
+    <item name="material_config_prefSnackWidth" type="dimen">84.0%</item>
+    <dimen name="material_design_snackbar_action_text_size">18.0sp</dimen>
+    <dimen name="material_design_snackbar_layout_padding_bottom">55.0dip</dimen>
+    <dimen name="material_design_snackbar_text_padding_left">20.0dip</dimen>
+    <dimen name="material_design_snackbar_text_padding_right">20.0dip</dimen>
+
+    <!-- TipPopup -->
+    <dimen name="oui_tip_popup_balloon_action_text_size">15.0sp</dimen>
+    <dimen name="oui_tip_popup_balloon_arrow_height">12.0dip</dimen>
+    <dimen name="oui_tip_popup_balloon_arrow_width">16.0dip</dimen>
+    <dimen name="oui_tip_popup_balloon_button_minheight">36.0dip</dimen>
+    <dimen name="oui_tip_popup_balloon_button_minwidth">0.0dip</dimen>
+    <dimen name="oui_tip_popup_balloon_message_margin_horizontal">18.0dip</dimen>
+    <dimen name="oui_tip_popup_balloon_message_margin_vertical">16.0dip</dimen>
+    <dimen name="oui_tip_popup_balloon_message_text_size">15.0sp</dimen>
+    <dimen name="oui_tip_popup_bubble_height">31.0dip</dimen>
+    <dimen name="oui_tip_popup_bubble_height_translucent">31.0dip</dimen>
+    <dimen name="oui_tip_popup_bubble_width">31.0dip</dimen>
+    <dimen name="oui_tip_popup_bubble_width_translucent">31.0dip</dimen>
+    <dimen name="oui_tip_popup_button_inset_horizontal">0.0dip</dimen>
+    <dimen name="oui_tip_popup_button_inset_vertical">0.0dip</dimen>
+    <dimen name="oui_tip_popup_button_padding_horizontal">9.0dip</dimen>
+    <dimen name="oui_tip_popup_button_padding_vertical">8.0dip</dimen>
+    <dimen name="oui_tip_popup_scale_margin">10.0dip</dimen>
+    <dimen name="oui_tip_popup_side_margin">10.0dip</dimen>
+
+
+    <dimen name="material_picker_spinner_height">144.0dip</dimen>
+    <dimen name="material_time_picker_dialog_min_width">400.0dip</dimen>
+    <dimen name="material_time_picker_spinner_am_pm_text_size">22.0dip</dimen>
+    <dimen name="material_time_picker_spinner_dialog_padding_bottom">24.0dip</dimen>
+    <dimen name="material_time_picker_spinner_dialog_padding_top">24.0dip</dimen>
+    <dimen name="material_time_picker_spinner_divider_text_size">32.0dip</dimen>
+    <item name="material_time_picker_spinner_height" type="dimen">
+        @dimen/material_picker_spinner_height
+    </item>
+    <dimen name="material_time_picker_spinner_text_size">28.0dip</dimen>
+    <dimen name="material_spinning_date_picker_date_spinner_text_size">21.0dip</dimen>
+    <dimen name="material_spinning_date_picker_height">277.0dip</dimen>
+    <dimen name="material_spinning_date_picker_height_dialog">277.0dip</dimen>
+    <dimen name="material_spinning_date_picker_margin_top">44.0dip</dimen>
+    <dimen name="material_number_picker_spinner_edit_text_height">48.0dip</dimen>
+    <item name="material_number_picker_spinner_height" type="dimen">
+        @dimen/material_picker_spinner_height
+    </item>
+    <dimen name="material_number_picker_spinner_width">90.0dip</dimen>
+    <dimen name="material_date_picker_calendar_day_height">32.0dip</dimen>
+    <dimen name="material_date_picker_calendar_header_button_height">36.0dip</dimen>
+    <dimen name="material_date_picker_calendar_header_button_width">36.0dip</dimen>
+    <dimen name="material_date_picker_calendar_header_height">36.0dip</dimen>
+    <dimen name="material_date_picker_calendar_header_month_text_size">16.0sp</dimen>
+    <dimen name="material_date_picker_calendar_view_height">192.0dip</dimen>
+    <dimen name="material_date_picker_calendar_view_margin">15.0dip</dimen>
+    <dimen name="material_date_picker_calendar_view_padding">0.0dip</dimen>
+    <dimen name="material_date_picker_calendar_view_width">328.0dip</dimen>
+    <dimen name="material_date_picker_calendar_week_height">32.0dip</dimen>
+    <dimen name="material_date_picker_day_number_text_size">15.0dip</dimen>
+    <dimen name="material_date_picker_dialog_min_height">205.0dip</dimen>
+    <dimen name="material_date_picker_dialog_min_width">400.0dip</dimen>
+    <dimen name="material_date_picker_dialog_padding_bottom">4.0dip</dimen>
+    <dimen name="material_date_picker_dialog_padding_top">20.0dip</dimen>
+    <dimen name="material_date_picker_gap_between_header_and_weekend">10.0dip</dimen>
+    <dimen name="material_date_picker_gap_between_weekend_and_calender">7.0dip</dimen>
+    <dimen name="material_date_picker_lunar_calendar_header_margin">10.0dip</dimen>
+    <dimen name="material_date_picker_month_day_label_text_size">11.0dip</dimen>
+    <dimen name="material_date_picker_selected_day_circle_radius">14.0dip</dimen>
+    <dimen name="material_date_picker_selected_day_circle_stroke">1.5dip</dimen>
+    <item name="material_date_picker_spinner_height" type="dimen">
+        @dimen/material_picker_spinner_height
+    </item>
+    <dimen name="material_picker_dialog_width">-1.0px</dimen>
+
+
+    <!--#############-->
+    <!--#  OneUI  4 #-->
+    <!--#############-->
+    <item name="sesl4_appbar_height_proportion" type="dimen">0.0</item>
+    <dimen name="sesl4_action_bar_default_height">64.0dip</dimen>
+    <dimen name="sesl4_action_bar_height_with_padding">80.0dip</dimen>
+    <dimen name="sesl4_action_bar_top_padding">16.0dip</dimen>
+    <dimen name="sesl4_appbar_extended_title_text_size">34.0sp</dimen>
+    <dimen name="sesl4_appbar_extended_title_text_size_with_subtitle">34.0dip</dimen>
+    <dimen name="sesl4_toolbar_title_text_size">21.0sp</dimen>
+    <dimen name="sesl4_toolbar_subtitle_text_size">13.0dip</dimen>
+
+    <dimen name="sesl4_popup_menu_item_text_size">16.0sp</dimen>
+
+    <dimen name="sesl4_about_app_name_text_size">38.0sp</dimen>
+    <dimen name="sesl4_about_secondary_text_size">14.0sp</dimen>
+
+    <dimen name="sesl4_menu_popup_corner_radius">26.0dip</dimen>
+    <dimen name="sesl4_menu_popup_stroke_width">2.0px</dimen>
+
+    <dimen name="sesl4_list_subheader_padding_top">13.0dip</dimen>
+    <dimen name="sesl4_list_subheader_text_size">13.0sp</dimen>
+
 
 </resources>

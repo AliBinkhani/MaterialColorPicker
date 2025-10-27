@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/material_color_picker_tab_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/material_color_picker_tab_layout_height"
+    android:layout_marginHorizontal="@dimen/material_color_picker_oneui_3_dialog_extra_horizontal_margin"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/material_color_picker_swatches_text_view"
+        style="@style/TabText"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:padding="10.0dip"
+        android:text="@string/material_color_picker_swatches_text" />
+
+    <TextView
+        android:id="@+id/material_color_picker_spectrum_text_view"
+        style="@style/TabText"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:padding="10.0dip"
+        android:text="@string/material_color_picker_spectrum_text" />
+</LinearLayout>

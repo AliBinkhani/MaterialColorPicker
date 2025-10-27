@@ -47,7 +47,7 @@ internal class ColorSpectrumView : View {
     private var cursorPosY: Float = 0f
     private val huePaint: Paint = Paint(1)
     private val saturationPaint: Paint = Paint(1)
-    private var colorChangedListener: Listener? = null
+    var colorChangedListener: Listener? = null
     private val strokePaint: Paint = Paint()
     private val spectrumRect: Rect = Rect(
         0,
@@ -60,7 +60,7 @@ internal class ColorSpectrumView : View {
         strokePaint.style = Paint.Style.STROKE
         strokePaint.setColor(
             resources.getColor(
-                R.color.material_color_picker_stroke_color_spectrum_view,
+                R.color.material_color_picker_stroke_color_spectrumview,
                 null
             )
         )
@@ -222,6 +222,6 @@ internal class ColorSpectrumView : View {
     }
 
     fun interface Listener {
-        fun onSpectrumColorChanged(f: Float, f2: Float)
+        fun onSpectrumColorChanged(newHue: Float, newSaturation: Float)
     }
 }
