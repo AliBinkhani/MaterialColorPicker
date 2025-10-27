@@ -105,9 +105,7 @@ class MaterialColorPickerView: LinearLayout {
                 updateHexAndRGBValues(intValue)
 
                 val progress = gradientColorSeekBar.progress
-                colorPickerSaturationEditText.setText(
-                    "" + String.format(Locale.getDefault(), "%d", progress)
-                )
+                colorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", progress))
                 colorPickerSaturationEditText.setSelection(progress.toString().length)
 
                 onColorChangedListener?.onColorChanged(intValue)
@@ -242,44 +240,26 @@ class MaterialColorPickerView: LinearLayout {
             override fun afterTextChanged(s: Editable) {
                 try {
                     if (s.toString().toInt() > 100) {
-                        colorPickerOpacityEditText.setText(
-                            "" + String.format(
-                                Locale.getDefault(),
-                                "%d",
-                                100
-                            )
-                        )
+                        colorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", 100))
                     }
                 } catch (e: NumberFormatException) {
                     e.printStackTrace()
                     colorPickerOpacityEditText.setText("0")
                 }
-                colorPickerOpacityEditText.setSelection(colorPickerOpacityEditText.getText().length)
+                colorPickerOpacityEditText.setSelection(colorPickerOpacityEditText.text.length)
             }
         })
         colorPickerOpacityEditText.onFocusChangeListener = OnFocusChangeListener { v, hasFocus ->
-            if (!colorPickerOpacityEditText.hasFocus() && colorPickerOpacityEditText.getText()
+            if (!colorPickerOpacityEditText.hasFocus() && colorPickerOpacityEditText.text
                     .toString().isEmpty()
             ) {
-                colorPickerOpacityEditText.setText(
-                    "" + String.format(
-                        Locale.getDefault(),
-                        "%d",
-                        0
-                    )
-                )
+                colorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", 0))
             }
         }
     }
 
     private fun initColorSpectrumView() {
-        colorPickerSaturationEditText.setText(
-            "" + java.lang.String.format(
-                Locale.getDefault(),
-                "%d",
-                gradientColorSeekBar.progress
-            )
-        )
+        colorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", gradientColorSeekBar.progress))
 
         colorSpectrumView.colorChangedListener = ColorSpectrumView.Listener { newHue, newSaturation ->
             isInputFromUser = true
@@ -320,19 +300,13 @@ class MaterialColorPickerView: LinearLayout {
                 if (!textFromRGB) {
                     try {
                         if (s.toString().toInt() > 100) {
-                            colorPickerSaturationEditText.setText(
-                                "" + String.format(
-                                    Locale.getDefault(),
-                                    "%d",
-                                    100
-                                )
-                            )
+                            colorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", 100))
                         }
                     } catch (e: NumberFormatException) {
                         e.printStackTrace()
                         colorPickerSaturationEditText.setText("0")
                     }
-                    colorPickerSaturationEditText.setSelection(colorPickerSaturationEditText.getText().length)
+                    colorPickerSaturationEditText.setSelection(colorPickerSaturationEditText.text.length)
                 }
             }
         })
@@ -351,7 +325,7 @@ class MaterialColorPickerView: LinearLayout {
                 try {
                     val imm = context.getSystemService<InputMethodManager>()
                     imm?.hideSoftInputFromWindow(windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
-                } catch (e: java.lang.Exception) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
                 pickedColor.setColorWithAlpha(newColor, opacitySeekBar.progress)
@@ -374,24 +348,12 @@ class MaterialColorPickerView: LinearLayout {
                 }
                 val f = (seekBar.progress.toFloat()) / (seekBar.max.toFloat())
                 if (progress >= 0 && flagVar) {
-                    colorPickerSaturationEditText.setText(
-                        "" + String.format(
-                            Locale.getDefault(),
-                            "%d",
-                            progress
-                        )
-                    )
+                    colorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", progress))
                     colorPickerSaturationEditText.setSelection(progress.toString().length)
                 }
                 if (fromRGB) {
                     textFromRGB = true
-                    colorPickerSaturationEditText.setText(
-                        "" + String.format(
-                            Locale.getDefault(),
-                            "%d",
-                            progress
-                        )
-                    )
+                    colorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", progress))
                     colorPickerSaturationEditText.setSelection(progress.toString().length)
                     textFromRGB = false
                 }
@@ -455,13 +417,7 @@ class MaterialColorPickerView: LinearLayout {
                 }
                 pickedColor.alpha = progress
                 if (progress >= 0 && colorPickerOpacityEditText.tag.toString().toInt() == 1) {
-                    colorPickerOpacityEditText.setText(
-                        "" + String.format(
-                            Locale.getDefault(),
-                            "%d",
-                            ceil((((progress * 100).toFloat()) / 255.0f).toDouble()).toInt()
-                        )
-                    )
+                    colorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", ceil((((progress * 100).toFloat()) / 255.0f).toDouble()).toInt()))
                 }
                 if (pickedColor.color != null) {
                     selectedColorBackground.setColor(pickedColor.color!!)
@@ -510,13 +466,9 @@ class MaterialColorPickerView: LinearLayout {
         val color: Int = pickedColor.color ?: return
         opacitySeekBar.changeColorBase(color, pickedColor.alpha)
         colorPickerOpacityEditText.setText(
-            "" + String.format(
-                Locale.getDefault(),
-                "%d",
-                Integer.valueOf(opacitySeekBar.progress)
-            )
+            String.format(Locale.getDefault(), "%d", opacitySeekBar.progress)
         )
-        colorPickerOpacityEditText.setSelection(colorPickerOpacityEditText.getText().length)
+        colorPickerOpacityEditText.setSelection(colorPickerOpacityEditText.text.length)
 
 
         selectedColorBackground.setColor(color)
@@ -574,17 +526,21 @@ class MaterialColorPickerView: LinearLayout {
                 val length = s.toString().trim { it <= ' ' }.length
                 if (length == 6) {
                     val color = "#$s".toColorInt()
-                    if (!colorPickerRedEditText.getText().toString().trim { it <= ' ' }
-                            .equals("" + Color.red(color), ignoreCase = true)) {
-                        colorPickerRedEditText.setText("" + Color.red(color))
+                    val red = Color.red(color).toString()
+                    val green = Color.green(color).toString()
+                    val blue = Color.blue(color).toString()
+
+                    if (!colorPickerRedEditText.text.toString().trim { it <= ' ' }
+                            .equals(red, ignoreCase = true)) {
+                        colorPickerRedEditText.setText(red)
                     }
-                    if (!colorPickerGreenEditText.getText().toString().trim { it <= ' ' }
-                            .equals("" + Color.green(color), ignoreCase = true)) {
-                        colorPickerGreenEditText.setText("" + Color.green(color))
+                    if (!colorPickerGreenEditText.text.toString().trim { it <= ' ' }
+                            .equals(green, ignoreCase = true)) {
+                        colorPickerGreenEditText.setText(green)
                     }
-                    if (!colorPickerBlueEditText.getText().toString().trim { it <= ' ' }
-                            .equals("" + Color.blue(color), ignoreCase = true)) {
-                        colorPickerBlueEditText.setText("" + Color.blue(color))
+                    if (!colorPickerBlueEditText.text.toString().trim { it <= ' ' }
+                            .equals(blue, ignoreCase = true)) {
+                        colorPickerBlueEditText.setText(blue)
                     }
                 }
             }
@@ -628,7 +584,7 @@ class MaterialColorPickerView: LinearLayout {
                                 colorPickerBlueEditText.setText("255")
                             }
                         }
-                    } catch (e: java.lang.NumberFormatException) {
+                    } catch (e: NumberFormatException) {
                         e.printStackTrace()
                         if (editText === editTexts[0]) {
                             colorPickerRedEditText.setText("0")
@@ -642,9 +598,9 @@ class MaterialColorPickerView: LinearLayout {
                     }
                     isInputFromUser = true
                     fromRGB = true
-                    colorPickerRedEditText.setSelection(colorPickerRedEditText.getText().length)
-                    colorPickerGreenEditText.setSelection(colorPickerGreenEditText.getText().length)
-                    colorPickerBlueEditText.setSelection(colorPickerBlueEditText.getText().length)
+                    colorPickerRedEditText.setSelection(colorPickerRedEditText.text.length)
+                    colorPickerGreenEditText.setSelection(colorPickerGreenEditText.text.length)
+                    colorPickerBlueEditText.setSelection(colorPickerBlueEditText.text.length)
                 }
             })
         }
@@ -665,7 +621,7 @@ class MaterialColorPickerView: LinearLayout {
         val colorStr = String.format("%08x", color)
 
         colorPickerHexEditText.setText(colorStr.substring(2, colorStr.length).uppercase(Locale.getDefault()))
-        colorPickerHexEditText.setSelection(colorPickerHexEditText.getText().length)
+        colorPickerHexEditText.setSelection(colorPickerHexEditText.text.length)
         if (!fromSaturationSeekbar && !fromSpectrumTouch) {
             mapColorOnColorWheel(color)
         }
@@ -699,7 +655,7 @@ class MaterialColorPickerView: LinearLayout {
             if (i < recentColorValuesSize) {
                 setImageColor(child, this.recentColorValues[i])
 
-                val sb = java.lang.StringBuilder()
+                val sb = StringBuilder()
                 sb.append(colorSwatchView.getColorSwatchDescriptionAt(this.recentColorValues[i]) as CharSequence?)
                 sb.insert(0, colorDescription!![i] + description + ", ")
                 child.setContentDescription(sb)
@@ -771,7 +727,7 @@ class MaterialColorPickerView: LinearLayout {
 
 
         val ceil = ceil((((opacitySeekBar.progress * 100).toFloat()) / 255.0f).toDouble()).toInt()
-        colorPickerOpacityEditText.setText("" + String.format(Locale.getDefault(), "%d", ceil))
+        colorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", ceil))
         colorPickerOpacityEditText.setSelection(ceil.toString().length)
     }
 
@@ -815,13 +771,16 @@ class MaterialColorPickerView: LinearLayout {
         if (i != 0) {
             val format = String.format("%08x", i)
             val substring = format.substring(2, format.length)
-            colorPickerHexEditText.setText("" + substring.uppercase(Locale.getDefault()))
-            colorPickerHexEditText.setSelection(colorPickerHexEditText.getText().length)
+            colorPickerHexEditText.setText(substring.uppercase(Locale.getDefault()))
+            colorPickerHexEditText.setSelection(colorPickerHexEditText.text.length)
 
             val color = "#$substring".toColorInt()
-            colorPickerRedEditText.setText("" + Color.red(color))
-            colorPickerBlueEditText.setText("" + Color.blue(color))
-            colorPickerGreenEditText.setText("" + Color.green(color))
+            val red = Color.red(color).toString()
+            val green = Color.green(color).toString()
+            val blue = Color.blue(color).toString()
+            colorPickerRedEditText.setText(red)
+            colorPickerGreenEditText.setText(green)
+            colorPickerBlueEditText.setText(blue)
         }
     }
 
