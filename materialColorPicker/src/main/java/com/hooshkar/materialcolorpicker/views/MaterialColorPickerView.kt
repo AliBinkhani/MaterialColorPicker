@@ -23,8 +23,11 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.annotation.ColorInt
+import androidx.annotation.IntRange
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
+import androidx.core.graphics.ColorUtils
 import com.hooshkar.materialcolorpicker.R
 import com.hooshkar.materialcolorpicker.isTablet
 import java.util.Locale
@@ -53,7 +56,7 @@ class MaterialColorPickerView: LinearLayout {
     private var beforeValue: String? = null
 
     private val colorPickerRedEditText: EditText
-    private var colorPickerGreenEditText: EditText //TODO: VAR???
+    private val colorPickerGreenEditText: EditText
     private val colorPickerBlueEditText: EditText
     private val colorPickerHexEditText: EditText
     private val colorPickerOpacityEditText: EditText
@@ -195,9 +198,7 @@ class MaterialColorPickerView: LinearLayout {
         colorPickerOpacityEditText.tag = 1
         flagVar = true
 
-        if (pickedColor.color != null) {
-            selectedColorBackground.setColor(pickedColor.color!!)
-        }
+        selectedColorBackground.setColor(pickedColor.color)
 
         tabLayoutContainer.check(R.id.material_color_picker_swatches_text_view)
         tabLayoutContainer.addOnButtonCheckedListener { toggleButton, checkedId, isChecked ->
@@ -262,6 +263,8 @@ class MaterialColorPickerView: LinearLayout {
         colorPickerSaturationEditText.setText(String.format(Locale.getDefault(), "%d", gradientColorSeekBar.progress))
 
         colorSpectrumView.colorChangedListener = ColorSpectrumView.Listener { newHue, newSaturation ->
+            //TODO: TWICE CALLS!!!
+
             isInputFromUser = true
             try {
                 val imm = context.getSystemService<InputMethodManager>()
@@ -271,7 +274,7 @@ class MaterialColorPickerView: LinearLayout {
             }
             pickedColor.setHS(newHue, newSaturation, opacitySeekBar.progress)
             updateCurrentColor()
-            updateHexAndRGBValues(pickedColor.color!!)
+            updateHexAndRGBValues(pickedColor.color)
         }
 
         colorPickerSaturationEditText.addTextChangedListener(object : TextWatcher {
@@ -357,15 +360,15 @@ class MaterialColorPickerView: LinearLayout {
                     colorPickerSaturationEditText.setSelection(progress.toString().length)
                     textFromRGB = false
                 }
-                pickedColor.v = f
-                val i: Int = pickedColor.color!!
+                pickedColor.value = f
+                val color: Int = pickedColor.color
                 if (fromEditText) {
-                    updateHexAndRGBValues(i)
+                    updateHexAndRGBValues(color)
                     fromEditText = false
                 }
-                selectedColorBackground.setColor(i)
-                opacitySeekBar.changeColorBase(i, pickedColor.alpha)
-                onColorChangedListener?.onColorChanged(i)
+                selectedColorBackground.setColor(color)
+                opacitySeekBar.changeColorBase(color, pickedColor.alpha)
+                onColorChangedListener?.onColorChanged(color)
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
@@ -419,10 +422,9 @@ class MaterialColorPickerView: LinearLayout {
                 if (progress >= 0 && colorPickerOpacityEditText.tag.toString().toInt() == 1) {
                     colorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", ceil((((progress * 100).toFloat()) / 255.0f).toDouble()).toInt()))
                 }
-                if (pickedColor.color != null) {
-                    selectedColorBackground.setColor(pickedColor.color!!)
-                    onColorChangedListener?.onColorChanged(pickedColor.color!!)
-                }
+
+                selectedColorBackground.setColor(pickedColor.color)
+                onColorChangedListener?.onColorChanged(pickedColor.color)
             }
         })
         opacitySeekBar.setOnTouchListener { v, event ->
@@ -463,7 +465,7 @@ class MaterialColorPickerView: LinearLayout {
     }
 
     private fun updateCurrentColor() {
-        val color: Int = pickedColor.color ?: return
+        val color: Int = pickedColor.color
         opacitySeekBar.changeColorBase(color, pickedColor.alpha)
         colorPickerOpacityEditText.setText(
             String.format(Locale.getDefault(), "%d", opacitySeekBar.progress)
@@ -497,13 +499,10 @@ class MaterialColorPickerView: LinearLayout {
     }
 
     private fun setInitialColors() {
-        if (pickedColor.color != null) {
-            mapColorOnColorWheel(pickedColor.color!!)
-        }
+        mapColorOnColorWheel(pickedColor.color)
     }
 
     private fun initCurrentColorValuesLayout() {
-        colorPickerGreenEditText = findViewById(R.id.material_color_green_edit_text)
         colorPickerRedEditText.setPrivateImeOptions("disableDirectWriting=true;")
         colorPickerBlueEditText.setPrivateImeOptions("disableDirectWriting=true;")
         colorPickerGreenEditText.setPrivateImeOptions("disableDirectWriting=true;")
@@ -717,12 +716,12 @@ class MaterialColorPickerView: LinearLayout {
         selectedColorBackground.setColor(i)
         setCurrentColorViewDescription(i, 1)
 
-        val v: Float = pickedColor.v
+        val v: Float = pickedColor.value
         val alpha: Int = pickedColor.alpha
-        pickedColor.v = 1.0f
+        pickedColor.value = 1.0f
         pickedColor.alpha = 255
-        colorSpectrumView.updateCursorColor(pickedColor.color!!)
-        pickedColor.v = v
+        colorSpectrumView.updateCursorColor(pickedColor.color)
+        pickedColor.value = v
         pickedColor.alpha = alpha
 
 
@@ -746,9 +745,7 @@ class MaterialColorPickerView: LinearLayout {
     }
 
     fun saveSelectedColor() {
-        if (pickedColor.color != null) {
-            recentColorInfo.selectedColor = pickedColor.color
-        }
+        recentColorInfo.selectedColor = pickedColor.color
     }
 
     fun getRecentColorInfo(): RecentColorInfo {
@@ -810,46 +807,46 @@ class MaterialColorPickerView: LinearLayout {
     }
 
     class PickedColor {
-        private var mColor: Int? = 0xffffffff.toInt()
-        private var mAlpha = 255
-        private val mHsv = FloatArray(3)
+        @ColorInt
+        private var mColor: Int = 0xffffffff.toInt()
 
-        fun setColorWithAlpha(i: Int, i2: Int) {
-            mColor = i
-            mAlpha = ceil((((i2 * 100).toFloat()) / 255.0f).toDouble()).toInt()
-            Color.colorToHSV(mColor!!, mHsv)
+        fun setColorWithAlpha(@ColorInt color: Int, @IntRange(from = 0, to = 255) alpha: Int) {
+            mColor = ColorUtils.setAlphaComponent(color, alpha)
         }
 
-        var color: Int?
+        var color: Int
+            @ColorInt
             get() = mColor
-            set(i) {
+            set(@ColorInt i) {
                 mColor = i
-                mAlpha = Color.alpha(i!!)
-                Color.colorToHSV(mColor!!, mHsv)
             }
 
-        fun setHS(f: Float, f2: Float, i: Int) {
-            val fArr = mHsv
-            fArr[0] = f
-            fArr[1] = f2
-            fArr[2] = 1.0f
-            mColor = Color.HSVToColor(mAlpha, fArr)
-            mAlpha = ceil((((i * 100).toFloat()) / 255.0f).toDouble()).toInt()
+        fun setHS(hue: Float, saturation: Float, value: Int) {
+            val alpha = Color.alpha(mColor)
+            val fArr = floatArrayOf(hue, saturation, (value * 100f) / 255f)
+            mColor = Color.HSVToColor(alpha, fArr)
         }
 
-        var v: Float
-            get() = mHsv[2]
-            set(f) {
-                val fArr = mHsv
-                fArr[2] = f
-                mColor = Color.HSVToColor(mAlpha, fArr)
+        var value: Float
+            get() {
+                val farr = FloatArray(3)
+                Color.colorToHSV(mColor, farr)
+                return farr[2]
+            }
+            set(value) {
+                val alpha = Color.alpha(mColor)
+                val farr = FloatArray(3)
+                Color.colorToHSV(mColor, farr)
+                farr[2] = value
+                mColor = Color.HSVToColor(alpha, farr)
             }
 
         var alpha: Int
-            get() = mAlpha
-            set(i) {
-                mAlpha = i
-                mColor = Color.HSVToColor(i, mHsv)
+            get() {
+                return Color.alpha(mColor)
+            }
+            set(value) {
+                mColor = ColorUtils.setAlphaComponent(color, value)
             }
     }
 
