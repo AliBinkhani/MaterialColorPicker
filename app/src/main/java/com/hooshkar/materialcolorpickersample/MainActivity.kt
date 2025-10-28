@@ -30,33 +30,17 @@ class MainActivity : AppCompatActivity() {
         val context: Context = this
         val colorPickerView = MaterialColorPickerView(context)
 
+        colorPickerView.setOpacityBarEnabled(true)
         colorPickerView.setNewColor(0xFFFF0000.toInt())
 
-        MaterialAlertDialogBuilder(this, R.style.MaterialColoPickerAlertDialog)
+        val dialog = MaterialAlertDialogBuilder(this, R.style.MaterialColoPickerAlertDialog)
             .setView(colorPickerView)
             .setPositiveButton("Done", null)
             .setNegativeButton("Cancel", null)
             .show()
 
-
-
-
-//        val dialog = MaterialColorPickerDialog(this) {
-//            Log.d("TAG_1234", "color set: $it")
-//        }
-//
-//        dialog.onColorChangedListener = OnColorChangedListener {
-//            Log.d("TAG_1234", "color changed: $it")
-//        }
-//
-//        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Done") { _, _ ->
-//
-//        }
-//
-//        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel") { _, _ ->
-//
-//        }
-//
-//        dialog.show()
+        binding.button.setOnClickListener {
+            dialog.show()
+        }
     }
 }

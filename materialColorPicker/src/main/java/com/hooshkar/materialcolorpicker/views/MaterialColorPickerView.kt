@@ -33,6 +33,7 @@ import com.hooshkar.materialcolorpicker.isTablet
 import java.util.Locale
 import kotlin.math.ceil
 import androidx.core.graphics.toColorInt
+import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButtonToggleGroup
 
 @SuppressLint("SetTextI18n")
@@ -67,6 +68,7 @@ class MaterialColorPickerView: LinearLayout {
     private val opacityLayout: LinearLayout
     private val opacitySeekBar: MaterialOpacitySeekBar
     private val opacitySeekBarContainer: FrameLayout
+    private val recentColorsLayout: View
     private val recentColorListLayout: LinearLayout
     private val spectrumViewContainer: FrameLayout
     private val swatchViewContainer: FrameLayout
@@ -80,6 +82,7 @@ class MaterialColorPickerView: LinearLayout {
     private val smallestWidthDp = intArrayOf(320, 360, 411)
     private var isInputFromUser = false
     private var isOpacityBarEnabled = false
+    private var isRecentColorEnabled = true
     private var isSpectrumSelected: Boolean = false
     private val editTexts: List<EditText>
     private var colorDescription: Array<String?>? = null
@@ -132,6 +135,7 @@ class MaterialColorPickerView: LinearLayout {
         opacitySeekBar = findViewById(R.id.material_color_picker_opacity_seekbar)
         opacitySeekBarContainer = findViewById(R.id.material_color_picker_opacity_seekbar_container)
         pickedColorView = findViewById(R.id.material_color_picker_picked_color_view)
+        recentColorsLayout = findViewById(R.id.material_color_picker_used_color_items_layout)
         recentColorListLayout = findViewById(R.id.material_color_picker_used_color_item_list_layout)
         spectrumViewContainer = findViewById(R.id.material_color_picker_color_spectrum_view_container)
         swatchViewContainer = findViewById(R.id.material_color_picker_color_swatch_view_container)
@@ -147,7 +151,7 @@ class MaterialColorPickerView: LinearLayout {
         initColorSwatchView()
         initGradientColorSeekBar()
         initColorSpectrumView()
-        initOpacitySeekBar(false)
+        initOpacitySeekBar()
         initRecentColorLayout()
         updateCurrentColor()
         setInitialColors()
@@ -397,12 +401,9 @@ class MaterialColorPickerView: LinearLayout {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    fun initOpacitySeekBar(enable: Boolean) {
-        opacityLayout.visibility = if (enable) VISIBLE else GONE
-        if (!isOpacityBarEnabled) {
-            opacitySeekBar.visibility = GONE
-            opacitySeekBarContainer.visibility = GONE
-        }
+    private fun initOpacitySeekBar() {
+        opacityLayout.isVisible = isOpacityBarEnabled
+
         opacitySeekBar.init(pickedColor.color)
         opacitySeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -643,7 +644,9 @@ class MaterialColorPickerView: LinearLayout {
         colorPickerGreenEditText.setInputType(InputType.TYPE_NULL)
     }
 
-    fun updateRecentColorLayout() {
+    private fun updateRecentColorLayout() {
+        recentColorsLayout.isVisible = isRecentColorEnabled
+
         val recentColorValuesSize = recentColorValues.size
         val description = ", " + resources.getString(R.string.material_color_picker_option)
         recentColorSlotCount =
@@ -762,12 +765,9 @@ class MaterialColorPickerView: LinearLayout {
         return isInputFromUser
     }
 
-    fun setOpacityBarEnabled(z: Boolean) {
-        isOpacityBarEnabled = z
-        if (z) {
-            opacitySeekBar.visibility = VISIBLE
-            opacitySeekBarContainer.visibility = VISIBLE
-        }
+    fun setOpacityBarEnabled(enabled: Boolean) {
+        isOpacityBarEnabled = enabled
+        opacityLayout.isVisible = true
     }
 
     private fun updateHexAndRGBValues(i: Int) {
@@ -795,6 +795,11 @@ class MaterialColorPickerView: LinearLayout {
     fun setNewColor(color: Int) {
         recentColorInfo.newColor = color
         updateRecentColorLayout()
+    }
+
+    fun setRecentColorEnabled(enabled: Boolean) {
+        isRecentColorEnabled = enabled
+        recentColorsLayout.isVisible = true
     }
 
     inner class RecentColorInfo {

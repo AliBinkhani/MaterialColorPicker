@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -19,7 +19,8 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/material_color_picker_oneui_3_main_content_height"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/material_color_picker_oneui_3_main_content_height"
                 android:orientation="horizontal">
 
                 <FrameLayout
@@ -143,29 +144,11 @@
 
                     <include layout="@layout/material_color_picker_oneui_3_selected_color_layout" />
 
-                    <LinearLayout
-                        android:layout_width="@dimen/material_color_picker_selected_color_group_width"
-                        android:layout_height="@dimen/material_color_picker_oneui_3_used_color_divider_container_height"
-                        android:layout_gravity="center"
-                        android:gravity="center_vertical"
-                        android:visibility="invisible">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/material_color_picker_recently_used_colors"
-                            android:visibility="gone" />
-
-                        <View
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_marginStart="16.0dip"
-                            android:background="?colorOutlineVariant" />
-                    </LinearLayout>
-
-                    <include layout="@layout/material_color_picker_oneui_3_used_color_group" />
+                    <include
+                        android:id="@+id/material_color_picker_used_color_items_layout"
+                        layout="@layout/material_color_picker_oneui_3_used_color_group" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </HorizontalScrollView>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
