@@ -288,7 +288,7 @@ class MaterialColorPickerView: LinearLayout {
                             flagVar = false
                             if (i <= 100) {
                                 colorPickerSaturationEditText.tag = 0
-                                gradientColorSeekBar.progress = i //TODO: cause listener spam in the end.
+                                gradientColorSeekBar.progress = i
                             }
                         }
                     } catch (e: Exception) {
@@ -339,7 +339,7 @@ class MaterialColorPickerView: LinearLayout {
     private fun initGradientColorSeekBar() {
         gradientColorSeekBar.init(pickedColor.color)
         gradientColorSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -366,10 +366,13 @@ class MaterialColorPickerView: LinearLayout {
                 }
                 selectedColorBackground.setColor(color)
                 opacitySeekBar.changeColorBase(color, pickedColor.alpha)
-                onColorChangedListener?.onColorChanged(color)
+
+                if (fromUser) {
+                    onColorChangedListener?.onColorChanged(color)
+                }
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
                 fromSaturationSeekbar = false
             }
         })
@@ -561,10 +564,12 @@ class MaterialColorPickerView: LinearLayout {
                 }
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    if (!s.toString().equals(beforeValue, ignoreCase = true) && s.toString().trim { it <= ' ' }.isNotEmpty()) {
-                        //TODO: Spam results.
-                        updateHexData()
-                    }
+                    if (s.toString().equals(beforeValue, true) && s.toString().trim { it <= ' ' }.isNotEmpty())
+                        return
+                    if (!editText.hasFocus())
+                        return
+
+                    updateHexData()
                 }
 
                 // TODO: WTF!
@@ -619,6 +624,7 @@ class MaterialColorPickerView: LinearLayout {
 
         colorPickerHexEditText.setText(colorStr.substring(2, colorStr.length).uppercase(Locale.getDefault()))
         colorPickerHexEditText.setSelection(colorPickerHexEditText.text.length)
+
         if (!fromSaturationSeekbar && !fromSpectrumTouch) {
             mapColorOnColorWheel(color)
         }
