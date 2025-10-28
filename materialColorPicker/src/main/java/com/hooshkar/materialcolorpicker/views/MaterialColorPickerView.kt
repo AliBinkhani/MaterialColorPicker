@@ -39,12 +39,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 class MaterialColorPickerView: LinearLayout {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
-
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
     constructor(
         context: Context,
         attrs: AttributeSet?,
@@ -79,9 +74,9 @@ class MaterialColorPickerView: LinearLayout {
     private val currentColorBackground: GradientDrawable
     private var flagVar = false
     private val pickedColor: PickedColor = PickedColor()
-    val recentColorInfo: RecentColorInfo = RecentColorInfo()
+    private val recentColorInfo: RecentColorInfo = RecentColorInfo()
     private val recentColorValues: ArrayList<Int> = recentColorInfo.recentColorInfo
-    private val selectedColorBackground: GradientDrawable
+    private var selectedColorBackground: GradientDrawable
     private val smallestWidthDp = intArrayOf(320, 360, 411)
     private var isInputFromUser = false
     private var isOpacityBarEnabled = false
@@ -157,6 +152,7 @@ class MaterialColorPickerView: LinearLayout {
         updateCurrentColor()
         setInitialColors()
         initCurrentColorValuesLayout()
+        updateRecentColorLayout()
     }
 
     private fun initDialogPadding() {
@@ -669,19 +665,29 @@ class MaterialColorPickerView: LinearLayout {
         }
 
         val currentColor = recentColorInfo.currentColor
+
         if (currentColor != null) {
+            currentColorView.visibility = VISIBLE
+            pickedColorView.setBackgroundResource(R.drawable.material_color_picker_oneui_3_selected_color_item_current_right_view)
+            selectedColorBackground = this.pickedColorView.background as GradientDrawable
             currentColorBackground.setColor(currentColor)
             setCurrentColorViewDescription(currentColor, 0)
             selectedColorBackground.setColor(currentColor)
             mapColorOnColorWheel(currentColor)
             updateHexAndRGBValues(currentColorBackground.color!!.defaultColor)
         } else if (recentColorValuesSize != 0) {
+            currentColorView.visibility = VISIBLE
             val recentColorValue = recentColorValues[0]
             currentColorBackground.setColor(recentColorValue)
             setCurrentColorViewDescription(recentColorValue, 0)
             selectedColorBackground.setColor(recentColorValue)
             mapColorOnColorWheel(recentColorValue)
             updateHexAndRGBValues(currentColorBackground.color!!.defaultColor)
+        } else {
+            currentColorView.visibility = GONE
+            pickedColorView.setBackgroundResource(R.drawable.material_color_picker_oneui_3_selected_color_item_current_single_view)
+            selectedColorBackground = this.pickedColorView.background as GradientDrawable
+            selectedColorBackground.setColor(pickedColor.color)
         }
 
         if (recentColorInfo.newColor != null) {
@@ -779,6 +785,16 @@ class MaterialColorPickerView: LinearLayout {
             colorPickerGreenEditText.setText(green)
             colorPickerBlueEditText.setText(blue)
         }
+    }
+
+    fun setRecentColor(color: Int) {
+        recentColorInfo.currentColor = color
+        updateRecentColorLayout()
+    }
+
+    fun setNewColor(color: Int) {
+        recentColorInfo.newColor = color
+        updateRecentColorLayout()
     }
 
     inner class RecentColorInfo {
