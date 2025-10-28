@@ -7,7 +7,7 @@
 
     <style name="Theme.MaterialColorPickerSample" parent="Base.Theme.MaterialColorPickerSample" />
 
-    <style name="CustomMaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
+    <style name="MaterialColoPickerAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="alertDialogStyle">@style/MaterialColorPickerAlertDialog</item>
     </style>
 

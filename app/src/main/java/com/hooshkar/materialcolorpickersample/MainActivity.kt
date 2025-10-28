@@ -29,7 +29,10 @@ class MainActivity : AppCompatActivity() {
 
         val context: Context = this
         val colorPickerView = MaterialColorPickerView(context)
-        MaterialAlertDialogBuilder(this, R.style.CustomMaterialAlertDialog)
+
+        colorPickerView.setNewColor(0xFFFF0000.toInt())
+
+        MaterialAlertDialogBuilder(this, R.style.MaterialColoPickerAlertDialog)
             .setView(colorPickerView)
             .setPositiveButton("Done", null)
             .setNegativeButton("Cancel", null)
