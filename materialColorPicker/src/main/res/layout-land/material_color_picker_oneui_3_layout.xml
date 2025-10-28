@@ -164,7 +164,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_marginStart="16.0dip"
-                            android:background="@drawable/material_color_picker_divider" />
+                            android:background="?colorOutlineVariant" />
                     </LinearLayout>
 
                     <include layout="@layout/material_color_picker_oneui_3_used_color_group" />

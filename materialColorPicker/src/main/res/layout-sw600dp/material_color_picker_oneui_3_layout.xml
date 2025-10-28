@@ -155,11 +155,11 @@
 
             <View
                 android:layout_width="@dimen/material_color_picker_used_color_divider_container_width"
-                android:layout_height="2.0dip"
+                android:layout_height="1dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/material_color_picker_used_color_divider_container_margin_top"
                 android:layout_marginBottom="@dimen/material_color_picker_used_color_divider_container_margin_bottom"
-                android:background="@drawable/material_color_picker_divider"
+                android:background="?colorOutlineVariant"
                 android:gravity="bottom" />
 
             <include layout="@layout/material_color_picker_oneui_3_used_color_group" />

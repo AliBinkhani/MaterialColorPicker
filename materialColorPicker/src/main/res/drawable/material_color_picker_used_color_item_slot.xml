@@ -3,6 +3,6 @@
     android:shape="oval">
     <stroke
         android:width="@dimen/material_color_picker_used_color_item_stroke_size"
-        android:color="@color/material_color_picker_stroke_color" />
-    <solid android:color="@color/material_color_picker_used_color_item_empty_slot_color" />
+        android:color="?colorOutlineVariant" />
+    <solid android:color="?colorSurfaceContainerHigh" />
 </shape>

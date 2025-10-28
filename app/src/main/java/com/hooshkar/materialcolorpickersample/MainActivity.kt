@@ -1,13 +1,13 @@
 package com.hooshkar.materialcolorpickersample
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.hooshkar.materialcolorpicker.views.MaterialColorPickerView.OnColorChangedListener
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.hooshkar.materialcolorpicker.views.MaterialColorPickerView
 import com.hooshkar.materialcolorpickersample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,16 +26,34 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.button.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-                .setTitle("Title")
-                .setPositiveButton("Yes", null)
-                .show()
 
-        }
+        val context: Context = this
+        val colorPickerView = MaterialColorPickerView(context)
+        MaterialAlertDialogBuilder(this, R.style.CustomMaterialAlertDialog)
+            .setView(colorPickerView)
+            .setPositiveButton("Done", null)
+            .setNegativeButton("Cancel", null)
+            .show()
 
-        binding.colorPicker.onColorChangedListener = OnColorChangedListener { newColor ->
-            Log.d("TAG_1412", "new color: ${newColor.toHexString(HexFormat.Default)}")
-        }
+
+
+
+//        val dialog = MaterialColorPickerDialog(this) {
+//            Log.d("TAG_1234", "color set: $it")
+//        }
+//
+//        dialog.onColorChangedListener = OnColorChangedListener {
+//            Log.d("TAG_1234", "color changed: $it")
+//        }
+//
+//        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Done") { _, _ ->
+//
+//        }
+//
+//        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel") { _, _ ->
+//
+//        }
+//
+//        dialog.show()
     }
 }

@@ -79,7 +79,7 @@ class MaterialColorPickerView: LinearLayout {
     private val currentColorBackground: GradientDrawable
     private var flagVar = false
     private val pickedColor: PickedColor = PickedColor()
-    private val recentColorInfo: RecentColorInfo = RecentColorInfo()
+    val recentColorInfo: RecentColorInfo = RecentColorInfo()
     private val recentColorValues: ArrayList<Int> = recentColorInfo.recentColorInfo
     private val selectedColorBackground: GradientDrawable
     private val smallestWidthDp = intArrayOf(320, 360, 411)
@@ -750,10 +750,6 @@ class MaterialColorPickerView: LinearLayout {
 
     fun saveSelectedColor() {
         recentColorInfo.selectedColor = pickedColor.color
-    }
-
-    fun getRecentColorInfo(): RecentColorInfo {
-        return recentColorInfo
     }
 
     fun isUserInputValid(): Boolean {
