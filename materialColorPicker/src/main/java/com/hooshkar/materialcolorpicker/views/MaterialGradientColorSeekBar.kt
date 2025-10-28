@@ -20,7 +20,7 @@ internal class MaterialGradientColorSeekBar : AppCompatSeekBar {
         defStyleAttr
     )
 
-    private val colors: IntArray = intArrayOf(ViewCompat.MEASURED_STATE_MASK, -1)
+    private val colors: IntArray = intArrayOf(MEASURED_STATE_MASK, -1)
     private val seekBarProgressDrawable: GradientDrawable = ResourcesCompat.getDrawable(
         resources,
         R.drawable.material_color_picker_gradient_seekbar_drawable,

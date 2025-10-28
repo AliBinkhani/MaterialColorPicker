@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="material_color_picker_color_oneui_3_swatch_view_container_margin_bottom">34.5dip</dimen>
     <dimen name="material_color_picker_gradient_wheel_cursor_radius">12.0dip</dimen>
     <dimen name="material_color_picker_oneui_3_color_spectrum_view_height">247.0dip</dimen>
     <dimen name="material_color_picker_oneui_3_color_swatch_view_container_margin_top">16.0dip</dimen>
@@ -20,6 +19,4 @@
     <dimen name="material_color_picker_seekbar_edittext_margin_left">16.0dip</dimen>
     <dimen name="material_color_picker_seekbar_height">20.0dip</dimen>
     <dimen name="material_color_picker_selected_color_item_margin">8.0dip</dimen>
-    <dimen name="material_color_picker_spectrum_cursor_paint_size">25.0dip</dimen>
-    <dimen name="material_color_picker_spectrum_size">264.0dip</dimen>
 </resources>

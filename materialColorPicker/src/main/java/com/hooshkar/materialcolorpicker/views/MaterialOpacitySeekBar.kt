@@ -7,7 +7,6 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.ViewCompat
 import com.hooshkar.materialcolorpicker.R
 
 internal class MaterialOpacitySeekBar : AppCompatSeekBar {
@@ -20,7 +19,7 @@ internal class MaterialOpacitySeekBar : AppCompatSeekBar {
         defStyleAttr
     )
 
-    private val colors: IntArray = intArrayOf(-1, ViewCompat.MEASURED_STATE_MASK)
+    private val colors: IntArray = intArrayOf(-1, MEASURED_STATE_MASK)
     private var seekBarProgressDrawable: GradientDrawable = ResourcesCompat.getDrawable(
         resources,
         R.drawable.material_color_picker_opacity_seekbar,

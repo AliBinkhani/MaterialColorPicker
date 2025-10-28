@@ -64,7 +64,6 @@
                         android:visibility="invisible">
 
                         <TextView
-                            android:id="@+id/material_color_picker_saturation_text"
                             style="@style/SeekbarTitleText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -105,7 +104,6 @@
                         android:paddingBottom="@dimen/material_color_picker_oneui_3_dialog_padding_bottom">
 
                         <TextView
-                            android:id="@+id/material_color_picker_opacity_text"
                             style="@style/SeekbarTitleText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -153,14 +151,12 @@
                         android:visibility="invisible">
 
                         <TextView
-                            android:id="@+id/material_color_picker_used_color_divider_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/material_color_picker_recently_used_colors"
                             android:visibility="gone" />
 
                         <View
-                            android:id="@+id/material_color_picker_recently_divider"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:layout_marginStart="16.0dip"

@@ -63,7 +63,6 @@
                     android:layout_marginBottom="@dimen/material_color_picker_oneui_3_dialog_extra_bottom_margin">
 
                     <TextView
-                        android:id="@+id/material_color_picker_saturation_text"
                         style="@style/SeekbarTitleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,7 +110,6 @@
                     android:layout_marginBottom="@dimen/material_color_picker_oneui_3_dialog_extra_bottom_margin">
 
                     <TextView
-                        android:id="@+id/material_color_picker_opacity_text"
                         style="@style/SeekbarTitleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

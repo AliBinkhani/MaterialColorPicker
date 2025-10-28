@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="material_color_picker_color_swatch_view_height">194.0dip</dimen>
+    <dimen name="material_color_picker_color_swatch_view_width">194.0dip</dimen>
+    <dimen name="material_color_picker_seekbar_width">268.0dip</dimen>
+    <dimen name="material_color_picker_selected_color_group_width">258.0dip</dimen>
+</resources>
