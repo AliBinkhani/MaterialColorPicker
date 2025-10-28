@@ -39,7 +39,7 @@ internal class ColorSpectrumView : View {
 
     private val hueColors = intArrayOf(-65281, -16776961, -16711681, -16711936, -256, -65536)
     private val roundedCornerRadius: Float = resources.dpToPx(4f).toFloat()
-    private val strokeWidth: Int = resources.dpToPx(2f)
+    private val strokeWidth: Int = resources.dpToPx(1f)
     private val cursorDrawable: Drawable
     private var cursorPaint: Paint = Paint()
     private val cursorPaintSize: Int = resources.dpToPx(25f)
@@ -58,18 +58,9 @@ internal class ColorSpectrumView : View {
 
     init {
         strokePaint.style = Paint.Style.STROKE
-        strokePaint.setColor(
-            resources.getColor(
-                R.color.material_color_picker_stroke_color_spectrumview,
-                null
-            )
-        )
+        strokePaint.setColor(resources.getColor(R.color.material_color_picker_stroke_color_spectrumview, null))
         strokePaint.strokeWidth = strokeWidth.toFloat()
-        cursorDrawable = ResourcesCompat.getDrawable(
-            resources,
-            R.drawable.material_color_picker_gradient_wheel_cursor,
-            null
-        )!!
+        cursorDrawable = ResourcesCompat.getDrawable(resources, R.drawable.material_color_picker_gradient_wheel_cursor, null)!!
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -165,11 +156,13 @@ internal class ColorSpectrumView : View {
             roundedCornerRadius,
             saturationPaint
         )
+
+        val strokeMargin = strokeWidth / 2
         canvas.drawRoundRect(
-            spectrumRectF.left,
-            spectrumRectF.top,
-            spectrumRectF.right,
-            spectrumRectF.bottom,
+            spectrumRectF.left + strokeMargin,
+            spectrumRectF.top + strokeMargin,
+            spectrumRectF.right - strokeMargin,
+            spectrumRectF.bottom - strokeMargin,
             roundedCornerRadius,
             roundedCornerRadius,
             strokePaint
@@ -212,8 +205,8 @@ internal class ColorSpectrumView : View {
         updateCursorPosition(color, fArr)
     }
 
-    internal fun updateCursorColor(i: Int) {
-        cursorPaint.setColor(i)
+    internal fun updateCursorColor(color: Int) {
+        cursorPaint.setColor(color)
     }
 
     fun updateCursorPosition(color: Int, fArr: FloatArray) {
