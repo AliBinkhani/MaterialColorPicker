@@ -107,6 +107,7 @@ internal class ColorSpectrumView : View {
         return true
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
@@ -202,16 +203,15 @@ internal class ColorSpectrumView : View {
     internal fun setColor(color: Int) {
         val fArr = FloatArray(3)
         Color.colorToHSV(color, fArr)
-        updateCursorPosition(color, fArr)
+        updateCursorPosition(fArr)
     }
 
     internal fun updateCursorColor(color: Int) {
         cursorPaint.setColor(color)
     }
 
-    fun updateCursorPosition(color: Int, fArr: FloatArray) {
-        cursorPosX =
-            (spectrumRect.left.toFloat()) + (((spectrumRect.width().toFloat()) * fArr[0]) / 300.0f)
+    fun updateCursorPosition(fArr: FloatArray) {
+        cursorPosX = (spectrumRect.left.toFloat()) + (((spectrumRect.width().toFloat()) * fArr[0]) / 300.0f)
         cursorPosY = (spectrumRect.top.toFloat()) + ((spectrumRect.height().toFloat()) * fArr[1])
         invalidate()
     }
