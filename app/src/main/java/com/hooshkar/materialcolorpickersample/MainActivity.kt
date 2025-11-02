@@ -2,12 +2,12 @@ package com.hooshkar.materialcolorpickersample
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.hooshkar.materialcolorpicker.views.MaterialColorPickerView
+import com.hooshkar.materialcolorpicker.MaterialColorPickerDialogBuilder
 import com.hooshkar.materialcolorpickersample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,17 +26,15 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
         val context: Context = this
-        val colorPickerView = MaterialColorPickerView(context)
-
-        colorPickerView.setOpacityBarEnabled(true)
-        colorPickerView.setNewColor(0xFFFF0000.toInt())
-
-        val dialog = MaterialAlertDialogBuilder(this, R.style.MaterialColoPickerAlertDialog)
-            .setView(colorPickerView)
-            .setPositiveButton("Done", null)
-            .setNegativeButton("Cancel", null)
+        val dialog = MaterialColorPickerDialogBuilder(context)
+            .setOpacityBarEnabled(true)
+            .setRecentColor(0x88FF0000.toInt())
+            .setOnColorChangeListener { color ->
+                Log.d("TAG_1234", "color changed: $color")
+            }.setPositiveButton("OK") { _, _, color ->
+                Log.d("TAG_1234", "color selected: $color")
+            }.setNegativeButton("Cancel", null)
             .show()
 
         binding.button.setOnClickListener {

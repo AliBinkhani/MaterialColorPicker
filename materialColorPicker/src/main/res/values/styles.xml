@@ -19,4 +19,21 @@
         <item name="android:textColor">@color/material_secondary_text_color</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
+
+    <style name="MaterialColoPickerAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/MaterialColorPickerAlertDialog</item>
+
+        <item name="android:windowMinWidthMajor">0%</item>
+        <item name="android:windowMinWidthMinor">0%</item>
+        <!--<item name="windowFixedWidthMajor">100%</item>-->
+        <!--<item name="windowFixedWidthMinor">100%</item>-->
+    </style>
+
+    <style name="MaterialColorPickerAlertDialog" parent="MaterialAlertDialog.Material3">
+        <item name="backgroundTint">?colorSurfaceContainerLow</item>
+        <item name="backgroundInsetStart">0dp</item>
+        <item name="backgroundInsetTop">5dp</item>
+        <item name="backgroundInsetEnd">0dp</item>
+        <item name="backgroundInsetBottom">5dp</item>
+    </style>
 </resources>
