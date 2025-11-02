@@ -78,7 +78,6 @@ class MaterialColorPickerView: LinearLayout {
     private var flagVar = false
     private val pickedColor: PickedColor = PickedColor()
     private val recentColorInfo: RecentColorInfo = RecentColorInfo()
-    private val recentColorValues: ArrayList<Int> = recentColorInfo.recentColorInfo
     private var selectedColorBackground: GradientDrawable
     private val smallestWidthDp = intArrayOf(320, 360, 411)
     private var isInputFromUser = false
@@ -97,6 +96,7 @@ class MaterialColorPickerView: LinearLayout {
 
     private val imageButtonClickListener: OnClickListener = OnClickListener { v ->
         var i = 0
+        val recentColorValues = recentColorInfo.recentColorValue
         while (i < recentColorValues.size && i < recentColorSlotCount) {
             if (recentColorListLayout.getChildAt(i) == v) {
                 isInputFromUser = true
@@ -656,6 +656,7 @@ class MaterialColorPickerView: LinearLayout {
     private fun updateRecentColorLayout() {
         recentColorsLayout.isVisible = isRecentColorEnabled
 
+        val recentColorValues = recentColorInfo.recentColorValue
         val recentColorValuesSize = recentColorValues.size
         val description = ", " + resources.getString(R.string.material_color_picker_option)
         recentColorSlotCount =
@@ -664,10 +665,10 @@ class MaterialColorPickerView: LinearLayout {
         for (i in 0..<recentColorSlotCount) {
             val child = recentColorListLayout.getChildAt(i)
             if (i < recentColorValuesSize) {
-                setImageColor(child, this.recentColorValues[i])
+                setImageColor(child, recentColorValues[i])
 
                 val sb = StringBuilder()
-                sb.append(colorSwatchView.getColorSwatchDescriptionAt(this.recentColorValues[i]) as CharSequence?)
+                sb.append(colorSwatchView.getColorSwatchDescriptionAt(recentColorValues[i]) as CharSequence?)
                 sb.insert(0, colorDescription[i] + description + ", ")
                 child.setContentDescription(sb)
 
@@ -809,14 +810,19 @@ class MaterialColorPickerView: LinearLayout {
 
     fun setRecentColorEnabled(enabled: Boolean) {
         isRecentColorEnabled = enabled
-        recentColorsLayout.isVisible = true
+        recentColorsLayout.isVisible = enabled
+    }
+
+    fun setRecentColors(recentColors: IntArray) {
+        recentColorInfo.initRecentColorInfo(recentColors)
+        updateRecentColorLayout()
     }
 
     inner class RecentColorInfo {
         var selectedColor: Int? = null
         var currentColor: Int? = null
         var newColor: Int? = null
-        val recentColorInfo = ArrayList<Int>()
+        internal val recentColorValue = ArrayList<Int>()
 
         fun initRecentColorInfo(iArr: IntArray?) {
             if (iArr != null) {
@@ -824,13 +830,13 @@ class MaterialColorPickerView: LinearLayout {
                 if (iArr.size <= recentColorSlotCount) {
                     val length = iArr.size
                     while (i < length) {
-                        this.recentColorInfo.add(iArr[i])
+                        this.recentColorValue.add(iArr[i])
                         i++
                     }
                     return
                 }
                 while (i < recentColorSlotCount) {
-                    recentColorInfo.add(iArr[i])
+                    recentColorValue.add(iArr[i])
                     i++
                 }
             }

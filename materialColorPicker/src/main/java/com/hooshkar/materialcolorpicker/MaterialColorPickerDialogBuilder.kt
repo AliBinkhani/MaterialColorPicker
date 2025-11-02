@@ -242,6 +242,16 @@ class MaterialColorPickerDialogBuilder {
         return this
     }
 
+    fun setRecentColorEnabled(enabled: Boolean): MaterialColorPickerDialogBuilder {
+        colorPickerView.setRecentColorEnabled(enabled)
+        return this
+    }
+
+    fun setRecentColors(vararg colors: Int): MaterialColorPickerDialogBuilder {
+        colorPickerView.setRecentColors(colors)
+        return this
+    }
+
     fun create(): AlertDialog {
         return materialAlertDialogBuilder.create()
     }

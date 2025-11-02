@@ -28,8 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         val context: Context = this
         val dialog = MaterialColorPickerDialogBuilder(context)
-            .setOpacityBarEnabled(true)
-            .setRecentColor(0x88FF0000.toInt())
+            .setRecentColorEnabled(false)
             .setOnColorChangeListener { color ->
                 Log.d("TAG_1234", "color changed: $color")
             }.setPositiveButton("OK") { _, _, color ->
