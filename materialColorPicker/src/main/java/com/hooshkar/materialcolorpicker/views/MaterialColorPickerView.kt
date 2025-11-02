@@ -50,7 +50,6 @@ class MaterialColorPickerView: LinearLayout {
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
     private var recentColorSlotCount: Int = 6
-    private var beforeValue: String? = null
 
     private val colorPickerRedEditText: EditText
     private val colorPickerGreenEditText: EditText
@@ -522,13 +521,15 @@ class MaterialColorPickerView: LinearLayout {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (!colorPickerHexEditText.hasFocus())
-                    return
-
                 val txt = s.toString().trim { it <= ' ' }
                 val length = txt.length
                 if (length == 6) {
-                    val color = "#$txt".toColorInt()
+                    val alpha = opacitySeekBar.progress
+                    val color = ColorUtils.setAlphaComponent("#$txt".toColorInt(), alpha)
+
+                    if (pickedColor.color == color)
+                        return
+
                     val red = Color.red(color).toString()
                     val green = Color.green(color).toString()
                     val blue = Color.blue(color).toString()
@@ -556,10 +557,10 @@ class MaterialColorPickerView: LinearLayout {
             }
         })
 
-        beforeValue = ""
-
         for (editText in editTexts) {
             editText.addTextChangedListener(object : TextWatcher {
+                private var beforeValue = ""
+
                 override fun beforeTextChanged(
                     s: CharSequence,
                     start: Int,
@@ -570,15 +571,17 @@ class MaterialColorPickerView: LinearLayout {
                 }
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    if (s.toString().equals(beforeValue, true) && s.toString().trim { it <= ' ' }.isNotEmpty())
+                    val txt = s.toString().trim { it <= ' ' }
+                    if (txt.isEmpty() || s.toString().equals(beforeValue, true))
                         return
+
                     if (!editText.hasFocus())
                         return
 
                     updateHexData()
                 }
 
-                // TODO: WTF!
+                // TODO: Use netter implementation here.
                 override fun afterTextChanged(s: Editable) {
                     try {
                         if (s.toString().toInt() > 255) {
