@@ -520,9 +520,10 @@ class MaterialColorPickerView: LinearLayout {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val length = s.toString().trim { it <= ' ' }.length
+                val txt = s.toString().trim { it <= ' ' }
+                val length = txt.length
                 if (length == 6) {
-                    val color = "#$s".toColorInt()
+                    val color = "#$txt".toColorInt()
                     val red = Color.red(color).toString()
                     val green = Color.green(color).toString()
                     val blue = Color.blue(color).toString()
@@ -539,6 +540,9 @@ class MaterialColorPickerView: LinearLayout {
                             .equals(blue, ignoreCase = true)) {
                         colorPickerBlueEditText.setText(blue)
                     }
+
+                    mapColorOnColorWheel(color)
+                    onColorChangedListener?.onColorChanged(color)
                 }
             }
 
