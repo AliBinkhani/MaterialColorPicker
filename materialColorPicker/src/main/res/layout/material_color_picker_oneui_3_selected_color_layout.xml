@@ -11,6 +11,7 @@
         android:layout_width="@dimen/material_color_picker_selected_current_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/material_color_picker_oneui_3_selected_color_item_current_bg_view"
         android:gravity="center"
         android:orientation="horizontal">
 
