@@ -85,7 +85,7 @@ class MaterialColorPickerView: LinearLayout {
     private var isRecentColorEnabled = true
     private var isSpectrumSelected: Boolean = false
     private val editTexts: List<EditText>
-    private var colorDescription: Array<String?>? = null
+    private var colorDescription: Array<String>
     private var fromEditText = false
     private var fromSaturationSeekbar = false
     private var fromSpectrumTouch = false
@@ -145,6 +145,16 @@ class MaterialColorPickerView: LinearLayout {
         selectedColorBackground = this.pickedColorView.background as GradientDrawable
 
         editTexts = listOf(colorPickerRedEditText, colorPickerGreenEditText, colorPickerBlueEditText)
+
+        colorDescription = arrayOf(
+            resources.getString(R.string.material_color_picker_color_one),
+            resources.getString(R.string.material_color_picker_color_two),
+            resources.getString(R.string.material_color_picker_color_three),
+            resources.getString(R.string.material_color_picker_color_four),
+            resources.getString(R.string.material_color_picker_color_five),
+            resources.getString(R.string.material_color_picker_color_six),
+            resources.getString(R.string.material_color_picker_color_seven)
+        )
 
         initDialogPadding()
         initCurrentColorView()
@@ -435,18 +445,8 @@ class MaterialColorPickerView: LinearLayout {
     }
 
     private fun initRecentColorLayout() {
-        colorDescription = arrayOf(
-            resources.getString(R.string.material_color_picker_color_one),
-            resources.getString(R.string.material_color_picker_color_two),
-            resources.getString(R.string.material_color_picker_color_three),
-            resources.getString(R.string.material_color_picker_color_four),
-            resources.getString(R.string.material_color_picker_color_five),
-            resources.getString(R.string.material_color_picker_color_six),
-            resources.getString(R.string.material_color_picker_color_seven)
-        )
         recentColorSlotCount =
             if (resources.configuration.orientation != Configuration.ORIENTATION_LANDSCAPE || context.isTablet()) 6 else 7
-
 
         for (i in 0..<recentColorSlotCount) {
             val child = recentColorListLayout.getChildAt(i)
@@ -520,6 +520,9 @@ class MaterialColorPickerView: LinearLayout {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (!colorPickerHexEditText.hasFocus())
+                    return
+
                 val txt = s.toString().trim { it <= ' ' }
                 val length = txt.length
                 if (length == 6) {
@@ -663,7 +666,7 @@ class MaterialColorPickerView: LinearLayout {
 
                 val sb = StringBuilder()
                 sb.append(colorSwatchView.getColorSwatchDescriptionAt(this.recentColorValues[i]) as CharSequence?)
-                sb.insert(0, colorDescription!![i] + description + ", ")
+                sb.insert(0, colorDescription[i] + description + ", ")
                 child.setContentDescription(sb)
 
                 child.isFocusable = true
@@ -681,7 +684,7 @@ class MaterialColorPickerView: LinearLayout {
             setCurrentColorViewDescription(currentColor, 0)
             selectedColorBackground.setColor(currentColor)
             mapColorOnColorWheel(currentColor)
-            updateHexAndRGBValues(currentColorBackground.color!!.defaultColor)
+            updateHexAndRGBValues(currentColor)
         } else if (recentColorValuesSize != 0) {
             currentColorView.visibility = VISIBLE
             val recentColorValue = recentColorValues[0]
@@ -689,7 +692,7 @@ class MaterialColorPickerView: LinearLayout {
             setCurrentColorViewDescription(recentColorValue, 0)
             selectedColorBackground.setColor(recentColorValue)
             mapColorOnColorWheel(recentColorValue)
-            updateHexAndRGBValues(currentColorBackground.color!!.defaultColor)
+            updateHexAndRGBValues(recentColorValue)
         } else {
             currentColorView.visibility = GONE
             pickedColorView.setBackgroundResource(R.drawable.material_color_picker_oneui_3_selected_color_item_current_single_view)
@@ -697,19 +700,21 @@ class MaterialColorPickerView: LinearLayout {
             selectedColorBackground.setColor(pickedColor.color)
         }
 
-        if (recentColorInfo.newColor != null) {
-            selectedColorBackground.setColor(recentColorInfo.newColor!!)
-            mapColorOnColorWheel(recentColorInfo.newColor!!)
-            updateHexAndRGBValues(selectedColorBackground.color!!.defaultColor)
+        val newColor = recentColorInfo.newColor
+        if (newColor != null) {
+            selectedColorBackground.setColor(newColor)
+            mapColorOnColorWheel(newColor)
+            updateHexAndRGBValues(newColor)
         }
     }
 
     private fun setImageColor(view: View, num: Int?) {
         val gradientDrawable =
-            ContextCompat.getDrawable(context, R.drawable.material_color_picker_used_color_item_slot) as GradientDrawable?
-        if (num != null) {
-            gradientDrawable!!.setColor(num)
-        }
+            ContextCompat.getDrawable(context, R.drawable.material_color_picker_used_color_item_slot) as GradientDrawable
+
+        if (num != null)
+            gradientDrawable.setColor(num)
+
         view.background = RippleDrawable(
             ColorStateList(
                 arrayOf<IntArray?>(IntArray(0)),
@@ -719,19 +724,19 @@ class MaterialColorPickerView: LinearLayout {
         view.setOnClickListener(imageButtonClickListener)
     }
 
-    private fun mapColorOnColorWheel(i: Int) {
-        pickedColor.color = i
+    private fun mapColorOnColorWheel(color: Int) {
+        pickedColor.color = color
 
-        colorSwatchView.updateCursorPosition(i)
+        colorSwatchView.updateCursorPosition(color)
 
-        colorSpectrumView.setColor(i)
+        colorSpectrumView.setColor(color)
 
-        gradientColorSeekBar.restoreColor(i)
+        gradientColorSeekBar.restoreColor(color)
 
-        opacitySeekBar.restoreColor(i)
+        opacitySeekBar.restoreColor(color)
 
-        selectedColorBackground.setColor(i)
-        setCurrentColorViewDescription(i, 1)
+        selectedColorBackground.setColor(color)
+        setCurrentColorViewDescription(color, 1)
 
         val v: Float = pickedColor.value
         val alpha: Int = pickedColor.alpha
@@ -741,10 +746,9 @@ class MaterialColorPickerView: LinearLayout {
         pickedColor.value = v
         pickedColor.alpha = alpha
 
-
-        val ceil = ceil((((opacitySeekBar.progress * 100).toFloat()) / 255.0f).toDouble()).toInt()
-        colorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", ceil))
-        colorPickerOpacityEditText.setSelection(ceil.toString().length)
+        val opacity = alpha * 100 / 255
+        colorPickerOpacityEditText.setText(String.format(Locale.getDefault(), "%d", opacity))
+        colorPickerOpacityEditText.setSelection(opacity.toString().length)
     }
 
     private fun setCurrentColorViewDescription(i: Int, i2: Int) {
