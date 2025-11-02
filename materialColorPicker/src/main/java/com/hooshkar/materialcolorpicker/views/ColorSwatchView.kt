@@ -243,9 +243,9 @@ internal class ColorSwatchView : View {
         initAccessibility()
 
         swatchItemHeight =
-            resources.getDimension(R.dimen.material_color_picker_color_swatch_view_height) / 10.0f
+            resources.getDimension(R.dimen.material_color_picker_ui_color_swatch_view_height) / 10.0f
         swatchItemWidth =
-            resources.getDimension(R.dimen.material_color_picker_color_swatch_view_width) / 11.0f
+            resources.getDimension(R.dimen.material_color_picker_ui_color_swatch_view_width) / 11.0f
         swatchRect = RectF(
             swatchItemSizeRoundingCorner,
             swatchItemSizeRoundingCorner,
