@@ -12,6 +12,7 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.DisplayMetrics
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -116,6 +117,7 @@ class MaterialColorPickerView: LinearLayout {
     }
 
     init {
+        this.gravity = Gravity.CENTER
         LayoutInflater.from(context).inflate(R.layout.material_color_picker_oneui_3_layout, this)
 
         colorPickerRedEditText = findViewById(R.id.material_color_red_edit_text)
