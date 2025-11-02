@@ -2,7 +2,7 @@
 <resources>
     <!--ColorPicker-->
     <style name="HexRGBTitleText" parent="@android:style/Widget.Material.Light.TextView">
-        <item name="android:textSize">@dimen/material_color_picker_oneui_3_selected_color_text_size</item>
+        <item name="android:textSize">@dimen/material_color_picker_ui_selected_color_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:fontFamily">sans-serif</item>

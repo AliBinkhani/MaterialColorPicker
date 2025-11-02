@@ -8,54 +8,54 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="@dimen/material_color_picker_oneui_3_main_content_width"
+            android:layout_width="@dimen/material_color_picker_ui_main_content_width"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/material_color_picker_oneui_3_dialog_padding_left"
-            android:paddingTop="@dimen/material_color_picker_oneui_3_dialog_padding_top"
-            android:paddingRight="@dimen/material_color_picker_oneui_3_dialog_padding_right">
+            android:paddingLeft="@dimen/material_color_picker_ui_dialog_padding_left"
+            android:paddingTop="@dimen/material_color_picker_ui_dialog_padding_top"
+            android:paddingRight="@dimen/material_color_picker_ui_dialog_padding_right">
 
-            <include layout="@layout/material_color_picker_oneui_3_tab_layout" />
+            <include layout="@layout/material_color_picker_ui_tab_layout" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/material_color_picker_oneui_3_main_content_height"
+                android:minHeight="@dimen/material_color_picker_ui_main_content_height"
                 android:orientation="horizontal">
 
                 <FrameLayout
                     android:id="@+id/material_color_picker_color_swatch_view_container"
-                    android:layout_width="@dimen/material_color_picker_oneui_3_color_swatch_view_width_background"
-                    android:layout_height="@dimen/material_color_picker_oneui_3_color_swatch_view_height_background"
-                    android:layout_marginTop="@dimen/material_color_picker_oneui_3_color_swatch_view_margin_top_background"
-                    android:layout_marginEnd="@dimen/material_color_picker_oneui_3_color_swatch_view_margin_right_background">
+                    android:layout_width="@dimen/material_color_picker_ui_color_swatch_view_width_background"
+                    android:layout_height="@dimen/material_color_picker_ui_color_swatch_view_height_background"
+                    android:layout_marginTop="@dimen/material_color_picker_ui_color_swatch_view_margin_top_background"
+                    android:layout_marginEnd="@dimen/material_color_picker_ui_color_swatch_view_margin_right_background">
 
                     <com.hooshkar.materialcolorpicker.views.ColorSwatchView
                         android:id="@+id/material_color_picker_color_swatch_view"
-                        android:layout_width="@dimen/material_color_picker_oneui_3_color_swatch_view_width_background"
-                        android:layout_height="@dimen/material_color_picker_oneui_3_color_swatch_view_height_background" />
+                        android:layout_width="@dimen/material_color_picker_ui_color_swatch_view_width_background"
+                        android:layout_height="@dimen/material_color_picker_ui_color_swatch_view_height_background" />
                 </FrameLayout>
 
                 <FrameLayout
                     android:id="@+id/material_color_picker_color_spectrum_view_container"
-                    android:layout_width="@dimen/material_color_picker_oneui_3_color_swatch_view_width"
-                    android:layout_height="@dimen/material_color_picker_oneui_3_color_spectrum_view_height"
-                    android:layout_marginStart="@dimen/material_color_picker_color_one_ui_3_swatch_view_container_margin_left"
-                    android:layout_marginTop="@dimen/material_color_picker_oneui_3_color_swatch_view_container_margin_top"
-                    android:layout_marginEnd="@dimen/material_color_picker_color_one_ui_3_swatch_view_container_margin_right"
+                    android:layout_width="@dimen/material_color_picker_ui_color_swatch_view_width"
+                    android:layout_height="@dimen/material_color_picker_ui_color_spectrum_view_height"
+                    android:layout_marginStart="@dimen/material_color_picker_color_ui_swatch_view_container_margin_left"
+                    android:layout_marginTop="@dimen/material_color_picker_ui_color_swatch_view_container_margin_top"
+                    android:layout_marginEnd="@dimen/material_color_picker_color_ui_swatch_view_container_margin_right"
                     android:visibility="gone">
 
                     <com.hooshkar.materialcolorpicker.views.ColorSpectrumView
                         android:id="@+id/material_color_picker_color_spectrum_view"
-                        android:layout_width="@dimen/material_color_picker_oneui_3_color_swatch_view_width"
-                        android:layout_height="@dimen/material_color_picker_oneui_3_color_spectrum_view_height" />
+                        android:layout_width="@dimen/material_color_picker_ui_color_swatch_view_width"
+                        android:layout_height="@dimen/material_color_picker_ui_color_spectrum_view_height" />
                 </FrameLayout>
 
                 <LinearLayout
-                    android:layout_width="@dimen/material_color_picker_oneui_3_seekbar_layout_width"
+                    android:layout_width="@dimen/material_color_picker_ui_seekbar_layout_width"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/material_color_picker_oneui_3_dialog_padding_bottom">
+                    android:paddingBottom="@dimen/material_color_picker_ui_dialog_padding_bottom">
 
                     <LinearLayout
                         android:id="@+id/material_color_picker_saturation_layout"
@@ -74,7 +74,7 @@
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/material_color_picker_oneui_3_dialog_padding_top"
+                            android:layout_marginTop="@dimen/material_color_picker_ui_dialog_padding_top"
                             android:layout_marginBottom="@dimen/material_color_picker_seekbar_margin_bottom"
                             android:orientation="horizontal">
 
@@ -89,8 +89,8 @@
                                     android:layout_width="fill_parent"
                                     android:layout_height="@dimen/material_color_picker_seekbar_height"
                                     android:importantForAccessibility="no"
-                                    android:paddingStart="@dimen/material_color_picker_oneui_3_seekbar_padding"
-                                    android:paddingEnd="@dimen/material_color_picker_oneui_3_seekbar_padding" />
+                                    android:paddingStart="@dimen/material_color_picker_ui_seekbar_padding"
+                                    android:paddingEnd="@dimen/material_color_picker_ui_seekbar_padding" />
                             </FrameLayout>
 
                             <include layout="@layout/material_color_picker_saturation_edittext_layout" />
@@ -99,10 +99,10 @@
 
                     <LinearLayout
                         android:id="@+id/material_color_picker_opacity_layout"
-                        android:layout_width="@dimen/material_color_picker_oneui_3_seekbar_layout_width"
+                        android:layout_width="@dimen/material_color_picker_ui_seekbar_layout_width"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingBottom="@dimen/material_color_picker_oneui_3_dialog_padding_bottom">
+                        android:paddingBottom="@dimen/material_color_picker_ui_dialog_padding_bottom">
 
                         <TextView
                             style="@style/SeekbarTitleText"
@@ -134,19 +134,19 @@
                                     android:layout_width="fill_parent"
                                     android:layout_height="@dimen/material_color_picker_seekbar_height"
                                     android:importantForAccessibility="no"
-                                    android:paddingStart="@dimen/material_color_picker_oneui_3_seekbar_padding"
-                                    android:paddingEnd="@dimen/material_color_picker_oneui_3_seekbar_padding" />
+                                    android:paddingStart="@dimen/material_color_picker_ui_seekbar_padding"
+                                    android:paddingEnd="@dimen/material_color_picker_ui_seekbar_padding" />
                             </FrameLayout>
 
                             <include layout="@layout/material_color_picker_opacity_edittext_layout" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <include layout="@layout/material_color_picker_oneui_3_selected_color_layout" />
+                    <include layout="@layout/material_color_picker_ui_selected_color_layout" />
 
                     <include
                         android:id="@+id/material_color_picker_used_color_items_layout"
-                        layout="@layout/material_color_picker_oneui_3_used_color_group" />
+                        layout="@layout/material_color_picker_ui_used_color_group" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

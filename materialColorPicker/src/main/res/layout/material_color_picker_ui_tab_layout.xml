@@ -4,7 +4,7 @@
     android:id="@+id/material_color_picker_tab_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/material_color_picker_oneui_3_dialog_extra_horizontal_margin"
+    android:layout_marginHorizontal="@dimen/material_color_picker_ui_dialog_extra_horizontal_margin"
     android:gravity="center"
     android:minHeight="@dimen/material_color_picker_tab_layout_height"
     app:selectionRequired="true"

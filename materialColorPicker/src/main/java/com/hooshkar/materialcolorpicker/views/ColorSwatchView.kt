@@ -243,23 +243,23 @@ internal class ColorSwatchView : View {
         initAccessibility()
 
         swatchItemHeight =
-            resources.getDimension(R.dimen.material_color_picker_oneui_3_color_swatch_view_height) / 10.0f
+            resources.getDimension(R.dimen.material_color_picker_color_swatch_view_height) / 10.0f
         swatchItemWidth =
-            resources.getDimension(R.dimen.material_color_picker_oneui_3_color_swatch_view_width) / 11.0f
+            resources.getDimension(R.dimen.material_color_picker_color_swatch_view_width) / 11.0f
         swatchRect = RectF(
             swatchItemSizeRoundingCorner,
             swatchItemSizeRoundingCorner,
-            (resources.getDimensionPixelSize(R.dimen.material_color_picker_oneui_3_color_swatch_view_width)
+            (resources.getDimensionPixelSize(R.dimen.material_color_picker_color_swatch_view_width)
                 .toFloat()) + swatchItemSizeRoundingCorner,
-            (resources.getDimensionPixelSize(R.dimen.material_color_picker_oneui_3_color_swatch_view_height)
+            (resources.getDimensionPixelSize(R.dimen.material_color_picker_ui_color_swatch_view_height)
                 .toFloat()) + swatchItemSizeRoundingCorner
         )
         swatchRectBackground = RectF(
             0.0f,
             0.0f,
-            resources.getDimensionPixelSize(R.dimen.material_color_picker_oneui_3_color_swatch_view_width_background)
+            resources.getDimensionPixelSize(R.dimen.material_color_picker_ui_color_swatch_view_width_background)
                 .toFloat(),
-            resources.getDimensionPixelSize(R.dimen.material_color_picker_oneui_3_color_swatch_view_height_background)
+            resources.getDimensionPixelSize(R.dimen.material_color_picker_ui_color_swatch_view_height_background)
                 .toFloat()
         )
 

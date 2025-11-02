@@ -4,14 +4,14 @@
     android:layout_width="fill_parent"
     android:layout_height="@dimen/material_color_picker_selected_color_layout_height"
     android:layout_gravity="center"
-    android:layout_marginStart="@dimen/material_color_picker_oneui_3_selected_color_extra_margin"
+    android:layout_marginStart="@dimen/material_color_picker_ui_selected_color_extra_margin"
     android:layout_marginTop="@dimen/material_color_picker_rgb_layout_margin">
 
     <LinearLayout
         android:layout_width="@dimen/material_color_picker_selected_current_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/material_color_picker_oneui_3_selected_color_item_current_bg_view"
+        android:background="@drawable/material_color_picker_ui_selected_color_item_current_bg_view"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -20,14 +20,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/material_color_picker_oneui_3_selected_color_item_current_left_view" />
+            android:background="@drawable/material_color_picker_ui_selected_color_item_current_left_view" />
 
         <View
             android:id="@+id/material_color_picker_picked_color_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/material_color_picker_oneui_3_selected_color_item_current_right_view" />
+            android:background="@drawable/material_color_picker_ui_selected_color_item_current_right_view" />
     </LinearLayout>
 
     <LinearLayout

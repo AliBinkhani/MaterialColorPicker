@@ -118,7 +118,7 @@ class MaterialColorPickerView: LinearLayout {
 
     init {
         this.gravity = Gravity.CENTER
-        LayoutInflater.from(context).inflate(R.layout.material_color_picker_oneui_3_layout, this)
+        LayoutInflater.from(context).inflate(R.layout.material_color_picker_ui_layout, this)
 
         colorPickerRedEditText = findViewById(R.id.material_color_red_edit_text)
         colorPickerGreenEditText = findViewById(R.id.material_color_green_edit_text)
@@ -190,13 +190,13 @@ class MaterialColorPickerView: LinearLayout {
                 if (isContains((width / density).toInt())) {
                     val seekBarWidth: Int =
                         resources.getDimensionPixelSize(R.dimen.material_color_picker_seekbar_width)
-                    if (width < (((resources.getDimensionPixelSize(R.dimen.material_color_picker_oneui_3_dialog_padding_left) * 2) + seekBarWidth).toFloat())) {
+                    if (width < (((resources.getDimensionPixelSize(R.dimen.material_color_picker_ui_dialog_padding_left) * 2) + seekBarWidth).toFloat())) {
                         val padding = ((width - (seekBarWidth.toFloat())) / 2.0f).toInt()
                         (findViewById<LinearLayout>(R.id.material_color_picker_main_content_container)).setPadding(
                             padding,
-                            resources.getDimensionPixelSize(R.dimen.material_color_picker_oneui_3_dialog_padding_top),
+                            resources.getDimensionPixelSize(R.dimen.material_color_picker_ui_dialog_padding_top),
                             padding,
-                            resources.getDimensionPixelSize(R.dimen.material_color_picker_oneui_3_dialog_padding_bottom)
+                            resources.getDimensionPixelSize(R.dimen.material_color_picker_ui_dialog_padding_bottom)
                         )
                     }
                 }
@@ -681,7 +681,7 @@ class MaterialColorPickerView: LinearLayout {
 
         if (currentColor != null) {
             currentColorView.visibility = VISIBLE
-            pickedColorView.setBackgroundResource(R.drawable.material_color_picker_oneui_3_selected_color_item_current_right_view)
+            pickedColorView.setBackgroundResource(R.drawable.material_color_picker_ui_selected_color_item_current_right_view)
             selectedColorBackground = this.pickedColorView.background as GradientDrawable
             currentColorBackground.setColor(currentColor)
             setCurrentColorViewDescription(currentColor, 0)
@@ -698,7 +698,7 @@ class MaterialColorPickerView: LinearLayout {
             updateHexAndRGBValues(recentColorValue)
         } else {
             currentColorView.visibility = GONE
-            pickedColorView.setBackgroundResource(R.drawable.material_color_picker_oneui_3_selected_color_item_current_single_view)
+            pickedColorView.setBackgroundResource(R.drawable.material_color_picker_ui_selected_color_item_current_single_view)
             selectedColorBackground = this.pickedColorView.background as GradientDrawable
             selectedColorBackground.setColor(pickedColor.color)
         }
