@@ -3,7 +3,7 @@
     android:shape="rectangle">
     <stroke
         android:width="@dimen/material_color_picker_ui_current_view_stroke"
-        android:color="@color/material_color_picker_stroke_color" />
+        android:color="?colorOutlineVariant" />
     <corners android:radius="@dimen/material_color_picker_ui_current_view_radius" />
     <size
         android:width="@dimen/material_color_picker_ui_current_view_width"

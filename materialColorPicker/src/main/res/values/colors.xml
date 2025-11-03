@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="material_secondary_text_color">#ff8c8c8c</color>
-
     <!--ColorPicker-->
     <color name="material_color_picker_cursor_stroke_color">#ffffffff</color>
     <color name="material_color_picker_seekbar_cursor_background_color">#fffafafa</color>
     <color name="material_color_picker_seekbar_cursor_stroke_color">#33000000</color>
     <color name="material_color_picker_shadow">#66000000</color>
-    <color name="material_color_picker_stroke_color">#ffd4d4d4</color>
     <color name="material_color_picker_stroke_color_spectrumview">#ffd6d6d6</color>
     <color name="material_color_picker_stroke_color_swatchview">#ffd1d0d0</color>
     <color name="material_color_picker_swatch_cursor_color">#4dffffff</color>
