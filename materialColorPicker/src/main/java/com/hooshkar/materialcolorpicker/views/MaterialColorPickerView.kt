@@ -693,6 +693,8 @@ class MaterialColorPickerView: LinearLayout {
             updateHexAndRGBValues(currentColor)
         } else if (recentColorValuesSize != 0) {
             currentColorView.visibility = VISIBLE
+            pickedColorView.setBackgroundResource(R.drawable.material_color_picker_ui_selected_color_item_current_right_view)
+            selectedColorBackground = this.pickedColorView.background as GradientDrawable
             val recentColorValue = recentColorValues[0]
             currentColorBackground.setColor(recentColorValue)
             setCurrentColorViewDescription(recentColorValue, 0)
