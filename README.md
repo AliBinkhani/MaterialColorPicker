@@ -54,11 +54,9 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.AliBinkhani.MaterialColorPicker:materialColorPicker:<version>")
+    implementation("com.github.AliBinkhani:MaterialColorPicker:1.0.0")
 }
 ```
-
-Replace `<version>` with the latest [release tag](https://github.com/AliBinkhani/MaterialColorPicker/releases) (or a commit hash for a specific snapshot). See the JitPack badge above for the latest resolvable version.
 
 > **Maven Central:** the library is not yet published to Maven Central. This section will be updated with `mavenCentral()` coordinates once a release is available there — JitPack works out of the box in the meantime.
 
