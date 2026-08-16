@@ -783,7 +783,7 @@ class MaterialColorPickerView: LinearLayout {
 
     fun setOpacityBarEnabled(enabled: Boolean) {
         isOpacityBarEnabled = enabled
-        opacityLayout.isVisible = true
+        opacityLayout.isVisible = enabled
     }
 
     private fun updateHexAndRGBValues(i: Int) {
