@@ -11,11 +11,9 @@ The UI and interaction model are inspired by the **Samsung OneUI Color Picker** 
 
 ## Screenshots
 
-| Swatches | Spectrum | Dialog |
+| Swatches | Spectrum | Spectrum (no opacity bar) |
 |---|---|---|
-| _add screenshot_ | _add screenshot_ | _add screenshot_ |
-
-> Replace the placeholders above with actual screenshots (light/dark) once available.
+| ![Swatches mode](screenshots/swatches.png) | ![Spectrum mode](screenshots/spectrum.png) | ![Spectrum mode without opacity bar](screenshots/spectrum_no_opacity.png) |
 
 ## Features
 
