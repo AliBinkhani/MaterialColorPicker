@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Material ColorPicker Sample"
 include(":app")
 include(":materialColorPicker")
+include(":materialColorPickerCompose")

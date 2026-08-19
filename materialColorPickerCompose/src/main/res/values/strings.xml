@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Swatches</string>
+    <string name="material_color_picker_compose_spectrum">Spectrum</string>
+    <string name="material_color_picker_compose_saturation">Saturation</string>
+    <string name="material_color_picker_compose_opacity">Opacity</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">Red</string>
+    <string name="material_color_picker_compose_green">Green</string>
+    <string name="material_color_picker_compose_blue">Blue</string>
+    <string name="material_color_picker_compose_current_color">Current color</string>
+    <string name="material_color_picker_compose_picked_color">Picked color</string>
+    <string name="material_color_picker_compose_recent_color">Recent color %1$d</string>
+    <string name="material_color_picker_compose_empty_slot">Empty color slot</string>
+</resources>
