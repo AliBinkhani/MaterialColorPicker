@@ -31,7 +31,8 @@ internal fun ColorPickerTabRow(
             SegmentedButton(
                 selected = selectedTab == tab,
                 onClick = { onTabSelected(tab) },
-                shape = SegmentedButtonDefaults.itemShape(index = index, count = tabs.size)
+                shape = SegmentedButtonDefaults.itemShape(index = index, count = tabs.size),
+                icon = {}
             ) {
                 Text(
                     text = stringResource(

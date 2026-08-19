@@ -39,6 +39,7 @@ internal fun GradientSlider(
     fraction: Float,
     onFractionChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     contentDescription: String? = null,
     track: @Composable (fraction: Float) -> Unit
 ) {
@@ -57,17 +58,21 @@ internal fun GradientSlider(
                 } else Modifier
             )
             .onSizeChanged { widthPx = it.width.toFloat() }
-            .pointerInput(Unit) {
-                awaitEachGesture {
-                    do {
-                        val event = awaitPointerEvent()
-                        val change = event.changes.firstOrNull { it.pressed } ?: continue
-                        val x = change.position.x.coerceIn(0f, widthPx)
-                        onFractionChange(if (widthPx > 0f) x / widthPx else 0f)
-                        change.consume()
-                    } while (event.changes.any { it.pressed })
-                }
-            }
+            .then(
+                if (enabled) {
+                    Modifier.pointerInput(Unit) {
+                        awaitEachGesture {
+                            do {
+                                val event = awaitPointerEvent()
+                                val change = event.changes.firstOrNull { it.pressed } ?: continue
+                                val x = change.position.x.coerceIn(0f, widthPx)
+                                onFractionChange(if (widthPx > 0f) x / widthPx else 0f)
+                                change.consume()
+                            } while (event.changes.any { it.pressed })
+                        }
+                    }
+                } else Modifier
+            )
     ) {
         Box(
             Modifier

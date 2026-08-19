@@ -39,7 +39,7 @@ internal fun ColorSpectrumPad(
     Canvas(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(ColorPickerDefaults.SpectrumAspectRatio)
+            .aspectRatio(ColorPickerDefaults.SpectrumPadAspectRatio)
             .then(
                 if (contentDescription != null) {
                     Modifier.semantics { this.contentDescription = contentDescription }

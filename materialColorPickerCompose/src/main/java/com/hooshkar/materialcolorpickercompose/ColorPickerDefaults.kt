@@ -19,15 +19,22 @@ object ColorPickerDefaults {
     val SectionSpacing: Dp = 8.dp
 
     val PickerCornerRadius: Dp = 8.dp
-    val SwatchAspectRatio: Float = 11f / 10f
-    val SpectrumAspectRatio: Float = 6f / 5f
+
+    /** The Swatches grid is 11 columns x 10 rows, so it's very slightly wider than tall. */
+    val SwatchGridAspectRatio: Float = 11f / 10f
+
+    /**
+     * The Spectrum pad matches the reference UI's proportions: for the same width, it's exactly
+     * 9/10 as tall as the Swatches grid (11 / (10 * 10/9) = 11/9).
+     */
+    val SpectrumPadAspectRatio: Float = 11f / 9f
 
     val SliderTrackHeight: Dp = 24.dp
     val SliderThumbSize: Dp = 22.dp
 
-    val SelectedColorPreviewWidth: Dp = 96.dp
-    val SelectedColorPreviewHeight: Dp = 56.dp
-    val SelectedColorPreviewCornerRadius: Dp = 16.dp
+    val SelectedColorPreviewWidth: Dp = 64.dp
+    val SelectedColorPreviewHeight: Dp = 44.dp
+    val SelectedColorPreviewCornerRadius: Dp = 12.dp
     val ColorFieldSpacing: Dp = 16.dp
     val HexFieldWidth: Dp = 76.dp
     val RgbFieldWidth: Dp = 40.dp

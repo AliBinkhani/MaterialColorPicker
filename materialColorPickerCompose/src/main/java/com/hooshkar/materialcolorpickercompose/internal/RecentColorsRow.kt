@@ -1,5 +1,7 @@
 package com.hooshkar.materialcolorpickercompose.internal
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -15,6 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -65,6 +68,12 @@ internal fun RecentColorsRow(
     }
 }
 
+/**
+ * A selected item shrinks slightly so a neutral outline ring shows around it, inside the same
+ * fixed footprint (so the row never reflows). A border drawn in the app's accent color was tried
+ * first but reads poorly against whichever recent color happens to be selected; the theme's
+ * outline color stays legible against any swatch.
+ */
 @Composable
 private fun RecentColorItem(
     color: Color?,
@@ -72,17 +81,20 @@ private fun RecentColorItem(
     contentDescription: String,
     onClick: (() -> Unit)?
 ) {
-    val borderColor = MaterialTheme.colorScheme.primary
+    val circleSize by animateDpAsState(
+        targetValue = if (isSelected) {
+            ColorPickerDefaults.RecentColorItemSize - 8.dp
+        } else {
+            ColorPickerDefaults.RecentColorItemSize
+        },
+        animationSpec = tween(150),
+        label = "RecentColorItemSize"
+    )
+
     Box(
         modifier = Modifier
             .size(ColorPickerDefaults.RecentColorItemSize)
             .clip(CircleShape)
-            .background(color ?: EmptyRecentColorSlot)
-            .then(
-                if (isSelected) {
-                    Modifier.border(width = 2.dp, color = borderColor, shape = CircleShape)
-                } else Modifier
-            )
             .then(
                 if (onClick != null) {
                     Modifier.clickable(onClick = onClick)
@@ -91,6 +103,21 @@ private fun RecentColorItem(
             .semantics {
                 this.contentDescription = contentDescription
                 if (onClick != null) role = Role.Button
-            }
-    )
+            },
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            Modifier
+                .size(circleSize)
+                .clip(CircleShape)
+                .background(color ?: EmptyRecentColorSlot)
+        )
+        if (isSelected) {
+            Box(
+                Modifier
+                    .matchParentSize()
+                    .border(width = 1.5.dp, color = MaterialTheme.colorScheme.outline, shape = CircleShape)
+            )
+        }
+    }
 }

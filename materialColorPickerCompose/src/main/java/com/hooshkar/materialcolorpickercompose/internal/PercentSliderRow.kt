@@ -32,6 +32,7 @@ internal fun PercentSliderRow(
     percent: Int,
     onPercentChange: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     contentDescription: String? = null,
     track: @Composable (fraction: Float) -> Unit
 ) {
@@ -43,6 +44,7 @@ internal fun PercentSliderRow(
                 fraction = percent / 100f,
                 onFractionChange = { onPercentChange((it * 100f).roundToInt().coerceIn(0, 100)) },
                 modifier = Modifier.weight(1f),
+                enabled = enabled,
                 contentDescription = contentDescription,
                 track = track
             )
@@ -58,6 +60,7 @@ internal fun PercentSliderRow(
                         onPercentChange(value)
                     },
                     modifier = Modifier.width(32.dp),
+                    enabled = enabled,
                     maxLength = 3,
                     keyboardType = KeyboardType.Number,
                     textStyle = ColorPickerDefaults.valueTextStyle().copy(

@@ -2,6 +2,8 @@ package com.hooshkar.materialcolorpickercompose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -20,6 +22,7 @@ import com.hooshkar.materialcolorpickercompose.internal.PercentSliderRow
 import com.hooshkar.materialcolorpickercompose.internal.PickerScaffold
 import com.hooshkar.materialcolorpickercompose.internal.RecentColorsRow
 import com.hooshkar.materialcolorpickercompose.internal.SelectedColorSection
+import com.hooshkar.materialcolorpickercompose.internal.StableHeightTabContent
 import kotlin.math.roundToInt
 
 /** Which page [MaterialColorPicker] is currently showing. */
@@ -57,35 +60,38 @@ fun MaterialColorPicker(
 
         PickerScaffold(
             topContent = {
-                when (selectedTab) {
-                    MaterialColorPickerTab.Swatches -> ColorSwatchGrid(
-                        color = state.color,
-                        onColorSelected = { newColor -> state.updateRgbKeepAlpha(newColor) }
-                    )
-
-                    MaterialColorPickerTab.Spectrum -> ColorSpectrumPad(
-                        hue = state.hue,
-                        saturation = state.saturation,
-                        onHueSaturationChanged = { hue, saturation ->
-                            state.updateHueSaturation(hue, saturation)
+                StableHeightTabContent(
+                    selectedTab = selectedTab,
+                    swatchesBlock = {
+                        ColorSwatchGrid(
+                            color = state.color,
+                            onColorSelected = { newColor -> state.updateRgbKeepAlpha(newColor) }
+                        )
+                    },
+                    spectrumBlock = {
+                        Column {
+                            ColorSpectrumPad(
+                                hue = state.hue,
+                                saturation = state.saturation,
+                                onHueSaturationChanged = { hue, saturation ->
+                                    state.updateHueSaturation(hue, saturation)
+                                }
+                            )
+                            Spacer(Modifier.height(ColorPickerDefaults.ContentSpacing))
+                            val saturationLabel = stringResource(R.string.material_color_picker_compose_saturation)
+                            val fullColor = Color(
+                                android.graphics.Color.HSVToColor(floatArrayOf(state.hue, state.saturation, 1f))
+                            )
+                            PercentSliderRow(
+                                label = saturationLabel,
+                                percent = (state.brightness * 100f).roundToInt(),
+                                onPercentChange = { percent -> state.updateBrightness(percent / 100f) },
+                                contentDescription = saturationLabel
+                            ) { BrightnessTrack(fullColor = fullColor) }
                         }
-                    )
-                }
+                    }
+                )
             },
-            brightnessSlider = if (selectedTab == MaterialColorPickerTab.Spectrum) {
-                {
-                    val saturationLabel = stringResource(R.string.material_color_picker_compose_saturation)
-                    val fullColor = Color(
-                        android.graphics.Color.HSVToColor(floatArrayOf(state.hue, state.saturation, 1f))
-                    )
-                    PercentSliderRow(
-                        label = saturationLabel,
-                        percent = (state.brightness * 100f).roundToInt(),
-                        onPercentChange = { percent -> state.updateBrightness(percent / 100f) },
-                        contentDescription = saturationLabel
-                    ) { BrightnessTrack(fullColor = fullColor) }
-                }
-            } else null,
             opacitySlider = if (opacityBarEnabled) {
                 {
                     val opacityLabel = stringResource(R.string.material_color_picker_compose_opacity)

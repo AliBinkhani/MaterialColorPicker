@@ -36,7 +36,7 @@ internal fun ColorSwatchGrid(
     Canvas(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(ColorPickerDefaults.SwatchAspectRatio)
+            .aspectRatio(ColorPickerDefaults.SwatchGridAspectRatio)
             .then(
                 if (contentDescription != null) {
                     Modifier.semantics { this.contentDescription = contentDescription }
