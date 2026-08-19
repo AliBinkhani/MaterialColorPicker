@@ -6,11 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
@@ -18,14 +21,17 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.hooshkar.materialcolorpickercompose.MaterialColorPicker
+import com.hooshkar.materialcolorpickercompose.MaterialColorPickerDialog
 import com.hooshkar.materialcolorpickercompose.SpectrumColorPicker
 import com.hooshkar.materialcolorpickercompose.SwatchesColorPicker
 import com.hooshkar.materialcolorpickercompose.rememberMaterialColorPickerState
@@ -41,6 +47,7 @@ class ComposePickerPreviewActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     var demo by remember { mutableStateOf(Demo.Swatches) }
+                    var dialogVisible by remember { mutableStateOf(false) }
                     val recentColors = remember {
                         listOf(
                             Color(0xFF6200EE),
@@ -60,11 +67,10 @@ class ComposePickerPreviewActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .verticalScroll(rememberScrollState())
                             .padding(20.dp),
                         verticalArrangement = Arrangement.spacedBy(20.dp)
                     ) {
-                        SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxSize()) {
+                        SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
                             Demo.entries.forEachIndexed { index, d ->
                                 SegmentedButton(
                                     selected = demo == d,
@@ -74,21 +80,33 @@ class ComposePickerPreviewActivity : ComponentActivity() {
                             }
                         }
 
-                        when (demo) {
-                            Demo.Swatches -> SwatchesColorPicker(
-                                state = state,
-                                onColorChanged = { }
-                            )
+                        Box(
+                            Modifier
+                                .size(64.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(state.color)
+                        )
 
-                            Demo.Spectrum -> SpectrumColorPicker(
-                                state = state,
-                                onColorChanged = { }
-                            )
+                        Button(onClick = { dialogVisible = true }) {
+                            Text("Pick a color")
+                        }
+                    }
 
-                            Demo.Both -> MaterialColorPicker(
-                                state = state,
-                                onColorChanged = { }
-                            )
+                    if (dialogVisible) {
+                        MaterialColorPickerDialog(
+                            onDismissRequest = { dialogVisible = false },
+                            confirmButton = {
+                                TextButton(onClick = { dialogVisible = false }) { Text("OK") }
+                            },
+                            dismissButton = {
+                                TextButton(onClick = { dialogVisible = false }) { Text("Cancel") }
+                            }
+                        ) {
+                            when (demo) {
+                                Demo.Swatches -> SwatchesColorPicker(state = state, onColorChanged = {})
+                                Demo.Spectrum -> SpectrumColorPicker(state = state, onColorChanged = {})
+                                Demo.Both -> MaterialColorPicker(state = state, onColorChanged = {})
+                            }
                         }
                     }
                 }
