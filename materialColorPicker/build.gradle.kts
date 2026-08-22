@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    `maven-publish`
 }
 
 android {
@@ -32,6 +33,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -41,4 +48,20 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
+}
+
+// Published to JitPack as its own artifact, independent of materialColorPickerCompose.
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.AliBinkhani.MaterialColorPicker"
+                artifactId = "materialColorPicker"
+                version = System.getenv("VERSION")
+                    ?: (findProperty("VERSION") as String?)
+                    ?: "unspecified"
+            }
+        }
+    }
 }

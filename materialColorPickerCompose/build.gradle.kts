@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    `maven-publish`
 }
 
 android {
@@ -27,6 +28,11 @@ android {
         compose = true
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -37,4 +43,21 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     debugImplementation(libs.androidx.compose.ui.tooling)
+}
+
+// Published to JitPack as its own artifact, independent of the materialColorPicker module -
+// this library shares no code or dependency with the View-based picker.
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.AliBinkhani.MaterialColorPicker"
+                artifactId = "materialColorPickerCompose"
+                version = System.getenv("VERSION")
+                    ?: (findProperty("VERSION") as String?)
+                    ?: "unspecified"
+            }
+        }
+    }
 }
