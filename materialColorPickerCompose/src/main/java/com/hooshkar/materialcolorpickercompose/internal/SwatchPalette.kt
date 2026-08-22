@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Color
  * palette, kept separate on purpose so the Compose module has no dependency
  * on the View-based module.
  */
-internal val SwatchPaletteColumns = 11
-internal val SwatchPaletteRows = 10
+internal const val SwatchPaletteColumns = 11
+internal const val SwatchPaletteRows = 10
 
 internal val swatchPalette: Array<IntArray> = arrayOf(
     intArrayOf(-1, -3355444, -5000269, -6710887, -8224126, -10066330, -11711155, -13421773, -15066598, -16777216),

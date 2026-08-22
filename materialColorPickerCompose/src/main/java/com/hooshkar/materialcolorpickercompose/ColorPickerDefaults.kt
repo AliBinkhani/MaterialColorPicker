@@ -33,13 +33,13 @@ object ColorPickerDefaults {
     val LandscapePickerAreaWidth: Dp = 200.dp
 
     /** The Swatches grid is 11 columns x 10 rows, so it's very slightly wider than tall. */
-    val SwatchGridAspectRatio: Float = 11f / 10f
+    const val SwatchGridAspectRatio: Float = 11f / 10f
 
     /**
      * The Spectrum pad matches the reference UI's proportions: for the same width, it's exactly
      * 9/10 as tall as the Swatches grid (11 / (10 * 10/9) = 11/9).
      */
-    val SpectrumPadAspectRatio: Float = 11f / 9f
+    const val SpectrumPadAspectRatio: Float = 11f / 9f
 
     val SliderTrackHeight: Dp = 20.dp
     val SliderThumbSize: Dp = 18.dp
@@ -57,7 +57,6 @@ object ColorPickerDefaults {
      * wrapping, since a wrapped "Blue" field by itself still looks broken.
      */
     val CompactWidthBreakpoint: Dp = 320.dp
-    val SelectedColorPreviewWidthCompact: Dp = 64.dp
     val HexFieldWidthCompact: Dp = 64.dp
     val RgbFieldWidthCompact: Dp = 32.dp
 
