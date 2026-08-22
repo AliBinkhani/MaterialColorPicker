@@ -49,12 +49,11 @@ internal class ColorSwatchView : View {
     private val strokeWidth: Float = 0.25f
     private val swatchItemSizeRoundingCorner: Float = 4.5f
 
-    //    private var corners: FloatArray = TODO()
     private var currentCursorColor: Int = 0
     private val backgroundPaint: Paint
     private val colorBrightness: Array<IntArray>
     private val colorSwatch: Array<IntArray>
-    private val colorSwatchDescription: Array<Array<StringBuilder>>
+    private val colorSwatchDescription: Array<Array<StringBuilder?>>
     private var cursorDrawable: GradientDrawable
     private val cursorIndex: Point = Point(-1, -1)
     private val cursorRect: Rect = Rect()
@@ -223,10 +222,8 @@ internal class ColorSwatchView : View {
             intArrayOf(83, 71, 61, 53, 50, 49, 43, 33, 18, 10),
             intArrayOf(83, 70, 61, 53, 50, 49, 43, 33, 19, 10)
         )
-        colorSwatchDescription = Array<Array<StringBuilder>>(11) {
-            Array<StringBuilder>(10) {
-                StringBuilder()
-            }
+        colorSwatchDescription = Array(11) {
+            arrayOfNulls<StringBuilder>(10)
         }
 
         // initCursorDrawable

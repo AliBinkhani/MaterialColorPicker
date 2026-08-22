@@ -196,8 +196,6 @@ internal class ColorSpectrumView : View {
             (cursorPosY.toInt()) + (cursorPaintSize / 2)
         )
         cursorDrawable.draw(canvas)
-
-        setDrawingCacheEnabled(true)
     }
 
     internal fun setColor(color: Int) {
