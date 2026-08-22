@@ -57,7 +57,7 @@ afterEvaluate {
                 // served files. Matching it explicitly keeps local publishing consistent with
                 // what JitPack actually serves.
                 groupId = "com.github.alibinkhani.materialcolorpicker"
-                artifactId = "materialcolorpickercompose"
+                artifactId = "compose"
                 version = System.getenv("VERSION")
                     ?: (findProperty("VERSION") as String?)
                     ?: "unspecified"

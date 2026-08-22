@@ -8,8 +8,8 @@ A Material 3 color picker for Android, shipped as **two independent libraries** 
 
 | Module | Toolkit | API | Artifact |
 |---|---|---|---|
-| [`materialColorPicker`](#materialcolorpicker-view-based) | Classic Views | `AlertDialog` builder + embeddable `View` | `materialcolorpicker` |
-| [`materialColorPickerCompose`](#materialcolorpickercompose-jetpack-compose) | Jetpack Compose | Composables + `Dialog` | `materialcolorpickercompose` |
+| [`materialColorPicker`](#materialcolorpicker-view-based) | Classic Views | `AlertDialog` builder + embeddable `View` | `views` |
+| [`materialColorPickerCompose`](#materialcolorpickercompose-jetpack-compose) | Jetpack Compose | Composables + `Dialog` | `compose` |
 
 The two modules **share no code and no dependency on one another** — `materialColorPickerCompose` is a from-scratch Compose implementation, not a wrapper around `materialColorPicker`'s views. Each is published as its own artifact on [JitPack](https://jitpack.io), so you only pull in what you actually use (in particular, using the Compose picker never pulls AppCompat/Material Views into your app, and using the View picker never pulls in Compose).
 
@@ -44,10 +44,10 @@ dependencyResolutionManagement {
 ```kotlin
 dependencies {
     // View-based picker
-    implementation("com.github.alibinkhani.materialcolorpicker:materialcolorpicker:1.0.0")
+    implementation("com.github.alibinkhani.materialcolorpicker:views:1.0.0")
 
     // Jetpack Compose picker
-    implementation("com.github.alibinkhani.materialcolorpicker:materialcolorpickercompose:1.0.0")
+    implementation("com.github.alibinkhani.materialcolorpicker:compose:1.0.0")
 }
 ```
 
