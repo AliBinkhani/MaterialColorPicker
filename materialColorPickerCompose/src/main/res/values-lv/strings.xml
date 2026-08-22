@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Paletes</string>
+    <string name="material_color_picker_compose_spectrum">Spektrs</string>
+    <string name="material_color_picker_compose_saturation">Piesātinājums</string>
+    <string name="material_color_picker_compose_opacity">Necaurredzamība</string>
+    <string name="material_color_picker_compose_hex">Heksadecimāli dati</string>
+    <string name="material_color_picker_compose_red">Sarkana</string>
+    <string name="material_color_picker_compose_green">Zaļa</string>
+    <string name="material_color_picker_compose_blue">Zila</string>
+    <string name="material_color_picker_compose_current_color">Pašreiz.</string>
+    <string name="material_color_picker_compose_picked_color">Jauna</string>
+</resources>

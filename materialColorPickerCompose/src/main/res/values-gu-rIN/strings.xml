@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">સ્વૉચિસ</string>
+    <string name="material_color_picker_compose_spectrum">સ્પેક્ટ્રમ</string>
+    <string name="material_color_picker_compose_saturation">સંતૃપ્તિ</string>
+    <string name="material_color_picker_compose_opacity">અપારદર્શિતા</string>
+    <string name="material_color_picker_compose_hex">હેક્સ</string>
+    <string name="material_color_picker_compose_red">લાલ</string>
+    <string name="material_color_picker_compose_green">લીલો</string>
+    <string name="material_color_picker_compose_blue">ભૂરો</string>
+    <string name="material_color_picker_compose_current_color">વર્તમાન</string>
+    <string name="material_color_picker_compose_picked_color">નવું</string>
+</resources>

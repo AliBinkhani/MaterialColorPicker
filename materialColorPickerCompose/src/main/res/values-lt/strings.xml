@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Atkarpos</string>
+    <string name="material_color_picker_compose_spectrum">Spektras</string>
+    <string name="material_color_picker_compose_saturation">Sotis</string>
+    <string name="material_color_picker_compose_opacity">Drumstumas</string>
+    <string name="material_color_picker_compose_hex">Kerai</string>
+    <string name="material_color_picker_compose_red">Raudona</string>
+    <string name="material_color_picker_compose_green">Žalia</string>
+    <string name="material_color_picker_compose_blue">Mėlyna</string>
+    <string name="material_color_picker_compose_current_color">Esamas</string>
+    <string name="material_color_picker_compose_picked_color">Nauja</string>
+</resources>

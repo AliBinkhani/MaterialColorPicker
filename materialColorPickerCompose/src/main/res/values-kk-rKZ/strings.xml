@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Бояғыштар</string>
+    <string name="material_color_picker_compose_spectrum">Ауқым</string>
+    <string name="material_color_picker_compose_saturation">Қанықтық</string>
+    <string name="material_color_picker_compose_opacity">Бұлыңғырлық</string>
+    <string name="material_color_picker_compose_hex">Он алтылық</string>
+    <string name="material_color_picker_compose_red">Қызыл</string>
+    <string name="material_color_picker_compose_green">Жасыл</string>
+    <string name="material_color_picker_compose_blue">Көк</string>
+    <string name="material_color_picker_compose_current_color">Ағымдағы</string>
+    <string name="material_color_picker_compose_picked_color">Жаңа</string>
+</resources>

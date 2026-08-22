@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">色彩樣本</string>
+    <string name="material_color_picker_compose_spectrum">色彩頻譜</string>
+    <string name="material_color_picker_compose_saturation">飽和度</string>
+    <string name="material_color_picker_compose_opacity">不透明度</string>
+    <string name="material_color_picker_compose_hex">十六進位</string>
+    <string name="material_color_picker_compose_red">紅色</string>
+    <string name="material_color_picker_compose_green">綠色</string>
+    <string name="material_color_picker_compose_blue">藍色</string>
+    <string name="material_color_picker_compose_current_color">目前</string>
+    <string name="material_color_picker_compose_picked_color">新</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Kartelalar</string>
+    <string name="material_color_picker_compose_spectrum">Spektrum</string>
+    <string name="material_color_picker_compose_saturation">Doygunluk</string>
+    <string name="material_color_picker_compose_opacity">Opaklık</string>
+    <string name="material_color_picker_compose_hex">Altıgen</string>
+    <string name="material_color_picker_compose_red">Kırmızı</string>
+    <string name="material_color_picker_compose_green">Yeşil</string>
+    <string name="material_color_picker_compose_blue">Mavi</string>
+    <string name="material_color_picker_compose_current_color">Geçerli</string>
+    <string name="material_color_picker_compose_picked_color">Yeni</string>
+</resources>

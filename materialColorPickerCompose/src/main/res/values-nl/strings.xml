@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Monsters</string>
+    <string name="material_color_picker_compose_spectrum">Spectrum</string>
+    <string name="material_color_picker_compose_saturation">Intensiteit</string>
+    <string name="material_color_picker_compose_opacity">Ondoorzichtigheid</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">Rood</string>
+    <string name="material_color_picker_compose_green">Groen</string>
+    <string name="material_color_picker_compose_blue">Blauw</string>
+    <string name="material_color_picker_compose_current_color">Huidig</string>
+    <string name="material_color_picker_compose_picked_color">Nieuw</string>
+</resources>

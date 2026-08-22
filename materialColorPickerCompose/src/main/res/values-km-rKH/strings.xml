@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">គំរូ​តូចៗ</string>
+    <string name="material_color_picker_compose_spectrum">វិសាលគម</string>
+    <string name="material_color_picker_compose_saturation">ភាពសើម</string>
+    <string name="material_color_picker_compose_opacity">ភាពស្រអាប់</string>
+    <string name="material_color_picker_compose_hex">ឆពណ៌</string>
+    <string name="material_color_picker_compose_red">ក្រហម</string>
+    <string name="material_color_picker_compose_green">បៃតង</string>
+    <string name="material_color_picker_compose_blue">ខៀវ</string>
+    <string name="material_color_picker_compose_current_color">បច្ចុប្បន្ន</string>
+    <string name="material_color_picker_compose_picked_color">ថ្មី</string>
+</resources>

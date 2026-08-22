@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Bảng màu</string>
+    <string name="material_color_picker_compose_spectrum">Quang phổ</string>
+    <string name="material_color_picker_compose_saturation">Độ bão hòa</string>
+    <string name="material_color_picker_compose_opacity">Độ mờ</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">Đỏ</string>
+    <string name="material_color_picker_compose_green">Xanh lá</string>
+    <string name="material_color_picker_compose_blue">Xanh dương</string>
+    <string name="material_color_picker_compose_current_color">Hiện tại</string>
+    <string name="material_color_picker_compose_picked_color">Mới</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">সোয়াচ</string>
+    <string name="material_color_picker_compose_spectrum">স্পেকট্রাম</string>
+    <string name="material_color_picker_compose_saturation">স্যাচুরেশন</string>
+    <string name="material_color_picker_compose_opacity">অস্বচ্ছতা</string>
+    <string name="material_color_picker_compose_hex">হেক্স</string>
+    <string name="material_color_picker_compose_red">লাল</string>
+    <string name="material_color_picker_compose_green">সবুজ</string>
+    <string name="material_color_picker_compose_blue">নীল</string>
+    <string name="material_color_picker_compose_current_color">বর্তমান</string>
+    <string name="material_color_picker_compose_picked_color">নতুন</string>
+</resources>

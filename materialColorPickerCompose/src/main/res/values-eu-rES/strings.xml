@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Laginak</string>
+    <string name="material_color_picker_compose_spectrum">Espektroa</string>
+    <string name="material_color_picker_compose_saturation">Saturazioa</string>
+    <string name="material_color_picker_compose_opacity">Opakutasuna</string>
+    <string name="material_color_picker_compose_hex">Hexadezimala</string>
+    <string name="material_color_picker_compose_red">Gorria</string>
+    <string name="material_color_picker_compose_green">Berdea</string>
+    <string name="material_color_picker_compose_blue">Urdina</string>
+    <string name="material_color_picker_compose_current_color">Unekoa</string>
+    <string name="material_color_picker_compose_picked_color">Berria</string>
+</resources>

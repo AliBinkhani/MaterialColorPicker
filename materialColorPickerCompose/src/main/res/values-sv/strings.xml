@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Swatches</string>
+    <string name="material_color_picker_compose_spectrum">Spektrum</string>
+    <string name="material_color_picker_compose_saturation">Mättnad</string>
+    <string name="material_color_picker_compose_opacity">Transparens</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">Rött</string>
+    <string name="material_color_picker_compose_green">Grönt</string>
+    <string name="material_color_picker_compose_blue">Blått</string>
+    <string name="material_color_picker_compose_current_color">Aktuell</string>
+    <string name="material_color_picker_compose_picked_color">Nytt</string>
+</resources>

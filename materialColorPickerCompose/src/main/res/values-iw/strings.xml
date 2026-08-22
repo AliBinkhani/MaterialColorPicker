@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">דוגמיות</string>
+    <string name="material_color_picker_compose_spectrum">קשת</string>
+    <string name="material_color_picker_compose_saturation">רוויה</string>
+    <string name="material_color_picker_compose_opacity">שקיפות</string>
+    <string name="material_color_picker_compose_hex">הקסדצימלי</string>
+    <string name="material_color_picker_compose_red">אדום</string>
+    <string name="material_color_picker_compose_green">ירוק</string>
+    <string name="material_color_picker_compose_blue">כחול</string>
+    <string name="material_color_picker_compose_current_color">נוכחי</string>
+    <string name="material_color_picker_compose_picked_color">חדש</string>
+</resources>

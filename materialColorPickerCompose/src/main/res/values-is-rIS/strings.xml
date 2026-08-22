@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Litaspjöld</string>
+    <string name="material_color_picker_compose_spectrum">Litróf</string>
+    <string name="material_color_picker_compose_saturation">Mettun</string>
+    <string name="material_color_picker_compose_opacity">Gegnsæi</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">Rauður</string>
+    <string name="material_color_picker_compose_green">Grænt</string>
+    <string name="material_color_picker_compose_blue">Blár</string>
+    <string name="material_color_picker_compose_current_color">Valinn</string>
+    <string name="material_color_picker_compose_picked_color">Nýr</string>
+</resources>

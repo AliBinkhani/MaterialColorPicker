@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Mostre culoare</string>
+    <string name="material_color_picker_compose_spectrum">Spectru</string>
+    <string name="material_color_picker_compose_saturation">Saturație</string>
+    <string name="material_color_picker_compose_opacity">Opacitate</string>
+    <string name="material_color_picker_compose_hex">Hexazecimal</string>
+    <string name="material_color_picker_compose_red">Roșu</string>
+    <string name="material_color_picker_compose_green">Verde</string>
+    <string name="material_color_picker_compose_blue">Albastru</string>
+    <string name="material_color_picker_compose_current_color">Actuală</string>
+    <string name="material_color_picker_compose_picked_color">Nouă</string>
+</resources>

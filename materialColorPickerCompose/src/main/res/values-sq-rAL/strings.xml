@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Koleksionet e ngjyrave</string>
+    <string name="material_color_picker_compose_spectrum">Spektri</string>
+    <string name="material_color_picker_compose_saturation">Ngopja</string>
+    <string name="material_color_picker_compose_opacity">Opaciteti</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">E kuqe</string>
+    <string name="material_color_picker_compose_green">E gjelbër</string>
+    <string name="material_color_picker_compose_blue">E kaltër</string>
+    <string name="material_color_picker_compose_current_color">Aktuale</string>
+    <string name="material_color_picker_compose_picked_color">E re</string>
+</resources>

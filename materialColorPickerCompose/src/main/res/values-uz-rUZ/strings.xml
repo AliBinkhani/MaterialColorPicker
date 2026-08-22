@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Namunalar</string>
+    <string name="material_color_picker_compose_spectrum">Spektrum</string>
+    <string name="material_color_picker_compose_saturation">To‘yinish</string>
+    <string name="material_color_picker_compose_opacity">Chaplanish</string>
+    <string name="material_color_picker_compose_hex">Oltiburchak</string>
+    <string name="material_color_picker_compose_red">Qizil</string>
+    <string name="material_color_picker_compose_green">Yashil</string>
+    <string name="material_color_picker_compose_blue">Ko‘k</string>
+    <string name="material_color_picker_compose_current_color">Joriy</string>
+    <string name="material_color_picker_compose_picked_color">Yangi</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">නියැදි</string>
+    <string name="material_color_picker_compose_spectrum">වර්ණාවලිය</string>
+    <string name="material_color_picker_compose_saturation">සන්තෘප්තිය</string>
+    <string name="material_color_picker_compose_opacity">පාරාන්ධතාව</string>
+    <string name="material_color_picker_compose_hex">ෂඩ්</string>
+    <string name="material_color_picker_compose_red">රතු</string>
+    <string name="material_color_picker_compose_green">කොළ</string>
+    <string name="material_color_picker_compose_blue">නිල්</string>
+    <string name="material_color_picker_compose_current_color">පවත්නා</string>
+    <string name="material_color_picker_compose_picked_color">අලුත්</string>
+</resources>

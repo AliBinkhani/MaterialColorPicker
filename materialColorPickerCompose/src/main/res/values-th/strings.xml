@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">ตัวอย่างสี</string>
+    <string name="material_color_picker_compose_spectrum">สเปกตรัม</string>
+    <string name="material_color_picker_compose_saturation">ระดับสี</string>
+    <string name="material_color_picker_compose_opacity">ความทึบ</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">สีแดง</string>
+    <string name="material_color_picker_compose_green">สีเขียว</string>
+    <string name="material_color_picker_compose_blue">สีน้ำเงิน</string>
+    <string name="material_color_picker_compose_current_color">ปัจจุบัน</string>
+    <string name="material_color_picker_compose_picked_color">ใหม่</string>
+</resources>

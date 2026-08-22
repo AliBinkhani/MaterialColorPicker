@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Үлгүлөр</string>
+    <string name="material_color_picker_compose_spectrum">Спектр</string>
+    <string name="material_color_picker_compose_saturation">Сатурация</string>
+    <string name="material_color_picker_compose_opacity">Тунук эместиги</string>
+    <string name="material_color_picker_compose_hex">Он алтылык</string>
+    <string name="material_color_picker_compose_red">Кызыл</string>
+    <string name="material_color_picker_compose_green">Жашыл</string>
+    <string name="material_color_picker_compose_blue">Көк</string>
+    <string name="material_color_picker_compose_current_color">Учурдагы</string>
+    <string name="material_color_picker_compose_picked_color">Жаңы</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Swatches</string>
+    <string name="material_color_picker_compose_spectrum">స్పెక్ట్రమ్‌</string>
+    <string name="material_color_picker_compose_saturation">సంతృప్తత</string>
+    <string name="material_color_picker_compose_opacity">అస్పష్టత</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">ఎరుపు రంగు</string>
+    <string name="material_color_picker_compose_green">ఆకుపచ్చ రంగు</string>
+    <string name="material_color_picker_compose_blue">నీలం</string>
+    <string name="material_color_picker_compose_current_color">ప్రస్తుతం</string>
+    <string name="material_color_picker_compose_picked_color">కొత్తది</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Campioni</string>
+    <string name="material_color_picker_compose_spectrum">Spettro</string>
+    <string name="material_color_picker_compose_saturation">Saturazione</string>
+    <string name="material_color_picker_compose_opacity">Opacità</string>
+    <string name="material_color_picker_compose_hex">Esadecimale</string>
+    <string name="material_color_picker_compose_red">Rosso</string>
+    <string name="material_color_picker_compose_green">Verde</string>
+    <string name="material_color_picker_compose_blue">Blu</string>
+    <string name="material_color_picker_compose_current_color">Corrente</string>
+    <string name="material_color_picker_compose_picked_color">Nuovo</string>
+</resources>

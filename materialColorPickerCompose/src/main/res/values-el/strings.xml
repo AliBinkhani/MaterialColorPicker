@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Δείγματα</string>
+    <string name="material_color_picker_compose_spectrum">Φάσμα</string>
+    <string name="material_color_picker_compose_saturation">Κορεσμός</string>
+    <string name="material_color_picker_compose_opacity">Αδιαφάνεια</string>
+    <string name="material_color_picker_compose_hex">Δεκαεξαδικό</string>
+    <string name="material_color_picker_compose_red">Κόκκινο</string>
+    <string name="material_color_picker_compose_green">Πράσινο</string>
+    <string name="material_color_picker_compose_blue">Μπλε</string>
+    <string name="material_color_picker_compose_current_color">Τρέχον</string>
+    <string name="material_color_picker_compose_picked_color">Νέο</string>
+</resources>

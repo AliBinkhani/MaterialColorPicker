@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">표준</string>
+    <string name="material_color_picker_compose_spectrum">사용자 지정</string>
+    <string name="material_color_picker_compose_saturation">색포화도</string>
+    <string name="material_color_picker_compose_opacity">불투명도</string>
+    <string name="material_color_picker_compose_hex">헥스</string>
+    <string name="material_color_picker_compose_red">빨간색</string>
+    <string name="material_color_picker_compose_green">녹색</string>
+    <string name="material_color_picker_compose_blue">파란색</string>
+    <string name="material_color_picker_compose_current_color">현재 색</string>
+    <string name="material_color_picker_compose_picked_color">새로운 색</string>
+</resources>

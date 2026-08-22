@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">नमूनाहरू</string>
+    <string name="material_color_picker_compose_spectrum">स्पेक्ट्रम</string>
+    <string name="material_color_picker_compose_saturation">स्याचुरेशन</string>
+    <string name="material_color_picker_compose_opacity">अपारदर्शिता</string>
+    <string name="material_color_picker_compose_hex">हेक्स</string>
+    <string name="material_color_picker_compose_red">रातो</string>
+    <string name="material_color_picker_compose_green">हरियो</string>
+    <string name="material_color_picker_compose_blue">नीलो</string>
+    <string name="material_color_picker_compose_current_color">हालको</string>
+    <string name="material_color_picker_compose_picked_color">नयाँ</string>
+</resources>

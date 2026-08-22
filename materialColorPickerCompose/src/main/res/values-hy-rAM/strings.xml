@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Նախշանմուշներ</string>
+    <string name="material_color_picker_compose_spectrum">Սպեկտր</string>
+    <string name="material_color_picker_compose_saturation">Հագեցում</string>
+    <string name="material_color_picker_compose_opacity">Անթափանցություն</string>
+    <string name="material_color_picker_compose_hex">Տասնվեցական</string>
+    <string name="material_color_picker_compose_red">Կարմիր</string>
+    <string name="material_color_picker_compose_green">Կանաչ</string>
+    <string name="material_color_picker_compose_blue">Կապույտ</string>
+    <string name="material_color_picker_compose_current_color">Ընթացիկ</string>
+    <string name="material_color_picker_compose_picked_color">Նոր</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Vzorkovník</string>
+    <string name="material_color_picker_compose_spectrum">Spektrum</string>
+    <string name="material_color_picker_compose_saturation">Sýtosť</string>
+    <string name="material_color_picker_compose_opacity">Nepriehľadnosť</string>
+    <string name="material_color_picker_compose_hex">Hexadecimálny</string>
+    <string name="material_color_picker_compose_red">Červená</string>
+    <string name="material_color_picker_compose_green">Zelená</string>
+    <string name="material_color_picker_compose_blue">Modrá</string>
+    <string name="material_color_picker_compose_current_color">Aktuálna</string>
+    <string name="material_color_picker_compose_picked_color">Nová</string>
+</resources>

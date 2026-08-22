@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">عينات الألوان</string>
+    <string name="material_color_picker_compose_spectrum">طيف</string>
+    <string name="material_color_picker_compose_saturation">التشبع</string>
+    <string name="material_color_picker_compose_opacity">معدل الشفافية</string>
+    <string name="material_color_picker_compose_hex">سداسي</string>
+    <string name="material_color_picker_compose_red">أحمر</string>
+    <string name="material_color_picker_compose_green">أخضر</string>
+    <string name="material_color_picker_compose_blue">أزرق</string>
+    <string name="material_color_picker_compose_current_color">الحالي</string>
+    <string name="material_color_picker_compose_picked_color">جديد</string>
+</resources>

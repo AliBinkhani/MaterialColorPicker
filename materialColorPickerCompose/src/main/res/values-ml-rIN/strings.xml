@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">സ്വാച്ചുകൾ</string>
+    <string name="material_color_picker_compose_spectrum">സ്പെക്ട്രം</string>
+    <string name="material_color_picker_compose_saturation">വ്യാപനം</string>
+    <string name="material_color_picker_compose_opacity">അതാര്യത</string>
+    <string name="material_color_picker_compose_hex">ഹെക്സ്</string>
+    <string name="material_color_picker_compose_red">ചുവപ്പ്</string>
+    <string name="material_color_picker_compose_green">പച്ച</string>
+    <string name="material_color_picker_compose_blue">നീല</string>
+    <string name="material_color_picker_compose_current_color">നിലവിലുള്ളത്</string>
+    <string name="material_color_picker_compose_picked_color">പുതിയത്</string>
+</resources>

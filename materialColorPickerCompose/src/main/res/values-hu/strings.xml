@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Minták</string>
+    <string name="material_color_picker_compose_spectrum">Spektrum</string>
+    <string name="material_color_picker_compose_saturation">Telítettség</string>
+    <string name="material_color_picker_compose_opacity">Áttetszőség</string>
+    <string name="material_color_picker_compose_hex">Hexadecimális</string>
+    <string name="material_color_picker_compose_red">Piros</string>
+    <string name="material_color_picker_compose_green">Zöld</string>
+    <string name="material_color_picker_compose_blue">Kék</string>
+    <string name="material_color_picker_compose_current_color">Jelenlegi</string>
+    <string name="material_color_picker_compose_picked_color">Új</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Relógios</string>
+    <string name="material_color_picker_compose_spectrum">Spectrum</string>
+    <string name="material_color_picker_compose_saturation">Saturação</string>
+    <string name="material_color_picker_compose_opacity">Opacidade</string>
+    <string name="material_color_picker_compose_hex">Hexadecimal</string>
+    <string name="material_color_picker_compose_red">Vermelho</string>
+    <string name="material_color_picker_compose_green">Verde</string>
+    <string name="material_color_picker_compose_blue">Azul</string>
+    <string name="material_color_picker_compose_current_color">Actual</string>
+    <string name="material_color_picker_compose_picked_color">Novo</string>
+</resources>

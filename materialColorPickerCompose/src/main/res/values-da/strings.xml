@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Farveprøver</string>
+    <string name="material_color_picker_compose_spectrum">Spektrum</string>
+    <string name="material_color_picker_compose_saturation">Mætning</string>
+    <string name="material_color_picker_compose_opacity">Uigennemsigtighed</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">Rød</string>
+    <string name="material_color_picker_compose_green">Grøn</string>
+    <string name="material_color_picker_compose_blue">Blå</string>
+    <string name="material_color_picker_compose_current_color">Aktuel</string>
+    <string name="material_color_picker_compose_picked_color">Ny</string>
+</resources>

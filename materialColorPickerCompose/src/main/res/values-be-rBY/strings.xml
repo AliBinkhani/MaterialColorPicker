@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Swatches</string>
+    <string name="material_color_picker_compose_spectrum">Спектр</string>
+    <string name="material_color_picker_compose_saturation">Насычанасць</string>
+    <string name="material_color_picker_compose_opacity">Непразрыстасць</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">Чырвоны</string>
+    <string name="material_color_picker_compose_green">Зялёны</string>
+    <string name="material_color_picker_compose_blue">Сіні</string>
+    <string name="material_color_picker_compose_current_color">Бягучы</string>
+    <string name="material_color_picker_compose_picked_color">Новыя</string>
+</resources>

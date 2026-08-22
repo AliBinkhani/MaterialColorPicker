@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Kombinacije boja</string>
+    <string name="material_color_picker_compose_spectrum">Spektar</string>
+    <string name="material_color_picker_compose_saturation">Zasićenost</string>
+    <string name="material_color_picker_compose_opacity">Prozirnost</string>
+    <string name="material_color_picker_compose_hex">Šesterougaoni</string>
+    <string name="material_color_picker_compose_red">Crvena</string>
+    <string name="material_color_picker_compose_green">Zelena</string>
+    <string name="material_color_picker_compose_blue">Plava</string>
+    <string name="material_color_picker_compose_current_color">Trenutno</string>
+    <string name="material_color_picker_compose_picked_color">Novo</string>
+</resources>

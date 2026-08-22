@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Nusgalar</string>
+    <string name="material_color_picker_compose_spectrum">Spektr</string>
+    <string name="material_color_picker_compose_saturation">Doýgunlyk</string>
+    <string name="material_color_picker_compose_opacity">Tutuklyk</string>
+    <string name="material_color_picker_compose_hex">Heks</string>
+    <string name="material_color_picker_compose_red">Gyzyl</string>
+    <string name="material_color_picker_compose_green">Ýaşyl</string>
+    <string name="material_color_picker_compose_blue">Gök</string>
+    <string name="material_color_picker_compose_current_color">Häzirki</string>
+    <string name="material_color_picker_compose_picked_color">Täze</string>
+</resources>

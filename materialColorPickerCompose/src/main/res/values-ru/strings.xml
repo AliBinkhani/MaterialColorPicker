@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">Образцы цветов</string>
+    <string name="material_color_picker_compose_spectrum">Цветовой спектр</string>
+    <string name="material_color_picker_compose_saturation">Насыщенность</string>
+    <string name="material_color_picker_compose_opacity">Непрозрачность</string>
+    <string name="material_color_picker_compose_hex">Hex</string>
+    <string name="material_color_picker_compose_red">Красный</string>
+    <string name="material_color_picker_compose_green">Зеленый</string>
+    <string name="material_color_picker_compose_blue">Синий</string>
+    <string name="material_color_picker_compose_current_color">Текущий</string>
+    <string name="material_color_picker_compose_picked_color">Новый</string>
+</resources>

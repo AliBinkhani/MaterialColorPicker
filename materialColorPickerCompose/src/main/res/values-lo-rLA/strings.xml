@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="material_color_picker_compose_swatches">ຕົວຢ່າງ</string>
+    <string name="material_color_picker_compose_spectrum">ແຖບສີ</string>
+    <string name="material_color_picker_compose_saturation">ລະດັບສີ</string>
+    <string name="material_color_picker_compose_opacity">ຄວາມມົວແສງ</string>
+    <string name="material_color_picker_compose_hex">ຫົກຫຼ່ຽມ</string>
+    <string name="material_color_picker_compose_red">ສີແດງ</string>
+    <string name="material_color_picker_compose_green">ສີຂຽວ</string>
+    <string name="material_color_picker_compose_blue">ສີຟ້າ</string>
+    <string name="material_color_picker_compose_current_color">ປະຈຸບັນ</string>
+    <string name="material_color_picker_compose_picked_color">ໃໝ່</string>
+</resources>
