@@ -35,17 +35,17 @@
 
             <FrameLayout
                 android:id="@+id/material_color_picker_color_spectrum_view_container"
-                android:layout_width="@dimen/material_color_picker_ui_color_swatch_view_width"
+                android:layout_width="@dimen/material_color_picker_ui_color_swatch_view_width_background"
                 android:layout_height="@dimen/material_color_picker_ui_color_spectrum_view_height"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="@dimen/material_color_picker_ui_dialog_extra_horizontal_margin"
                 android:layout_marginTop="@dimen/material_color_picker_ui_color_swatch_view_container_margin_top"
                 android:visibility="gone">
 
                 <com.hooshkar.materialcolorpicker.views.ColorSpectrumView
                     android:id="@+id/material_color_picker_color_spectrum_view"
                     android:layout_width="@dimen/material_color_picker_ui_color_swatch_view_width"
-                    android:layout_height="@dimen/material_color_picker_ui_color_spectrum_view_height" />
+                    android:layout_height="@dimen/material_color_picker_ui_color_spectrum_view_height"
+                    android:layout_gravity="center" />
             </FrameLayout>
 
             <LinearLayout
