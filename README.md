@@ -44,10 +44,10 @@ dependencyResolutionManagement {
 ```kotlin
 dependencies {
     // View-based picker
-    implementation("com.github.alibinkhani:materialcolorpicker:1.0.0")
+    implementation("com.github.alibinkhani.materialcolorpicker:materialcolorpicker:1.0.0")
 
     // Jetpack Compose picker
-    implementation("com.github.alibinkhani:materialcolorpickercompose:1.0.0")
+    implementation("com.github.alibinkhani.materialcolorpicker:materialcolorpickercompose:1.0.0")
 }
 ```
 

@@ -56,7 +56,11 @@ afterEvaluate {
         publications {
             register<MavenPublication>("release") {
                 from(components["release"])
-                groupId = "com.github.alibinkhani"
+                // JitPack always rewrites a multi-module build's groupId to include the repo
+                // name, regardless of what's set here - verified by inspecting a real build's
+                // served files. Matching it explicitly keeps local publishing consistent with
+                // what JitPack actually serves.
+                groupId = "com.github.alibinkhani.materialcolorpicker"
                 artifactId = "materialcolorpicker"
                 version = System.getenv("VERSION")
                     ?: (findProperty("VERSION") as String?)
