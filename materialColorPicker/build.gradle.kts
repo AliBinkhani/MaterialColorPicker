@@ -56,8 +56,8 @@ afterEvaluate {
         publications {
             register<MavenPublication>("release") {
                 from(components["release"])
-                groupId = "com.github.AliBinkhani.MaterialColorPicker"
-                artifactId = "materialColorPicker"
+                groupId = "com.github.alibinkhani"
+                artifactId = "materialcolorpicker"
                 version = System.getenv("VERSION")
                     ?: (findProperty("VERSION") as String?)
                     ?: "unspecified"
