@@ -1,9 +1,11 @@
 package com.hooshkar.materialcolorpickercompose
 
+import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import com.hooshkar.materialcolorpickercompose.internal.BrightnessTrack
 import com.hooshkar.materialcolorpickercompose.internal.ColorSpectrumPad
@@ -34,54 +36,63 @@ fun SpectrumColorPicker(
 ) {
     LaunchedEffect(state.color) { onColorChanged(state.color) }
 
-    PickerScaffold(
-        modifier = modifier,
-        topContent = {
-            ColorSpectrumPad(
-                hue = state.hue,
-                saturation = state.saturation,
-                onHueSaturationChanged = { hue, saturation -> state.updateHueSaturation(hue, saturation) }
-            )
-        },
-        brightnessSlider = {
-            val saturationLabel = stringResource(R.string.material_color_picker_compose_saturation)
-            val fullColor = Color(
-                android.graphics.Color.HSVToColor(floatArrayOf(state.hue, state.saturation, 1f))
-            )
-            PercentSliderRow(
-                label = saturationLabel,
-                percent = (state.brightness * 100f).roundToInt(),
-                onPercentChange = { percent -> state.updateBrightness(percent / 100f) },
-                contentDescription = saturationLabel
-            ) { BrightnessTrack(fullColor = fullColor) }
-        },
-        opacitySlider = if (opacityBarEnabled) {
-            {
-                val opacityLabel = stringResource(R.string.material_color_picker_compose_opacity)
-                PercentSliderRow(
-                    label = opacityLabel,
-                    percent = (state.alpha * 100f / 255f).roundToInt(),
-                    onPercentChange = { percent -> state.updateAlpha((percent * 255f / 100f).roundToInt()) },
-                    contentDescription = opacityLabel
-                ) { OpacityTrack(baseColor = state.color.copy(alpha = 1f)) }
-            }
-        } else null,
-        selectedColorSection = {
-            SelectedColorSection(
-                color = state.color,
-                previousColor = state.previousColor,
-                alpha = state.alpha,
-                onColorChange = { newColor -> state.color = newColor }
-            )
-        },
-        recentColorsRow = if (recentColorsEnabled) {
-            {
-                RecentColorsRow(
-                    recentColors = state.recentColors,
-                    selectedColor = state.color,
-                    onColorSelected = { newColor -> state.color = newColor }
+    val isLandscape =
+        LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    FixedFontScale {
+        PickerScaffold(
+            modifier = modifier,
+            topContent = { areaModifier ->
+                ColorSpectrumPad(
+                    hue = state.hue,
+                    saturation = state.saturation,
+                    onHueSaturationChanged = { hue, saturation -> state.updateHueSaturation(hue, saturation) },
+                    modifier = areaModifier
                 )
-            }
-        } else null
-    )
+            },
+            brightnessSlider = {
+                val saturationLabel = stringResource(R.string.material_color_picker_compose_saturation)
+                val fullColor = Color(
+                    android.graphics.Color.HSVToColor(floatArrayOf(state.hue, state.saturation, 1f))
+                )
+                PercentSliderRow(
+                    label = saturationLabel,
+                    percent = (state.brightness * 100f).roundToInt(),
+                    onPercentChange = { percent -> state.updateBrightness(percent / 100f) },
+                    showLabel = !isLandscape,
+                    contentDescription = saturationLabel
+                ) { BrightnessTrack(fullColor = fullColor) }
+            },
+            opacitySlider = if (opacityBarEnabled) {
+                {
+                    val opacityLabel = stringResource(R.string.material_color_picker_compose_opacity)
+                    PercentSliderRow(
+                        label = opacityLabel,
+                        percent = (state.alpha * 100f / 255f).roundToInt(),
+                        onPercentChange = { percent -> state.updateAlpha((percent * 255f / 100f).roundToInt()) },
+                        showLabel = !isLandscape,
+                        contentDescription = opacityLabel
+                    ) { OpacityTrack(baseColor = state.color.copy(alpha = 1f)) }
+                }
+            } else null,
+            selectedColorSection = {
+                SelectedColorSection(
+                    color = state.color,
+                    previousColor = state.previousColor,
+                    alpha = state.alpha,
+                    onColorChange = { newColor -> state.color = newColor }
+                )
+            },
+            recentColorsRow = if (recentColorsEnabled) {
+                {
+                    RecentColorsRow(
+                        recentColors = state.recentColors,
+                        selectedColor = state.color,
+                        onColorSelected = { newColor -> state.color = newColor },
+                        showDivider = !isLandscape
+                    )
+                }
+            } else null
+        )
+    }
 }

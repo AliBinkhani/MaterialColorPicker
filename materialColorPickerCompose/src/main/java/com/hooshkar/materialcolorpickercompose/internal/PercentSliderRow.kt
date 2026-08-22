@@ -25,7 +25,11 @@ import com.hooshkar.materialcolorpickercompose.ColorPickerDefaults
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
-/** Label + draggable percent slider + editable "NN%" field, shared by the Opacity and Saturation rows. */
+/**
+ * Label + draggable percent slider + editable "NN%" field, shared by the Opacity and Saturation
+ * rows. [showLabel] is turned off in the landscape layout, which is short on vertical room; the
+ * label text is still exposed as [contentDescription] either way.
+ */
 @Composable
 internal fun PercentSliderRow(
     label: String,
@@ -33,12 +37,15 @@ internal fun PercentSliderRow(
     onPercentChange: (Int) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    showLabel: Boolean = true,
     contentDescription: String? = null,
     track: @Composable (fraction: Float) -> Unit
 ) {
     Column(modifier) {
-        Text(text = label, style = ColorPickerDefaults.labelTextStyle())
-        Spacer(Modifier.height(ColorPickerDefaults.SectionSpacing))
+        if (showLabel) {
+            Text(text = label, style = ColorPickerDefaults.labelTextStyle())
+            Spacer(Modifier.height(ColorPickerDefaults.SectionSpacing))
+        }
         Row(verticalAlignment = Alignment.CenterVertically) {
             GradientSlider(
                 fraction = percent / 100f,

@@ -3,7 +3,6 @@ package com.hooshkar.materialcolorpickercompose.internal
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -23,20 +22,26 @@ import com.hooshkar.materialcolorpickercompose.ColorPickerDefaults
 private val ShadowColor = Color.Black.copy(alpha = 0.4f)
 private val DarkRowCursorColor = Color.White.copy(alpha = 0.3f)
 
-/** The 11x10 fixed-palette grid shown on the Swatches page. */
+/**
+ * The 11x10 fixed-palette grid shown on the Swatches page. [modifier] must give this a concrete
+ * width or height to grow from (e.g. `fillMaxWidth()` in portrait, a fixed `width()` in
+ * landscape) — the other dimension is then derived from [ColorPickerDefaults.SwatchGridAspectRatio].
+ * Set [matchHeightConstraintsFirst] when [modifier] instead fixes a *height* to grow the width
+ * from (e.g. matching the Spectrum pad's height in landscape).
+ */
 @Composable
 internal fun ColorSwatchGrid(
     color: Color,
     onColorSelected: (Color) -> Unit,
     modifier: Modifier = Modifier,
+    matchHeightConstraintsFirst: Boolean = false,
     contentDescription: String? = null
 ) {
     val selected = findSwatchIndex(color)
 
     Canvas(
         modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(ColorPickerDefaults.SwatchGridAspectRatio)
+            .aspectRatio(ColorPickerDefaults.SwatchGridAspectRatio, matchHeightConstraintsFirst)
             .then(
                 if (contentDescription != null) {
                     Modifier.semantics { this.contentDescription = contentDescription }

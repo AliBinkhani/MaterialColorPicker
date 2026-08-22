@@ -2,9 +2,10 @@ package com.hooshkar.materialcolorpickercompose.internal
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -15,10 +16,14 @@ import com.hooshkar.materialcolorpickercompose.ColorPickerDefaults
  * as two side-by-side columns in landscape (the Swatches/Spectrum area on the left, everything
  * else stacked on the right) — mirroring how the View-based picker re-lays itself out based on
  * [Configuration.orientation].
+ *
+ * [topContent] receives the modifier it should size itself with: [Modifier.fillMaxWidth] in
+ * portrait, or a fixed [ColorPickerDefaults.LandscapePickerAreaWidth] in landscape (a weight-based
+ * width there would make the picking area far larger than the controls beside it).
  */
 @Composable
 internal fun PickerScaffold(
-    topContent: @Composable () -> Unit,
+    topContent: @Composable (Modifier) -> Unit,
     selectedColorSection: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     brightnessSlider: (@Composable () -> Unit)? = null,
@@ -31,12 +36,12 @@ internal fun PickerScaffold(
     if (isLandscape) {
         Row(
             modifier = modifier,
-            horizontalArrangement = Arrangement.spacedBy(ColorPickerDefaults.ContentSpacing)
+            horizontalArrangement = Arrangement.spacedBy(ColorPickerDefaults.LandscapeContentSpacing)
         ) {
-            Box(Modifier.weight(1f)) { topContent() }
+            topContent(Modifier.width(ColorPickerDefaults.LandscapePickerAreaWidth))
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(ColorPickerDefaults.ContentSpacing)
+                verticalArrangement = Arrangement.spacedBy(ColorPickerDefaults.LandscapeContentSpacing)
             ) {
                 brightnessSlider?.invoke()
                 opacitySlider?.invoke()
@@ -49,7 +54,7 @@ internal fun PickerScaffold(
             modifier = modifier,
             verticalArrangement = Arrangement.spacedBy(ColorPickerDefaults.ContentSpacing)
         ) {
-            topContent()
+            topContent(Modifier.fillMaxWidth())
             brightnessSlider?.invoke()
             opacitySlider?.invoke()
             selectedColorSection()

@@ -3,7 +3,6 @@ package com.hooshkar.materialcolorpickercompose.internal
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -24,7 +23,14 @@ import com.hooshkar.materialcolorpickercompose.MaxSpectrumHue
 /**
  * The Hue (horizontal) x Saturation (vertical) picking pad shown on the Spectrum page.
  * Brightness and opacity are controlled by separate sliders, so this pad always renders at
- * full brightness/full alpha regardless of the currently selected color.
+ * full brightness/full alpha regardless of the currently selected color. [modifier] must give
+ * this a concrete width or height to grow from, the same as [ColorSwatchGrid]; set
+ * [matchHeightConstraintsFirst] when it fixes a height rather than a width.
+ *
+ * [aspectRatio] defaults to [ColorPickerDefaults.SpectrumPadAspectRatio] (matching the reference
+ * UI's proportions) but can be overridden — [MaterialColorPicker]'s landscape layout passes
+ * [ColorPickerDefaults.SwatchGridAspectRatio] instead so the pad is pixel-identical in size to
+ * the grid it swaps places with, rather than merely the same height.
  */
 @Composable
 internal fun ColorSpectrumPad(
@@ -32,14 +38,15 @@ internal fun ColorSpectrumPad(
     saturation: Float,
     onHueSaturationChanged: (hue: Float, saturation: Float) -> Unit,
     modifier: Modifier = Modifier,
+    matchHeightConstraintsFirst: Boolean = false,
+    aspectRatio: Float = ColorPickerDefaults.SpectrumPadAspectRatio,
     contentDescription: String? = null
 ) {
     val cursorColor = Color(android.graphics.Color.HSVToColor(floatArrayOf(hue, saturation, 1f)))
 
     Canvas(
         modifier = modifier
-            .fillMaxWidth()
-            .aspectRatio(ColorPickerDefaults.SpectrumPadAspectRatio)
+            .aspectRatio(aspectRatio, matchHeightConstraintsFirst)
             .then(
                 if (contentDescription != null) {
                     Modifier.semantics { this.contentDescription = contentDescription }

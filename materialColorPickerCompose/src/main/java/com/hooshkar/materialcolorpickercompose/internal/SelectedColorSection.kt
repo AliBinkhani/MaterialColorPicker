@@ -1,11 +1,16 @@
 package com.hooshkar.materialcolorpickercompose.internal
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,7 +32,14 @@ import com.hooshkar.materialcolorpickercompose.R
 /**
  * The current-color preview (split against [previousColor] when present) plus the editable
  * Hex/Red/Green/Blue fields, all kept in sync with [color].
+ *
+ * Below [ColorPickerDefaults.CompactWidthBreakpoint] of available width, the preview and fields
+ * shrink to their compact sizes. [FlowRow] (rather than a plain [Row]) is still the backstop for
+ * anything narrower still: a field wrapping onto its own line reads fine, whereas relying on
+ * wrapping alone at full size — the "Blue" field landing by itself, still overflowing at that
+ * size — does not.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun SelectedColorSection(
     color: Color,
@@ -37,76 +49,100 @@ internal fun SelectedColorSection(
     modifier: Modifier = Modifier,
     editable: Boolean = true
 ) {
-    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
-        ColorPreviewSwatch(
-            color = color,
-            previousColor = previousColor,
-            modifier = Modifier.size(
-                width = ColorPickerDefaults.SelectedColorPreviewWidth,
-                height = ColorPickerDefaults.SelectedColorPreviewHeight
+    BoxWithConstraints(modifier) {
+        val compact = maxWidth < ColorPickerDefaults.CompactWidthBreakpoint
+        val previewWidth = if (compact) {
+            ColorPickerDefaults.SelectedColorPreviewWidthCompact
+        } else {
+            ColorPickerDefaults.SelectedColorPreviewWidth
+        }
+        val fieldSpacing = if (compact) {
+            ColorPickerDefaults.ColorFieldSpacingCompact
+        } else {
+            ColorPickerDefaults.ColorFieldSpacing
+        }
+        val hexWidth = if (compact) ColorPickerDefaults.HexFieldWidthCompact else ColorPickerDefaults.HexFieldWidth
+        val rgbWidth = if (compact) ColorPickerDefaults.RgbFieldWidthCompact else ColorPickerDefaults.RgbFieldWidth
+
+        // Compact: pack fields with a minimal fixed gap, since the priority there is fitting at
+        // all (wrapping onto a second line if even that isn't enough). Regular: spread them across
+        // the full available width instead — with room to spare, a small fixed gap leaves the
+        // fields bunched at the start with a large empty gap after Blue, which reads as cramped.
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = if (compact) {
+                Arrangement.spacedBy(fieldSpacing)
+            } else {
+                Arrangement.SpaceBetween
+            },
+            verticalArrangement = Arrangement.spacedBy(ColorPickerDefaults.SectionSpacing)
+        ) {
+            ColorPreviewSwatch(
+                color = color,
+                previousColor = previousColor,
+                modifier = Modifier.size(
+                    width = previewWidth,
+                    height = ColorPickerDefaults.SelectedColorPreviewHeight
+                )
             )
-        )
 
-        Spacer(Modifier.width(ColorPickerDefaults.ColorFieldSpacing))
+            ColorValueField(
+                label = stringResource(R.string.material_color_picker_compose_hex),
+                displayValue = color.toHexRgb(),
+                onValueChange = { raw -> colorFromHex(raw, alpha)?.let(onColorChange) },
+                width = hexWidth,
+                maxLength = 6,
+                keyboardType = KeyboardType.Text,
+                filter = ::hexDigitsOnly,
+                enabled = editable,
+                compact = compact
+            )
 
-        ColorValueField(
-            label = stringResource(R.string.material_color_picker_compose_hex),
-            displayValue = color.toHexRgb(),
-            onValueChange = { raw -> colorFromHex(raw, alpha)?.let(onColorChange) },
-            width = ColorPickerDefaults.HexFieldWidth,
-            maxLength = 6,
-            keyboardType = KeyboardType.Text,
-            filter = ::hexDigitsOnly,
-            enabled = editable
-        )
+            ColorValueField(
+                label = stringResource(R.string.material_color_picker_compose_red),
+                displayValue = color.redInt().toString(),
+                onValueChange = { raw ->
+                    val red = raw.toIntOrNull()?.coerceIn(0, 255) ?: 0
+                    onColorChange(colorFromRgb(red, color.greenInt(), color.blueInt(), alpha))
+                },
+                width = rgbWidth,
+                maxLength = 3,
+                keyboardType = KeyboardType.Number,
+                filter = ::digitsOnly,
+                enabled = editable,
+                compact = compact
+            )
 
-        Spacer(Modifier.width(ColorPickerDefaults.ColorFieldSpacing))
+            ColorValueField(
+                label = stringResource(R.string.material_color_picker_compose_green),
+                displayValue = color.greenInt().toString(),
+                onValueChange = { raw ->
+                    val green = raw.toIntOrNull()?.coerceIn(0, 255) ?: 0
+                    onColorChange(colorFromRgb(color.redInt(), green, color.blueInt(), alpha))
+                },
+                width = rgbWidth,
+                maxLength = 3,
+                keyboardType = KeyboardType.Number,
+                filter = ::digitsOnly,
+                enabled = editable,
+                compact = compact
+            )
 
-        ColorValueField(
-            label = stringResource(R.string.material_color_picker_compose_red),
-            displayValue = color.redInt().toString(),
-            onValueChange = { raw ->
-                val red = raw.toIntOrNull()?.coerceIn(0, 255) ?: 0
-                onColorChange(colorFromRgb(red, color.greenInt(), color.blueInt(), alpha))
-            },
-            width = ColorPickerDefaults.RgbFieldWidth,
-            maxLength = 3,
-            keyboardType = KeyboardType.Number,
-            filter = ::digitsOnly,
-            enabled = editable
-        )
-
-        Spacer(Modifier.width(ColorPickerDefaults.ColorFieldSpacing))
-
-        ColorValueField(
-            label = stringResource(R.string.material_color_picker_compose_green),
-            displayValue = color.greenInt().toString(),
-            onValueChange = { raw ->
-                val green = raw.toIntOrNull()?.coerceIn(0, 255) ?: 0
-                onColorChange(colorFromRgb(color.redInt(), green, color.blueInt(), alpha))
-            },
-            width = ColorPickerDefaults.RgbFieldWidth,
-            maxLength = 3,
-            keyboardType = KeyboardType.Number,
-            filter = ::digitsOnly,
-            enabled = editable
-        )
-
-        Spacer(Modifier.width(ColorPickerDefaults.ColorFieldSpacing))
-
-        ColorValueField(
-            label = stringResource(R.string.material_color_picker_compose_blue),
-            displayValue = color.blueInt().toString(),
-            onValueChange = { raw ->
-                val blue = raw.toIntOrNull()?.coerceIn(0, 255) ?: 0
-                onColorChange(colorFromRgb(color.redInt(), color.greenInt(), blue, alpha))
-            },
-            width = ColorPickerDefaults.RgbFieldWidth,
-            maxLength = 3,
-            keyboardType = KeyboardType.Number,
-            filter = ::digitsOnly,
-            enabled = editable
-        )
+            ColorValueField(
+                label = stringResource(R.string.material_color_picker_compose_blue),
+                displayValue = color.blueInt().toString(),
+                onValueChange = { raw ->
+                    val blue = raw.toIntOrNull()?.coerceIn(0, 255) ?: 0
+                    onColorChange(colorFromRgb(color.redInt(), color.greenInt(), blue, alpha))
+                },
+                width = rgbWidth,
+                maxLength = 3,
+                keyboardType = KeyboardType.Number,
+                filter = ::digitsOnly,
+                enabled = editable,
+                compact = compact
+            )
+        }
     }
 }
 
@@ -156,10 +192,14 @@ private fun ColorValueField(
     maxLength: Int,
     keyboardType: KeyboardType,
     filter: (String) -> String,
-    enabled: Boolean
+    enabled: Boolean,
+    compact: Boolean
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = label, style = ColorPickerDefaults.labelTextStyle())
+        Text(
+            text = label,
+            style = if (compact) ColorPickerDefaults.labelTextStyleCompact() else ColorPickerDefaults.labelTextStyle()
+        )
         Spacer(Modifier.size(4.dp))
         SyncedTextField(
             displayValue = displayValue,
@@ -168,7 +208,7 @@ private fun ColorValueField(
             enabled = enabled,
             maxLength = maxLength,
             keyboardType = keyboardType,
-            textStyle = ColorPickerDefaults.valueTextStyle().copy(
+            textStyle = (if (compact) ColorPickerDefaults.valueTextStyleCompact() else ColorPickerDefaults.valueTextStyle()).copy(
                 color = LocalContentColor.current,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center
             ),

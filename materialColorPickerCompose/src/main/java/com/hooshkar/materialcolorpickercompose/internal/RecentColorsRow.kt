@@ -33,17 +33,23 @@ import com.hooshkar.materialcolorpickercompose.EmptyRecentColorSlot
 import com.hooshkar.materialcolorpickercompose.R
 import com.hooshkar.materialcolorpickercompose.RecentColorSlotCount
 
-/** A divider followed by up to [RecentColorSlotCount] circular recent-color buttons. */
+/**
+ * An optional divider followed by up to [RecentColorSlotCount] circular recent-color buttons.
+ * [showDivider] is turned off in the landscape layout to save vertical room.
+ */
 @Composable
 internal fun RecentColorsRow(
     recentColors: List<Color>,
     selectedColor: Color,
     onColorSelected: (Color) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showDivider: Boolean = true
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
-        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-        Spacer(Modifier.height(ColorPickerDefaults.SectionSpacing))
+        if (showDivider) {
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            Spacer(Modifier.height(ColorPickerDefaults.SectionSpacing))
+        }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(
