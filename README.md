@@ -44,14 +44,14 @@ dependencyResolutionManagement {
 ```kotlin
 dependencies {
     // View-based picker
-    implementation("com.github.alibinkhani.materialcolorpicker:views:1.0.0")
+    implementation("com.github.alibinkhani.materialcolorpicker:views:1.0.1")
 
     // Jetpack Compose picker
-    implementation("com.github.alibinkhani.materialcolorpicker:compose:1.0.0")
+    implementation("com.github.alibinkhani.materialcolorpicker:compose:1.0.1")
 }
 ```
 
-Add either one, or both if your app has mixed Views/Compose UI. Replace `1.0.0` with the latest tag — see the [JitPack page](https://jitpack.io/#AliBinkhani/MaterialColorPicker) for available versions.
+Add either one, or both if your app has mixed Views/Compose UI. Replace `1.0.1` with the latest tag — see the [JitPack page](https://jitpack.io/#AliBinkhani/MaterialColorPicker) for available versions.
 
 > **Maven Central:** neither library is published to Maven Central yet. This section will be updated with `mavenCentral()` coordinates once a release is available there — JitPack works out of the box in the meantime.
 
