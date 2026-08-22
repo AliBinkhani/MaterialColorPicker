@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,12 +21,14 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -48,6 +51,7 @@ class ComposePickerPreviewActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     var demo by remember { mutableStateOf(Demo.Swatches) }
                     var dialogVisible by remember { mutableStateOf(false) }
+                    var opacityBarEnabled by remember { mutableStateOf(true) }
                     val recentColors = remember {
                         listOf(
                             Color(0xFF6200EE),
@@ -87,6 +91,18 @@ class ComposePickerPreviewActivity : ComponentActivity() {
                                 .background(state.color)
                         )
 
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text("Opacity bar enabled")
+                            Switch(
+                                checked = opacityBarEnabled,
+                                onCheckedChange = { opacityBarEnabled = it }
+                            )
+                        }
+
                         Button(onClick = { dialogVisible = true }) {
                             Text("Pick a color")
                         }
@@ -103,9 +119,21 @@ class ComposePickerPreviewActivity : ComponentActivity() {
                             }
                         ) {
                             when (demo) {
-                                Demo.Swatches -> SwatchesColorPicker(state = state, onColorChanged = {})
-                                Demo.Spectrum -> SpectrumColorPicker(state = state, onColorChanged = {})
-                                Demo.Both -> MaterialColorPicker(state = state, onColorChanged = {})
+                                Demo.Swatches -> SwatchesColorPicker(
+                                    state = state,
+                                    opacityBarEnabled = opacityBarEnabled,
+                                    onColorChanged = {}
+                                )
+                                Demo.Spectrum -> SpectrumColorPicker(
+                                    state = state,
+                                    opacityBarEnabled = opacityBarEnabled,
+                                    onColorChanged = {}
+                                )
+                                Demo.Both -> MaterialColorPicker(
+                                    state = state,
+                                    opacityBarEnabled = opacityBarEnabled,
+                                    onColorChanged = {}
+                                )
                             }
                         }
                     }

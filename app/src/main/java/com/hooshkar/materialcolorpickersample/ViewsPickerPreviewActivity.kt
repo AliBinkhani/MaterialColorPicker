@@ -1,0 +1,52 @@
+package com.hooshkar.materialcolorpickersample
+
+import android.content.Context
+import android.os.Bundle
+import android.util.Log
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.hooshkar.materialcolorpicker.MaterialColorPickerDialogBuilder
+import com.hooshkar.materialcolorpickersample.databinding.ActivityViewsPickerPreviewBinding
+
+class ViewsPickerPreviewActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityViewsPickerPreviewBinding
+
+    @OptIn(ExperimentalStdlibApi::class)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        binding = ActivityViewsPickerPreviewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        val context: Context = this
+        val dialog = MaterialColorPickerDialogBuilder(context)
+            .setRecentColorEnabled(true)
+            .setRecentColors(
+                0xFF6200EE.toInt(),
+                0xFFBB86FC.toInt(),
+                0xFF03DAC5.toInt(),
+                0xFF018786.toInt(),
+                0xFF3700B3.toInt(),
+                0xFF3F51B5.toInt()
+            )
+            .setOpacityBarEnabled(true)
+            .setOnColorChangeListener { color ->
+                Log.d("TAG_1234", "color changed: $color")
+            }.setPositiveButton("OK") { _, _, color ->
+                Log.d("TAG_1234", "color selected: $color")
+            }.setNegativeButton("Cancel", null)
+            .show()
+
+        binding.button.setOnClickListener {
+            dialog.show()
+        }
+    }
+}

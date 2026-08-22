@@ -1,20 +1,17 @@
 package com.hooshkar.materialcolorpickersample
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.hooshkar.materialcolorpicker.MaterialColorPickerDialogBuilder
 import com.hooshkar.materialcolorpickersample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    @OptIn(ExperimentalStdlibApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,27 +23,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val context: Context = this
-        val dialog = MaterialColorPickerDialogBuilder(context)
-            .setRecentColorEnabled(true)
-            .setRecentColors(
-                0xFF6200EE.toInt(),
-                0xFFBB86FC.toInt(),
-                0xFF03DAC5.toInt(),
-                0xFF018786.toInt(),
-                0xFF3700B3.toInt(),
-                0xFF3F51B5.toInt()
-            )
-            .setOpacityBarEnabled(true)
-            .setOnColorChangeListener { color ->
-                Log.d("TAG_1234", "color changed: $color")
-            }.setPositiveButton("OK") { _, _, color ->
-                Log.d("TAG_1234", "color selected: $color")
-            }.setNegativeButton("Cancel", null)
-            .show()
-
-        binding.button.setOnClickListener {
-            dialog.show()
+        binding.buttonViews.setOnClickListener {
+            startActivity(Intent(this, ViewsPickerPreviewActivity::class.java))
+        }
+        binding.buttonCompose.setOnClickListener {
+            startActivity(Intent(this, ComposePickerPreviewActivity::class.java))
         }
     }
 }
