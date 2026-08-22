@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
  * since Compose's dp units already scale correctly across densities and window sizes.
  */
 object ColorPickerDefaults {
-    val ContentSpacing: Dp = 20.dp
-    val SectionSpacing: Dp = 8.dp
+    val ContentSpacing: Dp = 12.dp
+    val SectionSpacing: Dp = 4.dp
 
     /** Tighter spacing used in the landscape layout, which has much less room to spare. */
     val LandscapeContentSpacing: Dp = 12.dp
@@ -32,8 +32,6 @@ object ColorPickerDefaults {
      */
     val LandscapePickerAreaWidth: Dp = 200.dp
 
-    val PickerCornerRadius: Dp = 8.dp
-
     /** The Swatches grid is 11 columns x 10 rows, so it's very slightly wider than tall. */
     val SwatchGridAspectRatio: Float = 11f / 10f
 
@@ -43,13 +41,12 @@ object ColorPickerDefaults {
      */
     val SpectrumPadAspectRatio: Float = 11f / 9f
 
-    val SliderTrackHeight: Dp = 24.dp
-    val SliderThumbSize: Dp = 22.dp
+    val SliderTrackHeight: Dp = 20.dp
+    val SliderThumbSize: Dp = 18.dp
 
-    val SelectedColorPreviewWidth: Dp = 64.dp
-    val SelectedColorPreviewHeight: Dp = 44.dp
+    val SelectedColorPreviewWidth: Dp = 52.dp
+    val SelectedColorPreviewHeight: Dp = 40.dp
     val SelectedColorPreviewCornerRadius: Dp = 12.dp
-    val ColorFieldSpacing: Dp = 12.dp
     val HexFieldWidth: Dp = 72.dp
     val RgbFieldWidth: Dp = 34.dp
 
@@ -60,13 +57,11 @@ object ColorPickerDefaults {
      * wrapping, since a wrapped "Blue" field by itself still looks broken.
      */
     val CompactWidthBreakpoint: Dp = 320.dp
-    val SelectedColorPreviewWidthCompact: Dp = 48.dp
-    val ColorFieldSpacingCompact: Dp = 8.dp
+    val SelectedColorPreviewWidthCompact: Dp = 64.dp
     val HexFieldWidthCompact: Dp = 64.dp
     val RgbFieldWidthCompact: Dp = 32.dp
 
     val RecentColorItemSize: Dp = 40.dp
-    val RecentColorItemSpacing: Dp = 12.dp
 
     val TabRowHeight: Dp = 48.dp
 

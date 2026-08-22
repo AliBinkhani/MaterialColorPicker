@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,13 +32,9 @@ import com.hooshkar.materialcolorpickercompose.R
  * The current-color preview (split against [previousColor] when present) plus the editable
  * Hex/Red/Green/Blue fields, all kept in sync with [color].
  *
- * Below [ColorPickerDefaults.CompactWidthBreakpoint] of available width, the preview and fields
- * shrink to their compact sizes. [FlowRow] (rather than a plain [Row]) is still the backstop for
- * anything narrower still: a field wrapping onto its own line reads fine, whereas relying on
- * wrapping alone at full size — the "Blue" field landing by itself, still overflowing at that
- * size — does not.
+ * Below [ColorPickerDefaults.CompactWidthBreakpoint] of available width, the Hex/RGB fields
+ * shrink to their compact sizes.
  */
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun SelectedColorSection(
     color: Color,
@@ -51,16 +46,6 @@ internal fun SelectedColorSection(
 ) {
     BoxWithConstraints(modifier) {
         val compact = maxWidth < ColorPickerDefaults.CompactWidthBreakpoint
-        val previewWidth = if (compact) {
-            ColorPickerDefaults.SelectedColorPreviewWidthCompact
-        } else {
-            ColorPickerDefaults.SelectedColorPreviewWidth
-        }
-        val fieldSpacing = if (compact) {
-            ColorPickerDefaults.ColorFieldSpacingCompact
-        } else {
-            ColorPickerDefaults.ColorFieldSpacing
-        }
         val hexWidth = if (compact) ColorPickerDefaults.HexFieldWidthCompact else ColorPickerDefaults.HexFieldWidth
         val rgbWidth = if (compact) ColorPickerDefaults.RgbFieldWidthCompact else ColorPickerDefaults.RgbFieldWidth
 
@@ -68,20 +53,16 @@ internal fun SelectedColorSection(
         // all (wrapping onto a second line if even that isn't enough). Regular: spread them across
         // the full available width instead — with room to spare, a small fixed gap leaves the
         // fields bunched at the start with a large empty gap after Blue, which reads as cramped.
-        FlowRow(
+        Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = if (compact) {
-                Arrangement.spacedBy(fieldSpacing)
-            } else {
-                Arrangement.SpaceBetween
-            },
-            verticalArrangement = Arrangement.spacedBy(ColorPickerDefaults.SectionSpacing)
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             ColorPreviewSwatch(
                 color = color,
                 previousColor = previousColor,
                 modifier = Modifier.size(
-                    width = previewWidth,
+                    width = ColorPickerDefaults.SelectedColorPreviewWidth,
                     height = ColorPickerDefaults.SelectedColorPreviewHeight
                 )
             )
@@ -198,6 +179,7 @@ private fun ColorValueField(
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = label,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = if (compact) ColorPickerDefaults.labelTextStyleCompact() else ColorPickerDefaults.labelTextStyle()
         )
         Spacer(Modifier.size(4.dp))

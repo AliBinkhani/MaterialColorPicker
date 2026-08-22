@@ -98,10 +98,10 @@ internal fun ColorSpectrumPad(
             x = (hue / MaxSpectrumHue) * size.width,
             y = saturation * size.height
         )
-        drawCircle(color = cursorColor, radius = 9.dp.toPx(), center = cursorCenter)
+        drawCircle(color = cursorColor, radius = 10.dp.toPx(), center = cursorCenter)
         drawCircle(
             color = Color.White,
-            radius = 9.dp.toPx(),
+            radius = 10.dp.toPx(),
             center = cursorCenter,
             style = Stroke(width = 2.5.dp.toPx())
         )

@@ -2,6 +2,7 @@ package com.hooshkar.materialcolorpickercompose.internal
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -55,10 +56,10 @@ internal fun PercentSliderRow(
                 contentDescription = contentDescription,
                 track = track
             )
-            Spacer(Modifier.width(12.dp))
             Row(
-                modifier = Modifier.width(56.dp),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.width(48.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End
             ) {
                 SyncedTextField(
                     displayValue = percent.toString(),
@@ -86,7 +87,7 @@ internal fun PercentSliderRow(
 @Composable
 internal fun OpacityTrack(baseColor: Color, modifier: Modifier = Modifier) {
     Canvas(modifier.fillMaxSize()) {
-        val cellPx = 6.dp.toPx()
+        val cellPx = ColorPickerDefaults.SliderTrackHeight.toPx() / 4
         val columns = ceil(size.width / cellPx).toInt()
         val rows = ceil(size.height / cellPx).toInt()
         for (row in 0 until rows) {

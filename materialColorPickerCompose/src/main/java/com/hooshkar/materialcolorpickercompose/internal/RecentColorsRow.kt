@@ -48,14 +48,11 @@ internal fun RecentColorsRow(
     Column(modifier = modifier.fillMaxWidth()) {
         if (showDivider) {
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-            Spacer(Modifier.height(ColorPickerDefaults.SectionSpacing))
+            Spacer(Modifier.height(ColorPickerDefaults.ContentSpacing))
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(
-                ColorPickerDefaults.RecentColorItemSpacing,
-                Alignment.CenterHorizontally
-            )
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             repeat(RecentColorSlotCount) { index ->
                 val color = recentColors.getOrNull(index)
